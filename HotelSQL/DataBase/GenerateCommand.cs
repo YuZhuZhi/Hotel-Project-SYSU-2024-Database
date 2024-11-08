@@ -2,14 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
 
 namespace HotelSQL.DataBase
 {
     class GenerateCommand
     {
-        public static string Condition(ArrayList columns, ArrayList operators, ArrayList values, ArrayList logics)
+        public static string Condition(List<string> columns, List<string> operators, List<string> values, List<string> logics)
         {
             var condition = new StringBuilder();
             for (int i = 0; i < columns.Count; i++) {
@@ -19,7 +21,7 @@ namespace HotelSQL.DataBase
             return condition.ToString();
         }
 
-        public static string NatrualJoin(ArrayList tableNames)
+        public static string NatrualJoin(List<string> tableNames)
         {
             var tabel = new StringBuilder();
             for (int i = 0; i < tableNames.Count; i++) {
@@ -28,7 +30,7 @@ namespace HotelSQL.DataBase
             }
             return tabel.ToString();
         }
-        public static string Join(ArrayList tableNames, string condition)
+        public static string Join(List<string> tableNames, string condition)
         {
             var tabel = new StringBuilder();
             for (int i = 0; i < tableNames.Count; i++) {
@@ -39,29 +41,57 @@ namespace HotelSQL.DataBase
             return tabel.ToString();
         }
 
-        public static string Select(ArrayList columnNames, string table)
+        public static string Create(string tableName, List<string> stats, List<string> type, int primaryIndex, HashSet<int> foreignIndex, List<bool> isNotNull)
         {
-            if (columnNames.Count == 0) return $"SELECT * FROM {table};";
-            var columns = new StringBuilder();
-            for (int i = 0; i < columnNames.Count; i++) {
-                columns.Append(columnNames[i]);
-                if (i != columnNames.Count - 1) columns.Append(", ");
+            var statsTable = new StringBuilder();
+            for (int i = 0; i < stats.Count; i++) {
+                statsTable.Append($"{stats[i]} {type[i]}");
+                if (i == primaryIndex) statsTable.Append(" PRIMARY KEY");
+                if (foreignIndex.Contains(i)) statsTable.Append(" FOREIGN KEY");
+                if (isNotNull[i]) statsTable.Append(" NOT NULL");
+                statsTable.Append(",\n");
             }
-            var sentence = $"SELECT {columns} FROM {table};";
-            return sentence;
+            return $"CREATE TABLE {tableName} ({statsTable});";
         }
 
-        public static string Select(ArrayList columnNames, string table, string condition)
+        public static string Drop(string tableName)
         {
-            if (columnNames.Count == 0) return $"SELECT * FROM {table} WHERE ({condition});";
+            return $"DROP TABLE {tableName};";
+        }
+
+        public static string Select(List<string> columnNames, string tableName)
+        {
+            if (columnNames.Count == 0) return $"SELECT * FROM {tableName};";
             var columns = new StringBuilder();
             for (int i = 0; i < columnNames.Count; i++) {
                 columns.Append(columnNames[i]);
                 if (i != columnNames.Count - 1) columns.Append(", ");
             }
-            var sentence = $"SELECT {columns} FROM {table} WHERE ({condition});";
-            return sentence;
+            return $"SELECT {columns} FROM {tableName};";
         }
+
+        public static string Select(List<string> columnNames, string tableName, string condition)
+        {
+            var command = new StringBuilder(Select(columnNames, tableName));
+            return command.Insert(command.Length - 1, $" WHERE ({condition})").ToString();
+        }
+
+        public static string Insert(string tableName, string values, string hint = "")
+        {
+            if (hint == "") return $"INSERT INTO {tableName} VALUES ({values});";
+            else return $"INSERT INTO {tableName}({hint}) VALUES ({values});";
+        }
+
+        public static string Delete(string tableName, string condition)
+        {
+            return $"DELETE FROM {tableName} WHERE ({condition});";
+        }
+
+        public static string Update()
+        {
+            return "";
+        }
+
     }
 
 }

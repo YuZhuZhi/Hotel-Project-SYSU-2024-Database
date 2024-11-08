@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "N4eAauYxnHM=",
+  "dgSpecHash": "fScvxABhC6I=",
   "success": true,
   "projectFilePath": "F:\\资料及作业\\作业\\数据库\\HotelProject\\HotelSQL\\HotelSQL.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\御伫之\\.nuget\\packages\\antdui\\1.6.16\\antdui.1.6.16.nupkg.sha512",
     "C:\\Users\\御伫之\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\御伫之\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\御伫之\\.nuget\\packages\\npgsql\\8.0.5\\npgsql.8.0.5.nupkg.sha512"
