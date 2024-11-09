@@ -1,3 +1,5 @@
+#import "@preview/tablex:0.0.9": tablex, rowspanx, colspanx
+
 #let name = "王俊亚"
 #let stuNum = "22307049"
 
@@ -29,8 +31,16 @@
     #title
 
     #set text(15pt)
-    姓名：#name \
-    学号：#stuNum
+    #tablex(
+      columns: 2,
+      align: center + horizon,
+      auto-vlines: false,
+      header-rows: 2,
+
+      [姓名], [学号],
+      [王俊亚], [22307049],
+      [王炳睿], [22354124]
+    )
   ]
 
   outline(indent: 2.5em)
