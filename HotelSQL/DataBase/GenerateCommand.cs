@@ -41,14 +41,14 @@ namespace HotelSQL.DataBase
             return tabel.ToString();
         }
 
-        public static string Create(string tableName, List<string> stats, List<string> types, HashSet<int> primaryIndex, HashSet<int>? foreignIndex, List<bool> isNotNull)
+        public static string Create(string tableName, List<string> stats, List<string> types, HashSet<int> primaryIndex, Hashtable? foreignIndex, List<bool> isNotNull)
         {
             if (primaryIndex.Count == 0) return "";
             var statsTable = new StringBuilder();
             for (int i = 0; i < stats.Count; i++) {
                 statsTable.Append($"{stats[i]} {types[i]}");
                 if (primaryIndex.Contains(i)) statsTable.Append(" PRIMARY KEY");
-                if (foreignIndex is not null && foreignIndex.Contains(i)) statsTable.Append(" FOREIGN KEY");
+                //if (foreignIndex is not null && foreignIndex.Contains(i)) statsTable.Append(" FOREIGN KEY");
                 if (isNotNull[i]) statsTable.Append(" NOT NULL");
                 statsTable.Append(",\n");
             }
