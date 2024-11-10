@@ -15,33 +15,47 @@ namespace HotelSQL.DataBase
 
         public Postgre(string connectionString)
         {
-            connectString = connectionString;
-            connection = new NpgsqlConnection(connectString);
+            ConnectString = connectionString;
+            Connection = new NpgsqlConnection(ConnectString);
         }
 
         public Postgre(int port = 5432, string userName = "postgres", string passWord = "password")
         {
-            connectString = $"Host=localhost;Port={port};Username={userName};Password={passWord};";
-            connection = new NpgsqlConnection(connectString);
+            ConnectString = $"Host=localhost;Port={port};Username={userName};Password={passWord};";
+            Connection = new NpgsqlConnection(ConnectString);
         }
 
-        public string GetConnectString() { return connectString; }
-
-        public void Open() { connection.Open(); }
-
-        public void Close() { connection.Close(); }
-
-        public void Query(string query)
+        ~Postgre()
         {
-            var command = new NpgsqlCommand(query, connection);
+            try { Close(); }
+            finally { Connection.Dispose(); }
+        }
+
+        public void Open() { Connection.Open(); }
+
+        public void Close() { Connection.Close(); }
+
+        public void Select(string select)
+        {
+            if (string.IsNullOrEmpty(select)) return;
+            using var command = new NpgsqlCommand(select, Connection);
             PrintSelection(command.ExecuteReader());
         }
 
-        public void Insert(string insert) { NotQuery(insert); }
+        public int NotQuery(string sentence)
+        {
+            if (string.IsNullOrEmpty(sentence)) return 0;
+            using var command = new NpgsqlCommand(sentence, Connection);
+            return command.ExecuteNonQuery();
+        }
 
-        public void Update(string update) { NotQuery(update); }
+        public int Create(string create) { return NotQuery(create); }
 
-        public void Delete(string delete) { NotQuery(delete); }
+        public int Insert(string insert) { return NotQuery(insert); }
+
+        public int Update(string update) { return NotQuery(update); }
+
+        public int Delete(string delete) { return NotQuery(delete); }
 
         /*---------------------------Private Functions--------------------------*/
 
@@ -56,15 +70,9 @@ namespace HotelSQL.DataBase
             }
         }
 
-        private void NotQuery(string sentence)
-        {
-            var command = new NpgsqlCommand(sentence, connection);
-            command.ExecuteNonQuery();
-        }
-
         /*---------------------------Private Members--------------------------*/
 
-        private string connectString { get; }
-        private NpgsqlConnection connection;
+        public string ConnectString { get; private set; }
+        private NpgsqlConnection Connection;
     }
 }

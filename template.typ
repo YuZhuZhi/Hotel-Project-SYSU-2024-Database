@@ -16,7 +16,7 @@
   set document(author: name, title: title, date: auto)
   set text(font: "STSong", lang: "zh", region: "cn")
   show heading: set block(above: 2em, below: 1em)
-  set heading(numbering: "I.1.1")
+  set heading(numbering: "I.1.A")
   show heading: it => block[
     #set text(font: "STZhongsong")
     #counter(heading).display()
