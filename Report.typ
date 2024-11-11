@@ -152,7 +152,8 @@
     node(RST, ReserverTable(), shape: rect)
     node(Addr, [Address], shape: diamond, extrude: (-3, 0), inset: 10pt)
     node(Rsv, [Reservation], shape: diamond, inset: 10pt)
-    node((2,1), [orderNO], shape: rect)
+    node((1, -1), [Type], shape: diamond, inset: 10pt)
+    node((0.5,0.5), [orderNO], shape: rect)
 
     edge(HT, Addr, "=")
     edge(RTT, Addr, "-")
@@ -160,7 +161,9 @@
     edge(RT, Rsv, "<-")
     edge(RST, Rsv, "<-")
     edge(RST, Addr, "-")
-    edge(Rsv, (2,1), "--")
+    edge(Rsv, (0.5,0.5), "--")
+    edge(RTT, (1,-1), "<-")
+    edge(RT, (1,-1))
 })]]
 
 可以看出，其中最重要的的就是酒店地址(Address)。酒店名字并不足以区分酒店，但同一地点必定不会出现两个酒店，因此酒店是弱实体集。方便起见，在之后的设计中，我们以酒店编号(hotelNO)来代替地址(Address)。

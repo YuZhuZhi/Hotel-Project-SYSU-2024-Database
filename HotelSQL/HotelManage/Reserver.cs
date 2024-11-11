@@ -42,7 +42,7 @@ namespace HotelSQL.HotelManage
         /*---------------------------Private Member--------------------------*/
 
         private readonly string CreateCommand = "CREATE TABLE Reserver (\n" +
-            "hotelNO  serial   NOT NULL REFERENCES Hotel(hotelNO)," +
+            "hotelNO  int      NOT NULL REFERENCES Hotel(hotelNO)," +
             "ID       int      NOT NULL PRIMARY KEY," +
             "date     date     NOT NULL," +
             "duration interval NOT NULL);";

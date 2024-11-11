@@ -33,7 +33,9 @@ namespace HotelSQL.HotelManage
 
         private void InitialData(Postgre postgre)
         {
-            return;
+            postgre.Insert(GenerateCommand.Insert(TableName, "10001, 'KaiFeng', 4"));
+            postgre.Insert(GenerateCommand.Insert(TableName, "10002, 'SiJi', 5"));
+            postgre.Insert(GenerateCommand.Insert(TableName, "10003, 'SiJi', 5"));
         }
 
         /*---------------------------Public Member--------------------------*/
@@ -43,8 +45,8 @@ namespace HotelSQL.HotelManage
         /*---------------------------Private Member--------------------------*/
 
         private readonly string CreateCommand = "CREATE TABLE Hotel (\n" +
-            "hotelNO  serial   NOT NULL PRIMARY KEY,\n" +
-            "name     char[10] NOT NULL,\n" +
+            "hotelNO  int      NOT NULL PRIMARY KEY,\n" +
+            "name     char(10) NOT NULL,\n" +
             "star     int      NOT NULL\n" +
             ");";
 
