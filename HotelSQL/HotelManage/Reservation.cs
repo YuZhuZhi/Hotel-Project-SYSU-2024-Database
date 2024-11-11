@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace HotelSQL.HotelManage
 {
-    internal class Reserver
+    internal class Reservation
     {
         /*---------------------------Public Enum--------------------------*/
 
         public enum Attribute
         {
-            hotelNO, ID, date, duration
+            orderNO, ID, hotelNO, roomNO
         }
 
         /*---------------------------Public Function--------------------------*/
-        public Reserver(Postgre postgre)
+        public Reservation(Postgre postgre)
         {
             try {
                 postgre.Create(CreateCommand);
@@ -37,15 +37,15 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Public Member--------------------------*/
 
-        public string TableName { get; set; } = "Reserver";
+        public string TableName { get; set; } = "Reservation";
 
         /*---------------------------Private Member--------------------------*/
 
-        private readonly string CreateCommand = "CREATE TABLE Reserver (\n" +
-            "hotelNO  int      NOT NULL REFERENCES Hotel(hotelNO)," +
-            "ID       int      NOT NULL PRIMARY KEY," +
-            "date     date     NOT NULL," +
-            "duration interval NOT NULL);";
-
+        private readonly string CreateCommand = "CREATE TABLE Reservation (\n" +
+            "orderNO  serial NOT NULL PRIMARY KEY,\n" +
+            "ID       int    NOT NULL REFERENCES Reserver(ID),\n" +
+            "hotelNO  int    NOT NULL,\n" +
+            "roomNO   int    NOT NULL,\n" +
+            "FOREIGN KEY (hotelNO, roomNO) REFERENCES Room(hotelNO, roomNO));";
     }
 }

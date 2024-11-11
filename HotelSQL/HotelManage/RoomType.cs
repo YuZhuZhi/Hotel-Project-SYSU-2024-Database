@@ -25,7 +25,7 @@ namespace HotelSQL.HotelManage
                 InitialData(postgre);
             }
             catch (Exception) {
-                postgre.Drop($"DROP TABLE {TableName};");
+                postgre.Drop($"DROP TABLE {TableName} CASCADE;");
             }
         }
 
