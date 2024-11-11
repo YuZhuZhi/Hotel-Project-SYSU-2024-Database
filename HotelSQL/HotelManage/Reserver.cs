@@ -1,13 +1,15 @@
 ﻿using HotelSQL.DataBase;
+using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelSQL.HotelManage
 {
-    internal class Reserver
+    internal class Reserver : TableBase
     {
         /*---------------------------Public Enum--------------------------*/
 
@@ -17,35 +19,42 @@ namespace HotelSQL.HotelManage
         }
 
         /*---------------------------Public Function--------------------------*/
-        public Reserver(Postgre postgre)
+        public Reserver(Postgre postgre) : base(postgre, "Reserver")
         {
             try {
                 postgre.Create(CreateCommand);
                 InitialData(postgre);
             }
             catch (Exception) {
-                postgre.Drop($"DROP TABLE {TableName} CASCADE;");
+                return;
             }
+        }
+
+        public Attribute GetAttribute(int index)
+        {
+            return (Attribute)index;
+        }
+
+        public string GetAllAttribute()
+        {
+            return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}, {(Attribute)3}";
         }
 
         /*---------------------------Private Function--------------------------*/
 
-        private void InitialData(Postgre postgre)
+        protected override void InitialData(Postgre postgre)
         {
             return;
         }
 
         /*---------------------------Public Member--------------------------*/
 
-        public string TableName { get; set; } = "Reserver";
-
         /*---------------------------Private Member--------------------------*/
 
         private readonly string CreateCommand = "CREATE TABLE Reserver (\n" +
-            "hotelNO  int      NOT NULL REFERENCES Hotel(hotelNO)," +
+            "hotelNO  int      NOT NULL REFERENCES Hotel(hotelNO) ON DELETE CASCADE," +
             "ID       int      NOT NULL PRIMARY KEY," +
             "date     date     NOT NULL," +
             "duration interval NOT NULL);";
-
     }
 }

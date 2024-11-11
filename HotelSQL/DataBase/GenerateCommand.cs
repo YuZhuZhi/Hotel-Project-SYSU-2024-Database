@@ -60,7 +60,7 @@ namespace HotelSQL.DataBase
             return $"DROP TABLE {tableName};";
         }
 
-        public static string Select(List<string> columnNames, string tableName)
+        public static string Select(string tableName, List<string> columnNames)
         {
             if (columnNames.Count == 0) return $"SELECT * FROM {tableName};";
             var columns = new StringBuilder();
@@ -71,9 +71,9 @@ namespace HotelSQL.DataBase
             return $"SELECT {columns} FROM {tableName};";
         }
 
-        public static string Select(List<string> columnNames, string tableName, string condition)
+        public static string Select(string tableName, List<string> columnNames, string condition)
         {
-            var command = new StringBuilder(Select(columnNames, tableName));
+            var command = new StringBuilder(Select(tableName, columnNames));
             return command.Insert(command.Length - 1, $" WHERE ({condition})").ToString();
         }
 

@@ -133,7 +133,7 @@
 
 #import fletcher.shapes: pill, parallelogram, diamond, hexagon
 
-#figure(kind: table,
+#figure(kind: image,
   caption: [
     酒店预订管理系统的E-R图
   ])[
@@ -156,7 +156,7 @@
     node((1,1), [orderNO], shape: rect)
 
     edge(HT, Addr, "=")
-    edge(RTT, Addr, "-")
+    edge(RTT, Addr, "=")
     edge(RT, Addr, "=")
     edge(RT, Rsv, "-")
     edge(RST, Rsv, "-")

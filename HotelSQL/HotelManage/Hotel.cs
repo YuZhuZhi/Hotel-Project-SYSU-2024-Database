@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using HotelSQL.DataBase;
+using Npgsql;
 
 namespace HotelSQL.HotelManage
 {
-    internal class Hotel
+    internal class Hotel : TableBase
     {
         /*---------------------------Public Enum--------------------------*/
 
@@ -18,20 +21,30 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Public Function--------------------------*/
 
-        public Hotel(Postgre postgre)
+        public Hotel(Postgre postgre) : base(postgre, "Hotel")
         {
             try {
                 postgre.Create(CreateCommand);
                 InitialData(postgre);
             }
             catch (Exception) {
-                postgre.Drop($"DROP TABLE {TableName} CASCADE;");
+                return;
             }
+        }
+
+        public Attribute GetAttribute(int index)
+        {
+            return (Attribute)index;
+        }
+
+        public string GetAllAttribute()
+        {
+            return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}";
         }
 
         /*---------------------------Private Function--------------------------*/
 
-        private void InitialData(Postgre postgre)
+        protected override void InitialData(Postgre postgre)
         {
             postgre.Insert(GenerateCommand.Insert(TableName, "10001, 'KaiFeng', 4"));
             postgre.Insert(GenerateCommand.Insert(TableName, "10002, 'SiJi', 5"));
@@ -39,8 +52,6 @@ namespace HotelSQL.HotelManage
         }
 
         /*---------------------------Public Member--------------------------*/
-
-        public string TableName { get; set; } = "Hotel";
 
         /*---------------------------Private Member--------------------------*/
 

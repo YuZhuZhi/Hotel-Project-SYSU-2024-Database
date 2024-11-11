@@ -15,6 +15,8 @@ namespace HotelSQL.DataBase
 
         public Postgre(string connectionString)
         {
+            if (ConnectionNum >= 2) return;
+            ConnectionNum++;
             ConnectString = connectionString;
             Connection = new NpgsqlConnection(ConnectString);
             Connection.Open();
@@ -22,6 +24,8 @@ namespace HotelSQL.DataBase
 
         public Postgre(int port = 5432, string userName = "postgres", string passWord = "password")
         {
+            if (ConnectionNum >= 2) return;
+            ConnectionNum++;
             ConnectString = $"Host=localhost;Port={port};Username={userName};Password={passWord};";
             Connection = new NpgsqlConnection(ConnectString);
             Connection.Open();
@@ -30,18 +34,24 @@ namespace HotelSQL.DataBase
         ~Postgre()
         {
             try { Close(); }
-            finally { Connection.Dispose(); }
+            finally { Connection?.Dispose(); }
         }
 
-        public void Open() { Connection.Open(); }
+        public void Open() { Connection?.Open(); }
 
-        public void Close() { Connection.Close(); }
+        public void Close() { Connection?.Close(); }
 
-        public void Select(string select)
+        public NpgsqlDataAdapter? Adapter(string tableName)
         {
-            if (string.IsNullOrEmpty(select)) return;
-            using var command = new NpgsqlCommand(select, Connection);
-            PrintSelection(command.ExecuteReader());
+            if (Connection is null) return null;
+            return new NpgsqlDataAdapter($"SELECT * FROM {tableName};", Connection);
+        }
+
+        public NpgsqlDataReader? Query(string query)
+        {
+            if (string.IsNullOrEmpty(query)) return null;
+            using var command = new NpgsqlCommand(query, Connection);
+            return command.ExecuteReader();
         }
 
         public int NotQuery(string sentence)
@@ -49,6 +59,11 @@ namespace HotelSQL.DataBase
             if (string.IsNullOrEmpty(sentence)) return 0;
             using var command = new NpgsqlCommand(sentence, Connection);
             return command.ExecuteNonQuery();
+        }
+
+        public void Select(string select)
+        {
+            PrintSelection(Query(select));
         }
 
         public int Create(string create) { return NotQuery(create); }
@@ -63,8 +78,9 @@ namespace HotelSQL.DataBase
 
         /*---------------------------Private Functions--------------------------*/
 
-        private static void PrintSelection(NpgsqlDataReader reader)
+        private static void PrintSelection(NpgsqlDataReader? reader)
         {
+            if (reader is null) return;
             var schema = reader.GetColumnSchema();
             while (reader.Read()) {
                 foreach (var column in schema) {
@@ -76,7 +92,8 @@ namespace HotelSQL.DataBase
 
         /*---------------------------Private Members--------------------------*/
 
-        public string ConnectString { get; private set; }
-        private readonly NpgsqlConnection Connection;
+        public readonly string? ConnectString;
+        private readonly NpgsqlConnection? Connection;
+        private static int ConnectionNum = 0;
     }
 }

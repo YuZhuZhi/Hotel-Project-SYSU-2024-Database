@@ -1,13 +1,15 @@
 ﻿using HotelSQL.DataBase;
+using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelSQL.HotelManage
 {
-    internal class Address
+    internal class Address : TableBase
     {
         /*---------------------------Public Enum--------------------------*/
 
@@ -17,20 +19,32 @@ namespace HotelSQL.HotelManage
         }
 
         /*---------------------------Public Function--------------------------*/
-        public Address(Postgre postgre)
+
+        public Address(Postgre postgre) : base(postgre, "Address")
         {
             try {
                 postgre.Create(CreateCommand);
                 InitialData(postgre);
             }
-            catch (Exception) {
-                postgre.Drop($"DROP TABLE {TableName} CASCADE;");
+            catch (Exception error) {
+                Console.WriteLine(error.ToString());
             }
+        }
+
+
+        public Attribute GetAttribute(int index)
+        {
+            return (Attribute)index;
+        }
+
+        public string GetAllAttribute()
+        {
+            return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}";
         }
 
         /*---------------------------Private Function--------------------------*/
 
-        private void InitialData(Postgre postgre)
+        protected override void InitialData(Postgre postgre)
         {
             for (int i = 101; i <= 400; i++) {
                 postgre.Insert(GenerateCommand.Insert(TableName, $"10001, {i}, 'normal'"));
@@ -62,15 +76,13 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Public Member--------------------------*/
 
-        public string TableName { get; set; } = "Address";
-
         /*---------------------------Private Member--------------------------*/
 
         private readonly string CreateCommand = "CREATE TABLE Address (\n" +
             "hotelNO  int      NOT NULL,\n" +
             "roomNO   int      NOT NULL,\n" +
             "type     CHAR(10) NOT NULL,\n" +
-            "FOREIGN KEY (hotelNO, roomNO) REFERENCES Room(hotelNO, roomNO),\n" +
-            "FOREIGN KEY (hotelNO, type) REFERENCES RoomType(hotelNO, type));";
+            "FOREIGN KEY (hotelNO, roomNO) REFERENCES Room(hotelNO, roomNO) ON DELETE CASCADE,\n" +
+            "FOREIGN KEY (hotelNO, type) REFERENCES RoomType(hotelNO, type) ON DELETE CASCADE);";
     }
 }

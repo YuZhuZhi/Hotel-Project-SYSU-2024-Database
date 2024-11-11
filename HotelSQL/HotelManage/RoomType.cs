@@ -1,13 +1,15 @@
 ﻿using HotelSQL.DataBase;
+using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelSQL.HotelManage
 {
-    internal class RoomType
+    internal class RoomType : TableBase
     {
         /*---------------------------Public Enum--------------------------*/
 
@@ -18,20 +20,30 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Public Function--------------------------*/
 
-        public RoomType(Postgre postgre)
+        public RoomType(Postgre postgre) : base(postgre, "RoomType")
         {
             try {
                 postgre.Create(CreateCommand);
                 InitialData(postgre);
             }
             catch (Exception) {
-                postgre.Drop($"DROP TABLE {TableName} CASCADE;");
+                return;
             }
+        }
+
+        public Attribute GetAttribute(int index)
+        {
+            return (Attribute)index;
+        }
+
+        public string GetAllAttribute()
+        {
+            return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}, {(Attribute)3}";
         }
 
         /*---------------------------Private Function--------------------------*/
 
-        private void InitialData(Postgre postgre)
+        protected override void InitialData(Postgre postgre)
         {
             postgre.Insert(GenerateCommand.Insert(TableName, "10001, 'normal', 500, 300"));
             postgre.Insert(GenerateCommand.Insert(TableName, "10001, 'luxury', 1000, 100"));
@@ -47,12 +59,10 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Public Member--------------------------*/
 
-        public string TableName { get; set; } = "RoomType";
-
         /*---------------------------Private Member--------------------------*/
 
         private readonly string CreateCommand = "CREATE TABLE RoomType(\n" +
-            "hotelNO  int       NOT NULL REFERENCES Hotel(hotelNO),\n" +
+            "hotelNO  int       NOT NULL REFERENCES Hotel(hotelNO) ON DELETE CASCADE,\n" +
             "type     char(10)  NOT NULL,\n" +
             "price    int       NOT NULL,\n" +
             "amount   int       NOT NULL,\n" +
