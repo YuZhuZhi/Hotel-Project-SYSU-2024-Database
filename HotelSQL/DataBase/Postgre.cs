@@ -17,12 +17,14 @@ namespace HotelSQL.DataBase
         {
             ConnectString = connectionString;
             Connection = new NpgsqlConnection(ConnectString);
+            Connection.Open();
         }
 
         public Postgre(int port = 5432, string userName = "postgres", string passWord = "password")
         {
             ConnectString = $"Host=localhost;Port={port};Username={userName};Password={passWord};";
             Connection = new NpgsqlConnection(ConnectString);
+            Connection.Open();
         }
 
         ~Postgre()
@@ -51,6 +53,8 @@ namespace HotelSQL.DataBase
 
         public int Create(string create) { return NotQuery(create); }
 
+        public int Drop(string drop) { return NotQuery(drop); }
+
         public int Insert(string insert) { return NotQuery(insert); }
 
         public int Update(string update) { return NotQuery(update); }
@@ -73,6 +77,6 @@ namespace HotelSQL.DataBase
         /*---------------------------Private Members--------------------------*/
 
         public string ConnectString { get; private set; }
-        private NpgsqlConnection Connection;
+        private readonly NpgsqlConnection Connection;
     }
 }
