@@ -32,14 +32,14 @@
 
     #set text(15pt)
     #tablex(
-      columns: 2,
+      columns: 3,
       align: center + horizon,
       auto-vlines: false,
       header-rows: 2,
 
-      [姓名], [学号],
-      [王俊亚], [22307049],
-      [王炳睿], [22354124]
+      [姓名], [], [学号],
+      [王俊亚], [], [22307049],
+      [王炳睿], [], [22354124]
     )
   ]
 

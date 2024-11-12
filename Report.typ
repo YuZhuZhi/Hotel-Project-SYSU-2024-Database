@@ -1,6 +1,7 @@
 #import "@preview/fletcher:0.5.2" as fletcher: diagram, node, edge
 #import "@preview/tablex:0.0.9": tablex, rowspanx, colspanx
 #import "@preview/cetz:0.3.0"
+#import "@preview/lovelace:0.3.0": *
 #import "template.typ": template
 
 #show: doc => template(
@@ -71,7 +72,7 @@
     auto-vlines: true,
     header-rows: 1,
 
-    [*Hotel*], [#underline(stroke: (dash: "dashed"),offset: 3pt, extent: 0pt)[name]\ star]
+    [*Hotel*], [#underline(offset: 3pt, extent: 0pt)[hotelNO]\ name\ star]
 )}
 
 #let RoomTypeTable() = {
@@ -82,7 +83,7 @@
     auto-vlines: true,
     header-rows: 1,
 
-    [*RoomType*], [#underline(offset: 3pt, extent: 2pt)[type]\ price\ amount]
+    [*RoomType*], [#underline(stroke: (dash: "dashed"),offset: 3pt, extent: 2pt)[type]\ price\ amount]
 )}
 
 #let RoomTable() = {
@@ -155,7 +156,7 @@
     // node((1, -1), [Type], shape: diamond, inset: 10pt)
     node((1,1), [orderNO], shape: rect)
 
-    edge(HT, Addr, "=")
+    edge(HT, Addr, "-")
     edge(RTT, Addr, "=")
     edge(RT, Addr, "=")
     edge(RT, Rsv, "-")
@@ -166,13 +167,44 @@
     // edge(RT, (1,-1))
 })]]
 
-可以看出，其中最重要的的就是酒店地址(Address)。酒店名字并不足以区分酒店，但同一地点必定不会出现两个酒店，因此酒店是弱实体集。方便起见，在之后的设计中，我们以酒店编号(hotelNO)来代替地址(Address)。
+方便起见，在之后的设计中，我们以酒店编号(hotelNO)来代替地址(Address)。
 
 == 系统结构设计
 
+我们设计的系统中，通用的流程是：在未创建表的情况下，首先创建表格并初始化。同时，在本地内存与数据库中都持有表格。之后的一切操作，先在本地通过算法初步判断是否是合法的更新；如果合法，那么就更新本地表格；之后，再更新数据库中的数据。如果数据库更新成功，后端才返回更新成功的指示。
 
+== 功能模块设计 
 
-== 功能模块设计
+在这个项目中，我们设计的功能模块层级结构如下 ：
+
+#let Level() = {
+  set text(font: "")
+  pseudocode-list(line-numbering: none, booktabs: true, hooks: 1em, indentation: 1.5em)[
+  + Main
+  + DataBase 
+    + Postgre
+    + GenerateCommand
+  + HotelManage
+    + TableBase
+      + Hotel
+      + RoomType
+      + Room
+      + Reserver
+      + Address
+      + Reservation
+    + Manager
+  + UI
+    + TODO
+  ]
+}
+
+#figure(
+  diagram(node-stroke: black, {
+    node((0, 0), Level(), shape: rect)
+  }),
+  
+  caption: [功能模块设计层级结构]
+)
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
