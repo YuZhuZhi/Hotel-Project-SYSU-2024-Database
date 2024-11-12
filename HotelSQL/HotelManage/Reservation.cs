@@ -20,7 +20,7 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Public Function--------------------------*/
 
-        public Reservation(Postgre postgre) : base(postgre, "Reservation")
+        public Reservation(Postgre postgre) : base("Reservation")
         {
             try {
                 postgre.Create(CreateCommand);
@@ -29,6 +29,8 @@ namespace HotelSQL.HotelManage
             catch (Exception error) {
                 Console.WriteLine(error.ToString());
             }
+            Adapter = postgre.Adapter(TableName);
+            Adapter.Fill(Table);
         }
 
         public Attribute GetAttribute(int index)
@@ -43,7 +45,7 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Private Function--------------------------*/
 
-        protected override void InitialData(Postgre postgre)
+        private void InitialData(Postgre postgre)
         {
             return;
         }

@@ -20,7 +20,7 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Public Function--------------------------*/
 
-        public Room(Postgre postgre) : base(postgre, "Room")
+        public Room(Postgre postgre) : base("Room")
         {
             try {
                 postgre.Create(CreateCommand);
@@ -29,6 +29,8 @@ namespace HotelSQL.HotelManage
             catch (Exception) {
                 return;
             }
+            Adapter = postgre.Adapter(TableName);
+            Adapter.Fill(Table);
         }
 
         public Attribute GetAttribute(int index)
@@ -43,12 +45,14 @@ namespace HotelSQL.HotelManage
 
         public bool Reserve(int hotelNO, int roomNO)
         {
-            return false;
+            if ((bool)Table.Rows.Find([hotelNO, roomNO])["isReserved"]) return false;
+            Table.Rows.Find([hotelNO, roomNO])["isReserved"] = true;
+            return true;
         }
 
         /*---------------------------Private Function--------------------------*/
 
-        protected override void InitialData(Postgre postgre)
+        private void InitialData(Postgre postgre)
         {
             for (int i = 101; i <= 400; i++) {
                 postgre.Insert(GenerateCommand.Insert(TableName, $"10001, {i}, FALSE"));

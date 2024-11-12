@@ -21,7 +21,7 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Public Function--------------------------*/
 
-        public Hotel(Postgre postgre) : base(postgre, "Hotel")
+        public Hotel(Postgre postgre) : base("Hotel")
         {
             try {
                 postgre.Create(CreateCommand);
@@ -30,6 +30,8 @@ namespace HotelSQL.HotelManage
             catch (Exception) {
                 return;
             }
+            Adapter = postgre.Adapter(TableName);
+            Adapter.Fill(Table);
         }
 
         public Attribute GetAttribute(int index)
@@ -42,9 +44,16 @@ namespace HotelSQL.HotelManage
             return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}";
         }
 
+        public bool AddHotel(int hotelNO, string hotelName, int hotelStar)
+        {
+            if (Table.Rows.Find(hotelNO) is not null) return false;
+            Table.Rows.Add([hotelNO, hotelName, hotelStar]);
+            return true;
+        }
+
         /*---------------------------Private Function--------------------------*/
 
-        protected override void InitialData(Postgre postgre)
+        private void InitialData(Postgre postgre)
         {
             postgre.Insert(GenerateCommand.Insert(TableName, "10001, 'KaiFeng', 4"));
             postgre.Insert(GenerateCommand.Insert(TableName, "10002, 'SiJi', 5"));

@@ -44,7 +44,9 @@ namespace HotelSQL.DataBase
         public NpgsqlDataAdapter? Adapter(string tableName)
         {
             if (Connection is null) return null;
-            return new NpgsqlDataAdapter($"SELECT * FROM {tableName};", Connection);
+            var adapter =  new NpgsqlDataAdapter($"SELECT * FROM {tableName};", Connection);
+            _ = new NpgsqlCommandBuilder(adapter);
+            return adapter;
         }
 
         public NpgsqlDataReader? Query(string query)

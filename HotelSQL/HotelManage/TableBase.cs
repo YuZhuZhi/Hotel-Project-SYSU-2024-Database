@@ -13,23 +13,26 @@ namespace HotelSQL.HotelManage
     {
         /*---------------------------Public Function--------------------------*/
 
-        public TableBase(Postgre postgre, string tableName)
+        public TableBase(string tableName)
         {
             TableName = tableName;
-            Adapter = postgre.Adapter(TableName);
-            Adapter.Fill(Table);
+            Table = new DataTable(TableName);
         }
 
-        protected virtual void InitialData(Postgre postgre) { return; }
+        ~TableBase()
+        {
+            Adapter.Dispose();
+        }
 
         /*---------------------------Public Member--------------------------*/
 
         public readonly string TableName;
+        public DataTable Table { get; set; }
 
         /*---------------------------Protected Member--------------------------*/
 
-        protected NpgsqlDataAdapter Adapter = new();
-        protected DataTable Table = new();
+        protected NpgsqlDataAdapter Adapter;
+        
 
     }
 }

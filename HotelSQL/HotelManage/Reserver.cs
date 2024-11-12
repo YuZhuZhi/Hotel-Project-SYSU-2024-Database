@@ -15,11 +15,11 @@ namespace HotelSQL.HotelManage
 
         public enum Attribute
         {
-            hotelNO, ID, date, duration
+            ID, date, duration
         }
 
         /*---------------------------Public Function--------------------------*/
-        public Reserver(Postgre postgre) : base(postgre, "Reserver")
+        public Reserver(Postgre postgre) : base("Reserver")
         {
             try {
                 postgre.Create(CreateCommand);
@@ -28,6 +28,8 @@ namespace HotelSQL.HotelManage
             catch (Exception) {
                 return;
             }
+            Adapter = postgre.Adapter(TableName);
+            Adapter.Fill(Table);
         }
 
         public Attribute GetAttribute(int index)
@@ -42,7 +44,7 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Private Function--------------------------*/
 
-        protected override void InitialData(Postgre postgre)
+        private void InitialData(Postgre postgre)
         {
             return;
         }
@@ -52,7 +54,6 @@ namespace HotelSQL.HotelManage
         /*---------------------------Private Member--------------------------*/
 
         private readonly string CreateCommand = "CREATE TABLE Reserver (\n" +
-            "hotelNO  int      NOT NULL REFERENCES Hotel(hotelNO) ON DELETE CASCADE," +
             "ID       int      NOT NULL PRIMARY KEY," +
             "date     date     NOT NULL," +
             "duration interval NOT NULL);";

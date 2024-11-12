@@ -20,7 +20,7 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Public Function--------------------------*/
 
-        public RoomType(Postgre postgre) : base(postgre, "RoomType")
+        public RoomType(Postgre postgre) : base("RoomType")
         {
             try {
                 postgre.Create(CreateCommand);
@@ -29,6 +29,8 @@ namespace HotelSQL.HotelManage
             catch (Exception) {
                 return;
             }
+            Adapter = postgre.Adapter(TableName);
+            Adapter.Fill(Table);
         }
 
         public Attribute GetAttribute(int index)
@@ -41,9 +43,16 @@ namespace HotelSQL.HotelManage
             return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}, {(Attribute)3}";
         }
 
+        public bool AddRoomType(int hotelNO, string type, int price, int amount)
+        {
+            if (Table.Rows.Find([hotelNO, type]) is not null) return false;
+            Table.Rows.Add([hotelNO, type, price, amount]);
+            return true;
+        }
+
         /*---------------------------Private Function--------------------------*/
 
-        protected override void InitialData(Postgre postgre)
+        private void InitialData(Postgre postgre)
         {
             postgre.Insert(GenerateCommand.Insert(TableName, "10001, 'normal', 500, 300"));
             postgre.Insert(GenerateCommand.Insert(TableName, "10001, 'luxury', 1000, 100"));

@@ -20,7 +20,7 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Public Function--------------------------*/
 
-        public Address(Postgre postgre) : base(postgre, "Address")
+        public Address(Postgre postgre) : base("Address")
         {
             try {
                 postgre.Create(CreateCommand);
@@ -29,6 +29,8 @@ namespace HotelSQL.HotelManage
             catch (Exception error) {
                 Console.WriteLine(error.ToString());
             }
+            Adapter = postgre.Adapter(TableName);
+            Adapter.Fill(Table);
         }
 
 
@@ -44,7 +46,7 @@ namespace HotelSQL.HotelManage
 
         /*---------------------------Private Function--------------------------*/
 
-        protected override void InitialData(Postgre postgre)
+        private void InitialData(Postgre postgre)
         {
             for (int i = 101; i <= 400; i++) {
                 postgre.Insert(GenerateCommand.Insert(TableName, $"10001, {i}, 'normal'"));
