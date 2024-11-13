@@ -14,6 +14,7 @@ namespace HotelSQL.HotelManage
         
         public Manager(Postgre postgre)
         {
+            //DropAllTable();
             SQL = postgre;
             Hotel = new Hotel(postgre);
             RoomType = new RoomType(postgre);
@@ -21,27 +22,43 @@ namespace HotelSQL.HotelManage
             Reserver = new Reserver(postgre);
             Address = new Address(postgre);
             Reservation = new Reservation(postgre);
+            //DropAllTable();
             SetTables();
         }
 
         public void DropAllTable()
         {
-            SQL.Drop($"DROP TABLE {Address.TableName} CASCADE;");
-            SQL.Drop($"DROP TABLE {Reservation.TableName} CASCADE;");
-            SQL.Drop($"DROP TABLE {Reserver.TableName} CASCADE;");
-            SQL.Drop($"DROP TABLE {Room.TableName} CASCADE;");
-            SQL.Drop($"DROP TABLE {RoomType.TableName} CASCADE;");
-            SQL.Drop($"DROP TABLE {Hotel.TableName} CASCADE;");
+            try {
+                SQL.Drop($"DROP TABLE {Address.TableName} CASCADE;");
+                SQL.Drop($"DROP TABLE {Reservation.TableName} CASCADE;");
+                SQL.Drop($"DROP TABLE {Reserver.TableName} CASCADE;");
+                SQL.Drop($"DROP TABLE {Room.TableName} CASCADE;");
+                SQL.Drop($"DROP TABLE {RoomType.TableName} CASCADE;");
+                SQL.Drop($"DROP TABLE {Hotel.TableName} CASCADE;");
+            }
+            catch (Exception) { return; }
         }
 
-        public int ReserveRoom(int reserverID, int hotelNO, int roomNO)
+        public int ReserveRoom(int reserverID, int hotelNO, int roomNO, DateTime date, int duration)
         {
-            return 1;
+            if (Room.Reserve(hotelNO, roomNO)) {
+                Reserver.Delete(reserverID);
+                Reserver.Add(reserverID, date, duration);
+
+                Reservation.Add(reserverID, hotelNO, roomNO);
+
+                return Room.Update() + Reserver.Update() + Reservation.Update();
+            }
+            else return 0;
         }
 
         public int ReserveCancle(int reserverID)
         {
-            return 1;
+            DataRow reservationInfo = Reservation.GetRow(reserverID);
+            if (reservationInfo is null) return 0;
+            Room.Cancle((int)reservationInfo["hotelNO"], (int)reservationInfo["roomNO"]);
+            Reserver.Delete(reserverID);
+            return Room.Update() + Reserver.Update();
         }
 
         /*---------------------------Private Function--------------------------*/
@@ -56,12 +73,12 @@ namespace HotelSQL.HotelManage
                 [RoomType.Table.Columns["hotelNO"], RoomType.Table.Columns["type"]], 
                 [Address.Table.Columns["hotelNO"], Address.Table.Columns["type"]]) );
             dataSet.Relations.Add(new DataRelation("roomAddress",
-                [Room.Table.Columns["hotelNO"], Room.Table.Columns["type"]],
-                [Address.Table.Columns["hotelNO"], Address.Table.Columns["type"]]));
+                [Room.Table.Columns["hotelNO"], Room.Table.Columns["roomNO"]],
+                [Address.Table.Columns["hotelNO"], Address.Table.Columns["roomNO"]]));
             dataSet.Relations.Add(new DataRelation("reserverReservation", Reserver.Table.Columns["ID"], Reservation.Table.Columns["ID"]));
             dataSet.Relations.Add(new DataRelation("roomReservation",
-                [Room.Table.Columns["hotelNO"], Room.Table.Columns["type"]],
-                [Reservation.Table.Columns["hotelNO"], Reservation.Table.Columns["type"]]));
+                [Room.Table.Columns["hotelNO"], Room.Table.Columns["roomNO"]],
+                [Reservation.Table.Columns["hotelNO"], Reservation.Table.Columns["roomNO"]]));
 
         }
 

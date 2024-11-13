@@ -31,6 +31,8 @@ namespace HotelSQL.HotelManage
             }
             Adapter = postgre.Adapter(TableName);
             Adapter.Fill(Table);
+            Table.PrimaryKey = [Table.Columns["orderNO"]];
+            Table.Columns["orderNO"].AutoIncrement = true;
         }
 
         public Attribute GetAttribute(int index)
@@ -41,6 +43,23 @@ namespace HotelSQL.HotelManage
         public string GetAllAttribute()
         {
             return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}, {(Attribute)3}";
+        }
+
+        public DataRow GetRow(int ID)
+        {
+            var rows = Table.Select($"ID = {ID}");
+            return rows.Last();
+        }
+
+        public bool Add(int ID, int hotelNO, int roomNO)
+        {
+            //if (Table.Select($"ID = {ID} AND hotelNO = {hotelNO}") is not null) return false;
+            DataRow row = Table.NewRow();
+            row["ID"] = ID;
+            row["hotelNO"] = hotelNO;
+            row["roomNO"] = roomNO;
+            Table.Rows.Add(row);
+            return true;
         }
 
         /*---------------------------Private Function--------------------------*/

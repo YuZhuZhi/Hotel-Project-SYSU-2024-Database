@@ -24,6 +24,21 @@ namespace HotelSQL.HotelManage
             Adapter.Dispose();
         }
 
+        public int Update()
+        {
+            try {
+                int changes = Adapter.Update(Table);
+                Table.AcceptChanges();
+                return changes;
+            }
+            catch (Exception) {
+                Table.RejectChanges();
+                return 0;
+            }
+        }
+
+        public void Reject() { Table.RejectChanges(); }
+
         /*---------------------------Public Member--------------------------*/
 
         public readonly string TableName;

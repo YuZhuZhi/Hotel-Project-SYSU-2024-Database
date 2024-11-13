@@ -31,6 +31,7 @@ namespace HotelSQL.HotelManage
             }
             Adapter = postgre.Adapter(TableName);
             Adapter.Fill(Table);
+            Table.PrimaryKey = [Table.Columns["hotelNO"], Table.Columns["roomNO"]];
         }
 
         public Attribute GetAttribute(int index)
@@ -48,6 +49,11 @@ namespace HotelSQL.HotelManage
             if ((bool)Table.Rows.Find([hotelNO, roomNO])["isReserved"]) return false;
             Table.Rows.Find([hotelNO, roomNO])["isReserved"] = true;
             return true;
+        }
+
+        public void Cancle(int hotelNO, int roomNO)
+        {
+            Table.Rows.Find([hotelNO, roomNO])["isReserved"] = false;
         }
 
         /*---------------------------Private Function--------------------------*/

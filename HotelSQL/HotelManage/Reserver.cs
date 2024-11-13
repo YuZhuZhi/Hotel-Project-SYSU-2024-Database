@@ -30,6 +30,7 @@ namespace HotelSQL.HotelManage
             }
             Adapter = postgre.Adapter(TableName);
             Adapter.Fill(Table);
+            Table.PrimaryKey = [Table.Columns["ID"]];
         }
 
         public Attribute GetAttribute(int index)
@@ -40,6 +41,20 @@ namespace HotelSQL.HotelManage
         public string GetAllAttribute()
         {
             return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}, {(Attribute)3}";
+        }
+
+        public DataRow? GetRow(int ID) { return Table.Rows.Find(ID); }
+
+        public bool Add(int ID, DateTime date, int duration)
+        {
+            if (Table.Rows.Find(ID) is not null) return false;
+            Table.Rows.Add([ID, date.Date, new TimeSpan(duration, 0, 0)]);
+            return true;
+        }
+
+        public void Delete(int ID)
+        {
+            Table.Rows.Find(ID)?.Delete();
         }
 
         /*---------------------------Private Function--------------------------*/

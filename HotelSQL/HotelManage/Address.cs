@@ -31,6 +31,7 @@ namespace HotelSQL.HotelManage
             }
             Adapter = postgre.Adapter(TableName);
             Adapter.Fill(Table);
+            Table.PrimaryKey = [Table.Columns["hotelNO"], Table.Columns["roomNO"]];
         }
 
 
@@ -42,6 +43,13 @@ namespace HotelSQL.HotelManage
         public string GetAllAttribute()
         {
             return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}";
+        }
+
+        public bool Add(int hotelNO, int roomNO, string type)
+        {
+            if (Table.Rows.Find([hotelNO, roomNO]) is not null) return false;
+            Table.Rows.Add([hotelNO, roomNO, type]);
+            return true;
         }
 
         /*---------------------------Private Function--------------------------*/
