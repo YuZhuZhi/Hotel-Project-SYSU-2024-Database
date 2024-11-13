@@ -48,7 +48,7 @@ namespace HotelSQL.HotelManage
         public bool Add(int ID, DateTime date, int duration)
         {
             if (Table.Rows.Find(ID) is not null) return false;
-            Table.Rows.Add([ID, date.Date, new TimeSpan(duration, 0, 0)]);
+            Table.Rows.Add([ID, date.Date, new TimeSpan(duration, 0, 0, 0)]);
             return true;
         }
 

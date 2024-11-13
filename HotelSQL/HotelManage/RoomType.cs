@@ -71,6 +71,23 @@ namespace HotelSQL.HotelManage
             typeInfo["type"] = newType;
         }
 
+        public int IncreaseAmount(int hotelNO, string type, int increasement)
+            // Should be called BEFORE Room.Add() or Room.Delete().
+            // Return how many rooms changed for sure.
+        {
+            var typeInfo = Table.Rows.Find([hotelNO, type]);
+            if (typeInfo is null) return 0;
+            int afterAmount = (int)typeInfo["amount"] + increasement;
+            if (afterAmount >= 0) {
+                typeInfo["amount"] = afterAmount;
+                return increasement;
+            }
+            else {
+                typeInfo["amount"] = 0;
+                return -(int)typeInfo["amount"];
+            }
+        }
+
         /*---------------------------Private Function--------------------------*/
 
         private void InitialData(Postgre postgre)

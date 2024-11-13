@@ -53,7 +53,7 @@ namespace HotelSQL.HotelManage
 
         public bool Add(int ID, int hotelNO, int roomNO)
         {
-            if (Table.Select($"ID = {ID} AND hotelNO = {hotelNO}").Length == 0) return false;
+            if (Table.Select($"ID = {ID} AND hotelNO = {hotelNO}").Length != 0) return false;
             DataRow row = Table.NewRow();
             row["ID"] = ID;
             row["hotelNO"] = hotelNO;
@@ -64,7 +64,7 @@ namespace HotelSQL.HotelManage
 
         public bool SetRoom(int ID, int roomNO)
             // isReserved should be checked BEFORE calling.
-            // isReserved should be set to TRUE AFTER calling.
+            // isReserved should be set AFTER calling.
         {
             var presentReservation = GetRow(ID);
             try {
@@ -77,7 +77,7 @@ namespace HotelSQL.HotelManage
         public bool SetRoom(int ID, string type, int roomNO)
         // Set roomNO assuming the reserver just changing the room without changing hotel.
         // isReserved should be checked BEFORE calling.
-        // isReserved should be set to TRUE AFTER calling.
+        // isReserved should be set AFTER calling.
         {
             var presentReservation = GetRow(ID);
             var minRoomNO = Table.AsEnumerable()

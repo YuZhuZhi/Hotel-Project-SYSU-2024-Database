@@ -45,7 +45,13 @@ namespace HotelSQL.HotelManage
             return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}";
         }
 
+        public DataRow? GetRow(int hotelNO, int roomNO)
+        {
+            return Table.Rows.Find([hotelNO, roomNO]);
+        }
+
         public bool Add(int hotelNO, int roomNO, string type)
+            //Should be called After Room.Add().
         {
             if (Table.Rows.Find([hotelNO, roomNO]) is not null) return false;
             Table.Rows.Add([hotelNO, roomNO, type]);

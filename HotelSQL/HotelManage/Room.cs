@@ -44,6 +44,13 @@ namespace HotelSQL.HotelManage
             return $"{(Attribute)0}, {(Attribute)1}, {(Attribute)2}";
         }
 
+        public bool IsReserved(int hotelNO, int roomNO)
+        {
+            var roomInfo = Table.Rows.Find([hotelNO, roomNO]);
+            if (roomInfo is null) return false;
+            return (bool)roomInfo["isReserved"];
+        }
+
         public bool Reserve(int hotelNO, int roomNO)
         {
             var roomInfo = Table.Rows.Find([hotelNO, roomNO]);

@@ -18,19 +18,21 @@ namespace HotelSQL.HotelManage
             if (reset) DropAllTable();
             try {
                 CreateAllTables(postgre);
+                SetTables();
             }
             catch (Exception) {
                 DropAllTable();
+                dataSet = new DataSet();
                 CreateAllTables(postgre);
+                SetTables();
             }
-            SetTables();
         }
 
         public void DropAllTable()
         {
             try {
                 SQL.Drop($"DROP TABLE Address CASCADE;");
-                SQL.Drop($"DROP TABLE TableName CASCADE;");
+                SQL.Drop($"DROP TABLE Reservation CASCADE;");
                 SQL.Drop($"DROP TABLE Reserver CASCADE;");
                 SQL.Drop($"DROP TABLE Room CASCADE;");
                 SQL.Drop($"DROP TABLE RoomType CASCADE;");
@@ -58,7 +60,89 @@ namespace HotelSQL.HotelManage
             if (reservationInfo is null) return 0;
             Room.Cancle((int)reservationInfo["hotelNO"], (int)reservationInfo["roomNO"]);
             Reserver.Delete(reserverID);
-            return Room.Update() + Reserver.Update();
+            return Reservation.Update() + Room.Update() + Reserver.Update();
+        }
+
+        public int ChangeRoom(int reserverID, int newRoomNO)
+        {
+            DataRow reservationInfo = Reservation.GetRow(reserverID);
+            if (reservationInfo is null) return 0;
+            if (Room.IsReserved((int)reservationInfo["hotelNO"], newRoomNO)) return 0;
+            Room.Cancle((int)reservationInfo["hotelNO"], (int)reservationInfo["roomNO"]);
+            Room.Reserve((int)reservationInfo["hotelNO"], newRoomNO);
+            Reservation.SetRoom(reserverID, newRoomNO);
+            return Reservation.Update() + Room.Update();
+        }
+
+        public int AddHotel(int hotelNO, string hotelName, int hotelStar)
+        {
+            Hotel.Add(hotelNO, hotelName, hotelStar);
+            return Hotel.Update();
+        }
+
+        public int RemoveHotel(int hotelNO)
+        {
+            Hotel.Delete(hotelNO);
+            return Hotel.Update();
+        }
+
+        public int SetHotelRename(int hotelNO, string hotelName)
+        {
+            Hotel.Rename(hotelNO, hotelName);
+            return Hotel.Update();
+        }
+
+        public int SetHotelAddress(int hotelNO, int newHotelNO)
+        {
+            Hotel.SetAddress(hotelNO, newHotelNO);
+            return Hotel.Update();
+        }
+
+        public int SetHotelStar(int hotelNO, int star)
+        {
+            Hotel.SetStar(hotelNO, star);
+            return Hotel.Update();
+        }
+
+        public int AddRoomType(int hotelNO, string type, int price, int amount)
+        {
+            RoomType.Add(hotelNO, type, price, amount);
+            return RoomType.Update();
+        }
+
+        public int RemoveRoomType(int hotelNO, string type)
+        {
+            RoomType.Delete(hotelNO, type);
+            return RoomType.Update();
+        }
+
+        public int SetRoomTypePrice(int hotelNO, string type, int price)
+        {
+            RoomType.SetPrice(hotelNO, type, price);
+            return RoomType.Update();
+        }
+
+        public int SetRoomTypeName(int hotelNO, string type, string newType)
+        {
+            RoomType.SetType(hotelNO, type, newType);
+            return RoomType.Update();
+        }
+
+        public int AddRoom(int hotelNO, int roomNO, string type)
+        {
+            RoomType.IncreaseAmount(hotelNO, type, 1);
+            Room.Add(hotelNO, roomNO);
+            Address.Add(hotelNO, roomNO, type);
+            return Address.Update() + Room.Update() + RoomType.Update();
+        }
+
+        public int RemoveRoom(int hotelNO, int roomNO)
+        {
+            var addressInfo = Address.GetRow(hotelNO, roomNO);
+            if (addressInfo is null) return 0;
+            Room.Delete(hotelNO, roomNO);
+            RoomType.IncreaseAmount(hotelNO, addressInfo["type"].ToString(), -1);
+            return Address.Update() + Room.Update() + RoomType.Update();
         }
 
         /*---------------------------Private Function--------------------------*/
@@ -77,19 +161,65 @@ namespace HotelSQL.HotelManage
             //Fill the DataSet(private), and set Constraints same as which in SQL.
         {
             dataSet.Tables.AddRange([Hotel.Table, RoomType.Table, Room.Table, Reserver.Table, Address.Table, Reservation.Table]);
-            dataSet.Relations.Add(new DataRelation("hotelType", Hotel.Table.Columns["hotelNO"], RoomType.Table.Columns["hotelNO"]) );
-            dataSet.Relations.Add(new DataRelation("hotelRoom", Hotel.Table.Columns["hotelNO"], Room.Table.Columns["hotelNO"]) );
-            dataSet.Relations.Add(new DataRelation("typeAddress", 
-                [RoomType.Table.Columns["hotelNO"], RoomType.Table.Columns["type"]], 
-                [Address.Table.Columns["hotelNO"], Address.Table.Columns["type"]]) );
-            dataSet.Relations.Add(new DataRelation("roomAddress",
-                [Room.Table.Columns["hotelNO"], Room.Table.Columns["roomNO"]],
-                [Address.Table.Columns["hotelNO"], Address.Table.Columns["roomNO"]]));
-            dataSet.Relations.Add(new DataRelation("reserverReservation", Reserver.Table.Columns["ID"], Reservation.Table.Columns["ID"]));
-            dataSet.Relations.Add(new DataRelation("roomReservation",
-                [Room.Table.Columns["hotelNO"], Room.Table.Columns["roomNO"]],
-                [Reservation.Table.Columns["hotelNO"], Reservation.Table.Columns["roomNO"]]));
 
+            Room.Table.Constraints.Add(new ForeignKeyConstraint(
+                Hotel.Table.Columns["hotelNO"],
+                Room.Table.Columns["hotelNO"])
+                { DeleteRule = Rule.Cascade});
+            RoomType.Table.Constraints.Add(new ForeignKeyConstraint(
+                Hotel.Table.Columns["hotelNO"],
+                RoomType.Table.Columns["hotelNO"])
+                { DeleteRule = Rule.Cascade });
+            Address.Table.Constraints.Add(new ForeignKeyConstraint(
+                [RoomType.Table.Columns["hotelNO"], RoomType.Table.Columns["type"]],
+                [Address.Table.Columns["hotelNO"], Address.Table.Columns["type"]])
+                { DeleteRule = Rule.Cascade });
+            Address.Table.Constraints.Add(new ForeignKeyConstraint(
+                [Room.Table.Columns["hotelNO"], Room.Table.Columns["roomNO"]],
+                [Address.Table.Columns["hotelNO"], Address.Table.Columns["roomNO"]])
+                { DeleteRule = Rule.Cascade });
+            Reservation.Table.Constraints.Add(new ForeignKeyConstraint(
+                Reserver.Table.Columns["ID"],
+                Reservation.Table.Columns["ID"])
+                { DeleteRule = Rule.Cascade });
+            Reservation.Table.Constraints.Add(new ForeignKeyConstraint(
+                [Room.Table.Columns["hotelNO"], Room.Table.Columns["roomNO"]],
+                [Reservation.Table.Columns["hotelNO"], Reservation.Table.Columns["roomNO"]])
+                { DeleteRule = Rule.Cascade });
+
+            //var hotelType = new DataRelation("hotelType", 
+            //    Hotel.Table.Columns["hotelNO"], 
+            //    RoomType.Table.Columns["hotelNO"], 
+            //    createConstraints: true);
+            //var hotelRoom = new DataRelation("hotelRoom", 
+            //    Hotel.Table.Columns["hotelNO"], 
+            //    Room.Table.Columns["hotelNO"],
+            //    createConstraints: true);
+            //var typeAddress = new DataRelation("typeAddress",
+            //    [RoomType.Table.Columns["hotelNO"], RoomType.Table.Columns["type"]],
+            //    [Address.Table.Columns["hotelNO"], Address.Table.Columns["type"]],
+            //    createConstraints: true);
+            //var roomAddress = new DataRelation("roomAddress",
+            //    [Room.Table.Columns["hotelNO"], Room.Table.Columns["roomNO"]],
+            //    [Address.Table.Columns["hotelNO"], Address.Table.Columns["roomNO"]],
+            //    createConstraints: true);
+            //var reserverReservation = new DataRelation("reserverReservation", 
+            //    Reserver.Table.Columns["ID"], 
+            //    Reservation.Table.Columns["ID"],
+            //    createConstraints: true);
+            //var roomReservation = new DataRelation("roomReservation",
+            //    [Room.Table.Columns["hotelNO"], Room.Table.Columns["roomNO"]],
+            //    [Reservation.Table.Columns["hotelNO"], Reservation.Table.Columns["roomNO"]],
+            //    createConstraints: true);
+
+            //hotelType.ChildKeyConstraint.DeleteRule = Rule.Cascade;
+            //hotelRoom.ChildKeyConstraint.DeleteRule = Rule.Cascade;
+            //typeAddress.ChildKeyConstraint.DeleteRule = Rule.Cascade;
+            //roomAddress.ChildKeyConstraint.DeleteRule = Rule.Cascade;
+            //reserverReservation.ChildKeyConstraint.DeleteRule = Rule.Cascade;
+            //roomReservation.ChildKeyConstraint.DeleteRule = Rule.Cascade;
+
+            //dataSet.Relations.AddRange([hotelType, hotelRoom, typeAddress, roomAddress, reserverReservation, roomReservation]);
         }
 
         /*---------------------------Public Member--------------------------*/

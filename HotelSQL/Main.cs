@@ -12,7 +12,7 @@ class MainFunction
         var postgre = new Postgre(passWord: "wjy20040416");
 
 
-        var manager = new Manager(postgre);
+        var manager = new Manager(postgre, true);
 
         //foreach (DataColumn primaryKeyColumn in manager.Room.Table.PrimaryKey) {
         //    Console.WriteLine($"Column Name: {primaryKeyColumn.ColumnName}, Data Type: {primaryKeyColumn.DataType}");
@@ -24,7 +24,7 @@ class MainFunction
             date: DateTime.Now.Date,
             duration: 7));
 
-        manager.ReserveCancle(223344);
+        Console.WriteLine(manager.ReserveCancle(223344));
 
         //manager.DropAllTable();
     }
