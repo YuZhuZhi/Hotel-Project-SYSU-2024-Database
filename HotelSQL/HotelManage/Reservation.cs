@@ -53,12 +53,41 @@ namespace HotelSQL.HotelManage
 
         public bool Add(int ID, int hotelNO, int roomNO)
         {
-            //if (Table.Select($"ID = {ID} AND hotelNO = {hotelNO}") is not null) return false;
+            if (Table.Select($"ID = {ID} AND hotelNO = {hotelNO}").Length == 0) return false;
             DataRow row = Table.NewRow();
             row["ID"] = ID;
             row["hotelNO"] = hotelNO;
             row["roomNO"] = roomNO;
             Table.Rows.Add(row);
+            return true;
+        }
+
+        public bool SetRoom(int ID, int roomNO)
+            // isReserved should be checked BEFORE calling.
+            // isReserved should be set to TRUE AFTER calling.
+        {
+            var presentReservation = GetRow(ID);
+            try {
+                presentReservation["roomNO"] = roomNO;
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
+        public bool SetRoom(int ID, string type, int roomNO)
+        // Set roomNO assuming the reserver just changing the room without changing hotel.
+        // isReserved should be checked BEFORE calling.
+        // isReserved should be set to TRUE AFTER calling.
+        {
+            var presentReservation = GetRow(ID);
+            var minRoomNO = Table.AsEnumerable()
+                .Where(row => row.Field<string>("type") == type)
+                .Min(row => row.Field<int>("roomNO"));
+            var maxRoomNO = Table.AsEnumerable()
+                .Where(row => row.Field<string>("type") == type)
+                .Max(row => row.Field<int>("roomNO"));
+            if (roomNO < minRoomNO || roomNO > maxRoomNO) return false;
+            presentReservation["roomNO"] = roomNO;
             return true;
         }
 

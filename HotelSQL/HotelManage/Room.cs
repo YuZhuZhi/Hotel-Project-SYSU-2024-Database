@@ -46,14 +46,30 @@ namespace HotelSQL.HotelManage
 
         public bool Reserve(int hotelNO, int roomNO)
         {
-            if ((bool)Table.Rows.Find([hotelNO, roomNO])["isReserved"]) return false;
-            Table.Rows.Find([hotelNO, roomNO])["isReserved"] = true;
+            var roomInfo = Table.Rows.Find([hotelNO, roomNO]);
+            if (roomInfo is null) return false;
+            if ((bool)roomInfo["isReserved"]) return false;
+            roomInfo["isReserved"] = true;
             return true;
         }
 
         public void Cancle(int hotelNO, int roomNO)
         {
-            Table.Rows.Find([hotelNO, roomNO])["isReserved"] = false;
+            var roomInfo = Table.Rows.Find([hotelNO, roomNO]);
+            if (roomInfo is null) return;
+            roomInfo["isReserved"] = false;
+        }
+
+        public bool Add(int hotelNO, int roomNO)
+        {
+            if (Table.Rows.Find([hotelNO, roomNO]) is not null) return false;
+            Table.Rows.Add([hotelNO, roomNO, false]);
+            return true;
+        }
+
+        public void Delete(int hotelNO, int roomNO)
+        {
+            Table.Rows.Find([hotelNO, roomNO])?.Delete();
         }
 
         /*---------------------------Private Function--------------------------*/

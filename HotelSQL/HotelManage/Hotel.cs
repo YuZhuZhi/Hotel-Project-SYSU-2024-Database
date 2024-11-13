@@ -52,6 +52,33 @@ namespace HotelSQL.HotelManage
             return true;
         }
 
+        public void Delete(int hotelNO)
+        {
+            Table.Rows.Find(hotelNO)?.Delete();
+        }
+
+        public void SetAddress(int hotelNO, int newHotelNO)
+        {
+            if (Table.Rows.Find(newHotelNO) is not null) return;
+            var hotelInfo = Table.Rows.Find(hotelNO);
+            if (hotelInfo is null) return;
+            hotelInfo["hotelNO"] = newHotelNO;
+        }
+
+        public void Rename(int hotelNO, string hotelName)
+        {
+            var hotelInfo = Table.Rows.Find(hotelNO);
+            if (hotelInfo is null) return;
+            hotelInfo["name"] = hotelName;
+        }
+
+        public void SetStar(int hotelNO, int star)
+        {
+            var hotelInfo = Table.Rows.Find(hotelNO);
+            if (hotelInfo is null) return;
+            hotelInfo["star"] = star;
+        }
+
         /*---------------------------Private Function--------------------------*/
 
         private void InitialData(Postgre postgre)

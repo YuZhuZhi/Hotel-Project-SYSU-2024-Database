@@ -12,29 +12,29 @@ namespace HotelSQL.HotelManage
     {
         /*---------------------------Public Function--------------------------*/
         
-        public Manager(Postgre postgre)
+        public Manager(Postgre postgre, bool reset = false)
         {
-            //DropAllTable();
             SQL = postgre;
-            Hotel = new Hotel(postgre);
-            RoomType = new RoomType(postgre);
-            Room = new Room(postgre);
-            Reserver = new Reserver(postgre);
-            Address = new Address(postgre);
-            Reservation = new Reservation(postgre);
-            //DropAllTable();
+            if (reset) DropAllTable();
+            try {
+                CreateAllTables(postgre);
+            }
+            catch (Exception) {
+                DropAllTable();
+                CreateAllTables(postgre);
+            }
             SetTables();
         }
 
         public void DropAllTable()
         {
             try {
-                SQL.Drop($"DROP TABLE {Address.TableName} CASCADE;");
-                SQL.Drop($"DROP TABLE {Reservation.TableName} CASCADE;");
-                SQL.Drop($"DROP TABLE {Reserver.TableName} CASCADE;");
-                SQL.Drop($"DROP TABLE {Room.TableName} CASCADE;");
-                SQL.Drop($"DROP TABLE {RoomType.TableName} CASCADE;");
-                SQL.Drop($"DROP TABLE {Hotel.TableName} CASCADE;");
+                SQL.Drop($"DROP TABLE Address CASCADE;");
+                SQL.Drop($"DROP TABLE TableName CASCADE;");
+                SQL.Drop($"DROP TABLE Reserver CASCADE;");
+                SQL.Drop($"DROP TABLE Room CASCADE;");
+                SQL.Drop($"DROP TABLE RoomType CASCADE;");
+                SQL.Drop($"DROP TABLE Hotel CASCADE;");
             }
             catch (Exception) { return; }
         }
@@ -62,6 +62,16 @@ namespace HotelSQL.HotelManage
         }
 
         /*---------------------------Private Function--------------------------*/
+
+        private void CreateAllTables(Postgre postgre)
+        {
+            Hotel = new Hotel(postgre);
+            RoomType = new RoomType(postgre);
+            Room = new Room(postgre);
+            Reserver = new Reserver(postgre);
+            Address = new Address(postgre);
+            Reservation = new Reservation(postgre);
+        }
 
         private void SetTables()
             //Fill the DataSet(private), and set Constraints same as which in SQL.

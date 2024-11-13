@@ -226,9 +226,79 @@
 
 == 系统数据库设计
 
+根据E-R图，六张表对应的创建表格指令分别是：
+
+1. 酒店表：
+
+```SQL
+CREATE TABLE Hotel (
+  hotelNO  int      NOT NULL PRIMARY KEY,
+  name     char(10) NOT NULL,
+  star     int      NOT NULL);
+```
+
+2. 房间类型表：
+
+```SQL
+CREATE TABLE RoomType(
+  hotelNO  int       NOT NULL REFERENCES Hotel(hotelNO) ON DELETE CASCADE,
+  type     char(10)  NOT NULL,
+  price    int       NOT NULL,
+  amount   int       NOT NULL,
+  PRIMARY KEY (hotelNO, type));
+```
+
+3. 房间表：
+
+```SQL
+CREATE TABLE Room(
+  hotelNO    int     NOT NULL REFERENCES Hotel(hotelNO) ON DELETE CASCADE,
+  roomNO     int     NOT NULL,
+  isReserved boolean NOT NULL,
+  PRIMARY KEY (hotelNO, roomNO));
+```
+
+4. 预订人表：
+
+```SQL
+CREATE TABLE Reserver (
+  hotelNO  int      NOT NULL REFERENCES Hotel(hotelNO) ON DELETE CASCADE,
+  ID       int      NOT NULL PRIMARY KEY,
+  date     date     NOT NULL,
+  duration interval NOT NULL);
+```
+
+5. 地址表：
+
+```SQL
+CREATE TABLE Address (
+  hotelNO  int      NOT NULL,
+  roomNO   int      NOT NULL,
+  type     CHAR(10) NOT NULL,
+  FOREIGN KEY (hotelNO, roomNO) REFERENCES Room(hotelNO, roomNO) ON DELETE CASCADE,
+  FOREIGN KEY (hotelNO, type) REFERENCES RoomType(hotelNO, type) ON DELETE CASCADE);
+```
+
+6. 预订表：
+
+```SQL
+CREATE TABLE Reservation (
+  orderNO  serial NOT NULL PRIMARY KEY,
+  ID       int    NOT NULL REFERENCES Reserver(ID) ON DELETE CASCADE,
+  hotelNO  int    NOT NULL,
+  roomNO   int    NOT NULL,
+  FOREIGN KEY (hotelNO, roomNO) REFERENCES Room(hotelNO, roomNO) ON DELETE CASCADE);
+```
+
+在每一张表中，所有属性都完全依赖于主键或主键元组，因此这些表至少是符合2-NF范式的；同时，也不存在传递依赖，因此系统数据库是符合3-NF范式的。
+
 == 主要功能模块
 
+
+
 == 各模块算法
+
+
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

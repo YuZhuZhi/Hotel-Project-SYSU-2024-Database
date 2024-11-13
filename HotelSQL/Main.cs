@@ -26,6 +26,6 @@ class MainFunction
 
         manager.ReserveCancle(223344);
 
-        manager.DropAllTable();
+        //manager.DropAllTable();
     }
 }
