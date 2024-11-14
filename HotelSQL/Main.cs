@@ -18,13 +18,23 @@ class MainFunction
         //    Console.WriteLine($"Column Name: {primaryKeyColumn.ColumnName}, Data Type: {primaryKeyColumn.DataType}");
         //}
 
+        Console.WriteLine(manager.RoomRemian(10001, "normal"));
+
         Console.WriteLine(manager.ReserveRoom(reserverID: 223344,
             hotelNO: 10001,
             roomNO: 101,
             date: DateTime.Now.Date,
             duration: 7));
 
-        Console.WriteLine(manager.ReserveCancle(223344));
+        Console.WriteLine(manager.RoomRemian(10001, "normal"));
+
+        //Console.WriteLine(manager.ReserveCancle(223344));
+
+        //manager.AddHotel(10004, "LuFeng", 3);
+        //manager.AddRoomType(10004, "standard", 10, 1000, 100);
+        //manager.AddRoom(10004, 1005, "standard");
+        //Console.WriteLine(manager.RemoveRoom(10004, 1000));
+        //manager.RemoveHotel(10004);
 
         //manager.DropAllTable();
     }

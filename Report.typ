@@ -25,6 +25,8 @@
 
 我们首先考虑后端语言的选择。我们希望能够便捷地、现代化地使用程序语言操作数据库，这里便排除掉了繁琐且内存不安全的C与C++语言，而在JAVA, Python, C\#中选择。考虑到大部分的使用环境都是Windows，且并非所有人都会在计算机中安装JVM，因此我们又排除掉了JAVA；但同时考虑小部分情况下的跨平台性，且Python不易打包成可执行文件，我们最终选择了C\#作为后端语言。
 
+另一个有趣的点是，C\#具有独特的Linq查询表达式，与数据库语言颇为相似。这就允许我们在本地内存中进行相似的操作。
+
 选择C\#作为后端语言后，我们惊喜地发现它也能同时胜任前端的构建。对于C\#，WinForm与WPF都是非常成熟的前端框架，其中尤以WinForm最具有简易性——它可以使用拖拽的方式构建前端界面！
 
 因此我们最终敲定以C\#语言作为整个项目的基石，无需分别为了后端与前端专门学习两种语言。项目的环境最终如下所示：
@@ -40,7 +42,7 @@
 
 == 人员分工
 
-- 王俊亚：组长。
+- 王俊亚：组长。负责统筹协调，后端代码编写，前端代码编写，前端界面美化，报告书编写。
 
 - 王炳睿：组员。
 
@@ -275,11 +277,12 @@ CREATE TABLE Address (
   hotelNO  int      NOT NULL,
   roomNO   int      NOT NULL,
   type     CHAR(10) NOT NULL,
+  PRIMARY KEY (hotelNO, roomNO),
   FOREIGN KEY (hotelNO, roomNO) REFERENCES Room(hotelNO, roomNO) ON DELETE CASCADE,
   FOREIGN KEY (hotelNO, type) REFERENCES RoomType(hotelNO, type) ON DELETE CASCADE);
 ```
 
-6. 预订表：
+1. 预订表：
 
 ```SQL
 CREATE TABLE Reservation (

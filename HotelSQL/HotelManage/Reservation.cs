@@ -74,23 +74,6 @@ namespace HotelSQL.HotelManage
             catch (Exception) { return false; }
         }
 
-        public bool SetRoom(int ID, string type, int roomNO)
-        // Set roomNO assuming the reserver just changing the room without changing hotel.
-        // isReserved should be checked BEFORE calling.
-        // isReserved should be set AFTER calling.
-        {
-            var presentReservation = GetRow(ID);
-            var minRoomNO = Table.AsEnumerable()
-                .Where(row => row.Field<string>("type") == type)
-                .Min(row => row.Field<int>("roomNO"));
-            var maxRoomNO = Table.AsEnumerable()
-                .Where(row => row.Field<string>("type") == type)
-                .Max(row => row.Field<int>("roomNO"));
-            if (roomNO < minRoomNO || roomNO > maxRoomNO) return false;
-            presentReservation["roomNO"] = roomNO;
-            return true;
-        }
-
         /*---------------------------Private Function--------------------------*/
 
         private void InitialData(Postgre postgre)

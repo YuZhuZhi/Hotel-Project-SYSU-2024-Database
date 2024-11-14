@@ -104,10 +104,14 @@ namespace HotelSQL.HotelManage
             return Hotel.Update();
         }
 
-        public int AddRoomType(int hotelNO, string type, int price, int amount)
+        public int AddRoomType(int hotelNO, string type, int price, int amount, int initialRoomNO)
         {
             RoomType.Add(hotelNO, type, price, amount);
-            return RoomType.Update();
+            for (int i = initialRoomNO; i < initialRoomNO + amount; i++) {
+                Room.Add(hotelNO, i);
+                Address.Add(hotelNO, i, type);
+            }
+            return RoomType.Update() + Room.Update() + Address.Update();
         }
 
         public int RemoveRoomType(int hotelNO, string type)
@@ -140,9 +144,19 @@ namespace HotelSQL.HotelManage
         {
             var addressInfo = Address.GetRow(hotelNO, roomNO);
             if (addressInfo is null) return 0;
-            Room.Delete(hotelNO, roomNO);
             RoomType.IncreaseAmount(hotelNO, addressInfo["type"].ToString(), -1);
+            Room.Delete(hotelNO, roomNO);
             return Address.Update() + Room.Update() + RoomType.Update();
+        }
+
+        public int RoomRemian(int hotelNO, string type)
+        {
+            return (from room in Room.Table.AsEnumerable()
+                       join address in Address.Table.AsEnumerable()
+                       on room.Field<int>("roomNO") equals address.Field<int>("roomNO")
+                       where (room.Field<int>("hotelNO") == hotelNO) && (address.Field<int>("hotelNO") == hotelNO)
+                            && (address.Field<string>("type")?.TrimEnd() == type) && (room.Field<bool>("isReserved") == false)
+                    select room).Count();
         }
 
         /*---------------------------Private Function--------------------------*/

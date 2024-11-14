@@ -98,6 +98,7 @@ namespace HotelSQL.HotelManage
             "hotelNO  int      NOT NULL,\n" +
             "roomNO   int      NOT NULL,\n" +
             "type     CHAR(10) NOT NULL,\n" +
+            "PRIMARY KEY (hotelNO, roomNO),\n" +
             "FOREIGN KEY (hotelNO, roomNO) REFERENCES Room(hotelNO, roomNO) ON DELETE CASCADE,\n" +
             "FOREIGN KEY (hotelNO, type) REFERENCES RoomType(hotelNO, type) ON DELETE CASCADE);";
     }
