@@ -24,7 +24,7 @@ namespace HotelSQL.HotelManage
             Adapter.Dispose();
         }
 
-        public int Update()
+        public virtual int Update()
         {
             try {
                 int changes = Adapter.Update(Table);

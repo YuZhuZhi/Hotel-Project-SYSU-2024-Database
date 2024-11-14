@@ -17,3 +17,6 @@ build_property.RootNamespace = HotelSQL
 build_property.ProjectDir = F:\资料及作业\作业\数据库\HotelProject\HotelSQL\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 

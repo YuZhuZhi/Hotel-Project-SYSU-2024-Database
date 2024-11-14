@@ -28,7 +28,7 @@ class MainFunction
 
         Console.WriteLine(manager.RoomRemian(10001, "normal"));
 
-        //Console.WriteLine(manager.ReserveCancle(223344));
+        Console.WriteLine(manager.ReserveCancle(223344));
 
         //manager.AddHotel(10004, "LuFeng", 3);
         //manager.AddRoomType(10004, "standard", 10, 1000, 100);

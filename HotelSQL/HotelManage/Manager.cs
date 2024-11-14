@@ -159,6 +159,13 @@ namespace HotelSQL.HotelManage
                     select room).Count();
         }
 
+        public string GetRoomType(int hotelNO, int roomNO)
+        {
+            var row = Address.GetRow(hotelNO, roomNO);
+            if (row is null) return string.Empty;
+            return row["type"].ToString();
+        }
+
         /*---------------------------Private Function--------------------------*/
 
         private void CreateAllTables(Postgre postgre)

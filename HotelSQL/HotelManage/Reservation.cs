@@ -30,9 +30,12 @@ namespace HotelSQL.HotelManage
                 Console.WriteLine(error.ToString());
             }
             Adapter = postgre.Adapter(TableName);
+            Adapter.FillSchema(Table, SchemaType.Mapped);
             Adapter.Fill(Table);
             Table.PrimaryKey = [Table.Columns["orderNO"]];
             Table.Columns["orderNO"].AutoIncrement = true;
+            Table.Columns["orderNO"].AutoIncrementSeed = 1;
+            Table.Columns["orderNO"].AutoIncrementStep = 1;
         }
 
         public Attribute GetAttribute(int index)
