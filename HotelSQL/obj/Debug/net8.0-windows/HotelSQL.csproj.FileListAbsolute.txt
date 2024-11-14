@@ -19,5 +19,7 @@ F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windo
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.pdb
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.genruntimeconfig.cache
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\ref\HotelSQL.dll
-F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.Component1.resources
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.csproj.GenerateResource.cache
+F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.Properties.Resources.resources
+F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.LoginForm.resources
+F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.ManageForm.resources
