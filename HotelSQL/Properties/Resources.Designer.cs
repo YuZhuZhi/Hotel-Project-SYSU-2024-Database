@@ -173,6 +173,16 @@ namespace HotelSQL.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap HotelLogo2 {
+            get {
+                object obj = ResourceManager.GetObject("HotelLogo2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap illust_94588419_20211211_231940 {
             get {
                 object obj = ResourceManager.GetObject("illust_94588419_20211211_231940", resourceCulture);

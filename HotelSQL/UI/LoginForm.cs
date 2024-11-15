@@ -26,19 +26,21 @@ namespace HotelSQL
         private void AccountInput_Click(object sender, EventArgs e)
         {
             AccountInput.Clear();
+            AccountInput.ForeColor = null;
         }
 
         private void PasswordInput_Click(object sender, EventArgs e)
         {
             PasswordInput.Clear();
+            PasswordInput.ForeColor = null;
             PasswordInput.UseSystemPasswordChar = true;
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            AccountInput.Clear();
-            PasswordInput.Clear();
-            PasswordInput.UseSystemPasswordChar = true;
+            PasswordInput_Click(sender, e);
+            AccountInput_Click(sender, e);
+            AntdUI.Message.info(this, "已清除输入！", autoClose: 2);
         }
 
         private void LogInButton_Click(object sender, EventArgs e)
@@ -52,6 +54,7 @@ namespace HotelSQL
                 this.Close();
             }
             else {
+                ClearButton_Click(sender, e);
                 AntdUI.Message.error(this, "账户名或密码有误！", autoClose: 2);
             }
         }
@@ -61,6 +64,7 @@ namespace HotelSQL
             switch (e.KeyCode) {
                 case Keys.Enter:
                     LogInButton_Click(sender, e);
+                    ClearButton_Click(sender, e);
                     break;
                 case Keys.Escape:
                     Close();
@@ -70,6 +74,9 @@ namespace HotelSQL
                     break;
                 case Keys.PageUp:
                     AccountInput.Focus();
+                    break;
+                case Keys.Alt:
+                    ClearButton_Click(sender, e);
                     break;
             }
         }

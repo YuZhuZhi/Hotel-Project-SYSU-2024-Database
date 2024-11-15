@@ -40,7 +40,8 @@
             // AccountLabel
             // 
             AccountLabel.BackColor = Color.Transparent;
-            AccountLabel.Font = new Font("Microsoft YaHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            AccountLabel.Font = new Font("Microsoft YaHei UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            AccountLabel.ForeColor = Color.GhostWhite;
             AccountLabel.Location = new Point(86, 153);
             AccountLabel.Name = "AccountLabel";
             AccountLabel.Shadow = 10;
@@ -52,7 +53,8 @@
             // PasswordLabel
             // 
             PasswordLabel.BackColor = Color.Transparent;
-            PasswordLabel.Font = new Font("Microsoft YaHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            PasswordLabel.Font = new Font("Microsoft YaHei UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            PasswordLabel.ForeColor = Color.Ivory;
             PasswordLabel.Location = new Point(86, 209);
             PasswordLabel.Name = "PasswordLabel";
             PasswordLabel.Shadow = 10;
@@ -74,6 +76,7 @@
             // 
             // AccountInput
             // 
+            AccountInput.ForeColor = SystemColors.ButtonShadow;
             AccountInput.Location = new Point(164, 153);
             AccountInput.Name = "AccountInput";
             AccountInput.Size = new Size(315, 34);
@@ -84,6 +87,7 @@
             // 
             // PasswordInput
             // 
+            PasswordInput.ForeColor = SystemColors.ButtonShadow;
             PasswordInput.Location = new Point(164, 209);
             PasswordInput.Name = "PasswordInput";
             PasswordInput.Size = new Size(315, 34);
@@ -95,12 +99,12 @@
             // ClearButton
             // 
             ClearButton.Font = new Font("Microsoft YaHei UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            ClearButton.ForeColor = Color.SlateGray;
             ClearButton.Location = new Point(153, 283);
             ClearButton.Name = "ClearButton";
             ClearButton.Size = new Size(128, 63);
             ClearButton.TabIndex = 5;
             ClearButton.Text = "清除";
-            ClearButton.Type = AntdUI.TTypeMini.Warn;
             ClearButton.Click += ClearButton_Click;
             // 
             // LogInPanel

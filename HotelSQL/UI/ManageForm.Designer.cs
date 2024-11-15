@@ -37,8 +37,11 @@
             AntdUI.MenuItem menuItem2 = new AntdUI.MenuItem();
             AntdUI.MenuItem menuItem3 = new AntdUI.MenuItem();
             AntdUI.MenuItem menuItem4 = new AntdUI.MenuItem();
+            AntdUI.MenuItem menuItem5 = new AntdUI.MenuItem();
             HotelCarousel = new AntdUI.Carousel();
             HotelMenu = new AntdUI.Menu();
+            CarouselPanel = new AntdUI.Panel();
+            CarouselPanel.SuspendLayout();
             SuspendLayout();
             // 
             // HotelCarousel
@@ -46,6 +49,7 @@
             HotelCarousel.Autoplay = true;
             HotelCarousel.BackColor = Color.Transparent;
             HotelCarousel.DotPosition = AntdUI.TAlignMini.Bottom;
+            HotelCarousel.HandCursor = Cursors.Default;
             carouselItem1.Img = Properties.Resources.Hotel0;
             carouselItem2.Img = Properties.Resources.Hotel1;
             carouselItem3.Img = Properties.Resources.Hotel2;
@@ -59,11 +63,11 @@
             HotelCarousel.Image.Add(carouselItem5);
             HotelCarousel.Image.Add(carouselItem6);
             HotelCarousel.ImageFit = AntdUI.TFit.Contain;
-            HotelCarousel.Location = new Point(276, 33);
+            HotelCarousel.Location = new Point(32, 0);
             HotelCarousel.Name = "HotelCarousel";
             HotelCarousel.Radius = 3;
-            HotelCarousel.SelectIndex = 4;
-            HotelCarousel.Size = new Size(808, 591);
+            HotelCarousel.SelectIndex = 1;
+            HotelCarousel.Size = new Size(958, 634);
             HotelCarousel.TabIndex = 0;
             HotelCarousel.Text = "carousel1";
             HotelCarousel.UseWaitCursor = true;
@@ -71,7 +75,7 @@
             // HotelMenu
             // 
             HotelMenu.AutoCollapse = true;
-            HotelMenu.BackColor = Color.DimGray;
+            HotelMenu.BackColor = Color.FromArgb(50, 48, 48);
             HotelMenu.Dock = DockStyle.Left;
             HotelMenu.Indent = true;
             menuItem1.Font = new Font("微软雅黑", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 134);
@@ -83,20 +87,26 @@
             menuItem2.Icon = Properties.Resources.HotelLogo;
             menuItem2.PARENTITEM = null;
             menuItem3.Font = new Font("微软雅黑", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            menuItem3.Icon = Properties.Resources.RoomLogo;
+            menuItem3.Icon = Properties.Resources.HotelLogo2;
             menuItem3.PARENTITEM = menuItem2;
-            menuItem3.Text = "房间管理";
+            menuItem3.Text = "酒店管理";
             menuItem4.Font = new Font("微软雅黑", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            menuItem4.Icon = Properties.Resources.OrderLogo;
+            menuItem4.Icon = Properties.Resources.RoomLogo;
             menuItem4.PARENTITEM = menuItem2;
-            menuItem4.Text = "订单管理";
+            menuItem4.Text = "房间管理";
+            menuItem5.Font = new Font("微软雅黑", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            menuItem5.Icon = Properties.Resources.OrderLogo;
+            menuItem5.PARENTITEM = menuItem2;
+            menuItem5.Text = "订单管理";
             menuItem2.Sub.Add(menuItem3);
             menuItem2.Sub.Add(menuItem4);
-            menuItem2.Text = "酒店管理";
+            menuItem2.Sub.Add(menuItem5);
+            menuItem2.Text = "酒店";
             HotelMenu.Items.Add(menuItem1);
             HotelMenu.Items.Add(menuItem2);
             HotelMenu.Location = new Point(0, 0);
             HotelMenu.Name = "HotelMenu";
+            HotelMenu.Round = true;
             HotelMenu.ShowSubBack = true;
             HotelMenu.Size = new Size(176, 681);
             HotelMenu.TabIndex = 1;
@@ -106,18 +116,29 @@
             HotelMenu.UseWaitCursor = true;
             HotelMenu.SelectChanged += menu1_SelectChanged;
             // 
+            // CarouselPanel
+            // 
+            CarouselPanel.Back = Color.Transparent;
+            CarouselPanel.Controls.Add(HotelCarousel);
+            CarouselPanel.Location = new Point(239, 12);
+            CarouselPanel.Name = "CarouselPanel";
+            CarouselPanel.Size = new Size(1013, 640);
+            CarouselPanel.TabIndex = 2;
+            CarouselPanel.Text = "panel1";
+            // 
             // ManageForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Beige;
+            BackColor = Color.DimGray;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1264, 681);
+            Controls.Add(CarouselPanel);
             Controls.Add(HotelMenu);
-            Controls.Add(HotelCarousel);
             Name = "ManageForm";
             Text = "酒店管理系统";
             Load += ManageForm_Load;
+            CarouselPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -125,5 +146,6 @@
 
         private AntdUI.Carousel HotelCarousel;
         private AntdUI.Menu HotelMenu;
+        private AntdUI.Panel CarouselPanel;
     }
 }
