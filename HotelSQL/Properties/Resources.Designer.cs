@@ -73,6 +73,16 @@ namespace HotelSQL.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap BackGround2 {
+            get {
+                object obj = ResourceManager.GetObject("BackGround2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap FrostedGlass {
             get {
                 object obj = ResourceManager.GetObject("FrostedGlass", resourceCulture);
@@ -186,6 +196,26 @@ namespace HotelSQL.Properties {
         internal static System.Drawing.Bitmap illust_94588419_20211211_231940 {
             get {
                 object obj = ResourceManager.GetObject("illust_94588419_20211211_231940", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap ItemLogo {
+            get {
+                object obj = ResourceManager.GetObject("ItemLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap LoginPanelBackground {
+            get {
+                object obj = ResourceManager.GetObject("LoginPanelBackground", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

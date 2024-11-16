@@ -25,27 +25,36 @@ namespace HotelSQL
 
         private void AccountInput_Click(object sender, EventArgs e)
         {
-            AccountInput.Clear();
-            AccountInput.ForeColor = null;
+            if (AccountInput.Text == "请输入账户名称") {
+                AccountInput.Clear();
+                AccountInput.ForeColor = null;
+            }
         }
 
         private void PasswordInput_Click(object sender, EventArgs e)
         {
-            PasswordInput.Clear();
-            PasswordInput.ForeColor = null;
-            PasswordInput.UseSystemPasswordChar = true;
+            if (PasswordInput.Text == "请输入密码") {
+                PasswordInput.Clear();
+                PasswordInput.ForeColor = null;
+                PasswordInput.UseSystemPasswordChar = true;
+            }
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            PasswordInput_Click(sender, e);
-            AccountInput_Click(sender, e);
+            PasswordInput.Clear();
+            PasswordInput.ForeColor = null;
+            PasswordInput.UseSystemPasswordChar = true;
+
+            AccountInput.Clear();
+            AccountInput.ForeColor = null;
             AntdUI.Message.info(this, "已清除输入！", autoClose: 2);
         }
 
         private void LogInButton_Click(object sender, EventArgs e)
         {
-            if ((AccountInput.Text == "") && (PasswordInput.Text == "")) {
+            if (((AccountInput.Text == "") && (PasswordInput.Text == "")) ||
+                ((AccountInput.Text == "DataBase") && (PasswordInput.Text == "password"))) {
                 AntdUI.Message.success(this, "登录成功！", autoClose: 2);
                 this.Hide();
 
@@ -89,6 +98,16 @@ namespace HotelSQL
         private void PasswordInput_Enter(object sender, EventArgs e)
         {
             PasswordInput_Click(sender, e);
+        }
+
+        private void AccountInput_TextChanged(object sender, EventArgs e)
+        {
+            if (AccountInput.Text == "DataBase") AccountInput.Status = AntdUI.TType.Success;
+        }
+
+        private void PasswordInput_TextChanged(object sender, EventArgs e)
+        {
+            if (PasswordInput.Text == "password") PasswordInput.Status = AntdUI.TType.Success;
         }
     }
 }

@@ -23,3 +23,4 @@ F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windo
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.Properties.Resources.resources
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.LoginForm.resources
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.ManageForm.resources
+F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.UserControl1.resources

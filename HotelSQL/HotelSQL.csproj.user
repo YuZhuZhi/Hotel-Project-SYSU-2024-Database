@@ -8,6 +8,9 @@
     <Compile Update="UI\ManageForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">

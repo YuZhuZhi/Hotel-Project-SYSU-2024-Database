@@ -66,7 +66,7 @@
             HotelCarousel.Location = new Point(32, 0);
             HotelCarousel.Name = "HotelCarousel";
             HotelCarousel.Radius = 3;
-            HotelCarousel.SelectIndex = 1;
+            HotelCarousel.SelectIndex = 4;
             HotelCarousel.Size = new Size(958, 634);
             HotelCarousel.TabIndex = 0;
             HotelCarousel.Text = "carousel1";
@@ -75,26 +75,26 @@
             // HotelMenu
             // 
             HotelMenu.AutoCollapse = true;
-            HotelMenu.BackColor = Color.FromArgb(50, 48, 48);
+            HotelMenu.BackColor = Color.FromArgb(28, 28, 28);
             HotelMenu.Dock = DockStyle.Left;
             HotelMenu.Indent = true;
-            menuItem1.Font = new Font("微软雅黑", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            menuItem1.Font = new Font("汉仪文黑-85W", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             menuItem1.Icon = Properties.Resources.HomeLogo1;
             menuItem1.PARENTITEM = null;
             menuItem1.Select = true;
             menuItem1.Text = "首页";
-            menuItem2.Font = new Font("微软雅黑", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 134);
-            menuItem2.Icon = Properties.Resources.HotelLogo;
+            menuItem2.Font = new Font("汉仪文黑-85W", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            menuItem2.Icon = Properties.Resources.ItemLogo;
             menuItem2.PARENTITEM = null;
-            menuItem3.Font = new Font("微软雅黑", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            menuItem3.Font = new Font("汉仪文黑-85W", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuItem3.Icon = Properties.Resources.HotelLogo2;
             menuItem3.PARENTITEM = menuItem2;
             menuItem3.Text = "酒店管理";
-            menuItem4.Font = new Font("微软雅黑", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            menuItem4.Font = new Font("汉仪文黑-85W", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuItem4.Icon = Properties.Resources.RoomLogo;
             menuItem4.PARENTITEM = menuItem2;
             menuItem4.Text = "房间管理";
-            menuItem5.Font = new Font("微软雅黑", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 134);
+            menuItem5.Font = new Font("汉仪文黑-85W", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuItem5.Icon = Properties.Resources.OrderLogo;
             menuItem5.PARENTITEM = menuItem2;
             menuItem5.Text = "订单管理";
@@ -119,6 +119,7 @@
             // CarouselPanel
             // 
             CarouselPanel.Back = Color.Transparent;
+            CarouselPanel.BackColor = Color.Transparent;
             CarouselPanel.Controls.Add(HotelCarousel);
             CarouselPanel.Location = new Point(239, 12);
             CarouselPanel.Name = "CarouselPanel";
@@ -130,7 +131,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.DimGray;
+            BackColor = Color.FromArgb(76, 76, 76);
+            BackgroundImage = Properties.Resources.BackGround2;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1264, 681);
             Controls.Add(CarouselPanel);
