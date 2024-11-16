@@ -27,6 +27,7 @@ namespace HotelSQL
         {
             if (AccountInput.Text == "请输入账户名称") {
                 AccountInput.Clear();
+                AccountInput.Font = new Font("汉仪文黑-85W", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
                 AccountInput.ForeColor = null;
             }
         }
@@ -42,12 +43,14 @@ namespace HotelSQL
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
+            AccountInput.Clear();
+            AccountInput.Font = new Font("汉仪文黑-85W", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            AccountInput.ForeColor = null;
+
             PasswordInput.Clear();
             PasswordInput.ForeColor = null;
             PasswordInput.UseSystemPasswordChar = true;
 
-            AccountInput.Clear();
-            AccountInput.ForeColor = null;
             AntdUI.Message.info(this, "已清除输入！", autoClose: 2);
         }
 
@@ -102,12 +105,14 @@ namespace HotelSQL
 
         private void AccountInput_TextChanged(object sender, EventArgs e)
         {
-            if (AccountInput.Text == "DataBase") AccountInput.Status = AntdUI.TType.Success;
+            if (AccountInput.Text == "DataBase") { AccountInput.Status = AntdUI.TType.Success; }
+            else AccountInput.Status = AntdUI.TType.None;
         }
 
         private void PasswordInput_TextChanged(object sender, EventArgs e)
         {
             if (PasswordInput.Text == "password") PasswordInput.Status = AntdUI.TType.Success;
+            else PasswordInput.Status = AntdUI.TType.None;
         }
     }
 }

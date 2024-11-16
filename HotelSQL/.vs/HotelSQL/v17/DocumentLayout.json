@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -76,14 +76,14 @@
               "RelativeDocumentMoniker": "UI\\LoginForm.Designer.cs",
               "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.Designer.cs",
               "RelativeToolTip": "UI\\LoginForm.Designer.cs",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAqwGsAAABHAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAqwFEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-16T06:53:42.237Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "LoginForm.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.cs",
               "RelativeDocumentMoniker": "UI\\LoginForm.cs",
@@ -103,18 +103,17 @@
               "RelativeToolTip": "UI\\ManageForm.Designer.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAqwBUAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-15T04:13:30.143Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-15T04:13:30.143Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "LoginForm.cs",
               "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.cs",
               "RelativeDocumentMoniker": "UI\\LoginForm.cs",
               "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.cs",
               "RelativeToolTip": "UI\\LoginForm.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAzwC4AAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAA0wCYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-15T04:06:09.589Z",
               "EditorCaption": ""
@@ -165,8 +164,7 @@
               "RelativeToolTip": "HotelManage\\Manager.cs",
               "ViewState": "AgIAAKAAAAAAAAAAAMA1wKsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T15:00:53.019Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T15:00:53.019Z"
             },
             {
               "$type": "Document",
@@ -177,8 +175,7 @@
               "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\ManageForm.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "UI\\ManageForm.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T15:11:42.012Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2024-11-14T15:11:42.012Z"
             },
             {
               "$type": "Document",
@@ -190,8 +187,7 @@
               "RelativeToolTip": "UI\\ManageForm.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAgwCEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T16:13:24.039Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-14T16:13:24.039Z"
             },
             {
               "$type": "Document",

@@ -147,11 +147,11 @@
             // 
             HotelManagerLabel.Font = new Font("汉仪文黑-85W", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             HotelManagerLabel.ForeColor = Color.White;
-            HotelManagerLabel.Location = new Point(16, 17);
+            HotelManagerLabel.Location = new Point(19, 24);
             HotelManagerLabel.Name = "HotelManagerLabel";
-            HotelManagerLabel.Size = new Size(170, 23);
+            HotelManagerLabel.Size = new Size(208, 23);
             HotelManagerLabel.TabIndex = 8;
-            HotelManagerLabel.Text = "Hotel Manager";
+            HotelManagerLabel.Text = "HOTEL MANAGER";
             // 
             // LoginDescriptionLabel
             // 
