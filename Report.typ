@@ -9,6 +9,11 @@
   doc
 )
 
+#show ref: it => {
+  set text(fill: orange)
+  it
+}
+
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 = 引言
@@ -35,7 +40,7 @@
 
 选择C\#作为后端语言后，我们惊喜地发现它也能同时胜任前端的构建。对于C\#，WinForm与WPF都是非常成熟的前端框架，其中尤以WinForm最具有简易性——它可以使用拖拽的方式构建前端界面！
 
-因此我们最终敲定以C\#语言作为整个项目的基石，无需分别为了后端与前端专门学习两种语言。项目的环境最终如下所示：
+因此我们最终敲定以C\#语言作为整个项目的基石，无需分别为了后端与前端专门学习两种语言，更是省去了两个不同语言间的调用过程。项目的环境最终如下所示：
 
 - 数据库：PostgreSQL
 - 后端语言：C\# @CSharpdocument
@@ -45,12 +50,13 @@
   - 使用WinForm作为开发前端的平台，而不是更加复杂的WPF。
   - 出于美观考量，使用开源的AntdUI作为界面库。
   - #link("https://gitee.com/antdui/AntdUI")[#text(blue, "AntdUI Gitee发布页")] @AntdUIdocument
+  - 同时，AntdUI并没有提供表格相关组件，因此我们还使用了???。
 
 == 人员分工
 
 - 王俊亚：组长。负责统筹协调，后端代码编写，前端代码编写，前端界面美化与审查，报告书编写。
 
-- 王炳睿：组员。
+- 王炳睿：组员。负责前后端的逻辑连接。
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -70,10 +76,12 @@
 
 预订订单的具体信息有：订单编号，酒店地址，预订房间号，预订人身份证号，起始日期，旅居天数。
 
-结合上述的具体信息，我们显然可以发现系统中具有实体集：酒店(Hotel)、房间(Room)、预订人(Reserver)。事实上，我们还应当从中分离出一个“房间类型(RoomType)”的实体集出来。其中的联系集是：(Hotel, RoomType)，酒店持有其独特的房间类型；(Room, RoomType)，房间自然是具有房间类型的；(Reserver, Room)，预订人会预订特定的房间；(Reserver, Hotel)，由于房间归属于酒店，因此还需要附加酒店信息。整理后我们可以绘制E-R图如@E-R 所示：
+结合上述的具体信息，我们显然可以发现系统中具有实体集：酒店(Hotel)、房间(Room)、预订人(Reserver)。事实上，我们还应当从中分离出一个“房间类型(RoomType)”的实体集出来。
+
+其中的联系集是：(Hotel, RoomType)，酒店持有其独特的房间类型；(Room, RoomType)，房间自然是具有房间类型的；(Reserver, Room)，预订人会预订特定的房间；(Reserver, Hotel)，由于房间归属于酒店，因此还需要附加酒店信息。整理后我们可以绘制E-R图如@E-R 所示。
 
 #let HotelTable() = {
-  set text(font: "Cambria", lang: "en")
+  set text(font: "SDK_SC_Unity", lang: "en")
   tablex(
     columns: 1,
     align: center + horizon,
@@ -84,7 +92,7 @@
 )}
 
 #let RoomTypeTable() = {
-  set text(font: "Cambria", lang: "en")
+  set text(font: "SDK_SC_Unity", lang: "en")
   tablex(
     columns: 1,
     align: center + horizon,
@@ -95,7 +103,7 @@
 )}
 
 #let RoomTable() = {
-  set text(font: "Cambria", lang: "en")
+  set text(font: "SDK_SC_Unity", lang: "en")
   tablex(
     columns: 1,
     align: center + horizon,
@@ -106,7 +114,7 @@
 )}
 
 #let ReserverTable() = {
-  set text(font: "Cambria", lang: "en")
+  set text(font: "SDK_SC_Unity", lang: "en")
   tablex(
     columns: 1,
     align: center + horizon,
@@ -117,7 +125,7 @@
 )}
 
 #let Address() = {
-  set text(font: "Cambria", lang: "en")
+  set text(font: "SDK_SC_Unity", lang: "en")
   cetz.canvas({
     import cetz.draw: *
     line((0,0), (30deg, 2), (0deg, 3.464), (-30deg, 2), (0,0), name: "line")
@@ -131,7 +139,7 @@
 }
 
 #let Reservation() = {
-  set text(font: "Cambria", lang: "en")
+  set text(font: "SDK_SC_Unity", lang: "en")
   cetz.canvas({
     import cetz.draw: *
     line((0,0), (30deg, 2), (0deg, 3.464), (-30deg, 2), (0,0), name: "line")
@@ -145,9 +153,9 @@
 #figure(kind: image,
   caption: [
     酒店预订管理系统的E-R图
-  ])[
+  ], placement: auto)[
     #align(center)[
-    #set text(font: "Cambria", lang: "en")
+    #set text(font: "SDK_SC_Unity", lang: "en")
     #diagram(
     spacing: 2cm, 
     node-stroke: black,{
@@ -175,7 +183,7 @@
     // edge(RT, (1,-1))
 })]] <E-R>
 
-方便起见，在之后的设计中，我们以酒店编号(hotelNO)来代替地址(Address)。
+方便起见，在之后的设计中，我们以酒店编号(hotelNO)来代替地址(Address)。在数据库中，相关属性会以hotelNO的名字出现；在用户界面中，尽管列名会显示为“酒店地址”，但其中的内容依然会以不同的数字形式出现。
 
 == 系统结构设计
 
@@ -186,7 +194,7 @@
 == 功能模块设计 
 
 #let Level() = {
-  set text(font: "")
+  set text(font: "SDK_SC_Unity")
   pseudocode-list(line-numbering: none, booktabs: true, hooks: 1em, indentation: 1.5em)[
   + Main
   + DataBase 
@@ -202,21 +210,24 @@
       + Reservation
     + Manager
   + UI
-    + TODO
+    + MainForm
+    + ManageForm
+      + TODO
   ]
 }
 
-#place(right)[
+在这个项目中，我们设计的功能模块层级结构如@LevelSturcture 所示。由于C\#语言的语言特性，图中列出的层级结构不一定代表真实文件结构，仅具有逻辑含义。同时，所列项目也不一定是文件名或类名，具体含义请看左边的具体释义。
+
+#place(top+right)[
   #figure(
   diagram(node-stroke: black, {
     node((0, 0), Level(), shape: rect)
   }),
   
-  caption: [功能模块设计层级结构]
+  caption: [功能模块设计层级结构],
+  placement: bottom
   )  <LevelSturcture>
 ]
-
-在这个项目中，我们设计的功能模块层级结构如@LevelSturcture 所示：
 
 - Main是整个项目的入口，即主函数
 - DataBase命名空间，用于较底层与数据库沟通的功能
