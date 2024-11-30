@@ -1,9 +1,14 @@
+#import "@preview/codly:1.0.0": *
 #import "@preview/tablex:0.0.9": tablex, rowspanx, colspanx
 
 #let name = "王俊亚"
 #let stuNum = "22307049"
 
 #let template(title, doc) = {
+  show ref: it => {
+    set text(fill: orange)
+    it
+  }
   set page(
     paper: "us-letter",
     header: align(right)[
@@ -12,6 +17,24 @@
     ],
     numbering: "1/1",
   )
+
+  show: codly-init.with()
+
+  codly(
+    languages: (
+      CSharp: (
+        name: "CSharp",
+        icon: text(font: "tabler-icons", "\u{fa53}"),
+        color: rgb("#CE412B")
+      ),
+      SQL: (
+        name: "SQL",
+        icon: text(font: "tabler-icons", "\u{fa63}"),
+        color: rgb("#6ace2b")
+      ),
+    )
+  )
+
   set par(justify: true)
   set document(author: name, title: title, date: auto)
   set text(font: "STSong", lang: "zh", region: "cn")
