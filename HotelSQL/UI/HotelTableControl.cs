@@ -19,6 +19,7 @@ namespace HotelSQL.UI
         /*----------------------------Private Member----------------------------------------*/
 
         private Manager manager;
+        private int page = 1;
 
         /*----------------------------Public Event----------------------------------------*/
 
@@ -38,21 +39,22 @@ namespace HotelSQL.UI
                 new Column("operate", "操作", ColumnAlign.Center),
                 ]);
 
-            bindHotel.DataSource = GetPageData(1, 10);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
-            TableOfHotel.DataSource = bindHotel;
+            //bindHotel.DataSource = GetPageData(page, 10);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
+            //TableOfHotel.DataSource = bindHotel;
+            TableOfHotel.Binding((AntList<AntItem[]>)GetPageData(page, 20));
 
-
-
+            HotelTablePagination.Current = page;
         }
 
         /*----------------------------Private Function----------------------------------------*/
 
         private object GetPageData(int current, int pageSize)
         {
-            var list = new List<AntItem[]>(pageSize);
+            var list = new AntList<AntItem[]>(pageSize);
             var table = manager.Hotel.Table;
             int start = Math.Abs(current - 1) * pageSize;
             int end = Math.Min(start + pageSize, table.Rows.Count);
+            HotelTablePagination.Total = table.Rows.Count;
 
             for (int i = start; i < end; i++) {
                 list.Add(new AntItem[] {
@@ -74,10 +76,8 @@ namespace HotelSQL.UI
         private Table.CellStyleInfo? TableOfHotel_SetRowStyle(object sender, TableSetRowStyleEventArgs e)
         {
             if (e.RowIndex % 2 == 0) {
-                return new Table.CellStyleInfo
-                {
+                return new Table.CellStyleInfo {
                     BackColor = Style.Db.ErrorBg,
-                    //ForeColor = Style.Db.Error
                 };
             }
             return null;
@@ -85,12 +85,28 @@ namespace HotelSQL.UI
 
         private void TableOfHotel_CellButtonClick(object sender, TableButtonEventArgs e)
         {
-            if (e.Btn.Id.Contains("ViewHotelRoom")) {
+            if (e.Btn.Id.Contains("Room")) {
                 List<string> args = new() { "房间管理" };
                 args.Add(TableOfHotel[e.RowIndex - 1]?["hotelno"]?.ToString());
                 TableButtonClicked?.Invoke(this, args);
+                return;
+            }
+            else if (e.Btn.Id.Contains("Order")) {
+                List<string> args = new() { "订单管理" };
+                args.Add(TableOfHotel[e.RowIndex - 1]?["hotelno"]?.ToString());
+                TableButtonClicked?.Invoke(this, args);
+                return;
+            }
+            else if (e.Btn.Id.Contains("Edit")) {
+
             }
 
+        }
+
+        private void HotelTablePagination_ValueChanged(object sender, PagePageEventArgs e)
+        {
+            page = e.Current;
+            TableOfHotel.Binding((AntList<AntItem[]>)GetPageData(page, 20));
         }
     }
 }

@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net8.0-windows7.0": {
-      "AntdUI/1.6.16": {
+      "AntdUI/1.7.12": {
         "type": "package",
         "compile": {
           "lib/net8.0-windows7.0/AntdUI.dll": {
@@ -18,7 +18,7 @@
           "Microsoft.WindowsDesktop.App.WindowsForms"
         ]
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.2": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
@@ -34,10 +34,10 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+      "Microsoft.Extensions.Logging.Abstractions/8.0.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2"
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
@@ -53,10 +53,10 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-      "Npgsql/8.0.5": {
+      "Npgsql/9.0.2": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
         },
         "compile": {
           "lib/net8.0/Npgsql.dll": {
@@ -72,15 +72,15 @@
     }
   },
   "libraries": {
-    "AntdUI/1.6.16": {
-      "sha512": "/olITUrroLAmxriuL1lrTOf+sn2pfzW8CSoQxp7CWpulkx71uyr901jDmDQk06+/pN2nQMWpBKMRol6pNhvuog==",
+    "AntdUI/1.7.12": {
+      "sha512": "ThQHDsHP3vPuxv5Q6A5shO3UOeQ2how6JNZugInN3HRmi7BjfXGi3wwa9mcvoDQAyovhkzz/Xr+fnmQYSuIgLg==",
       "type": "package",
-      "path": "antdui/1.6.16",
+      "path": "antdui/1.7.12",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "antdui.1.6.16.nupkg.sha512",
+        "antdui.1.7.12.nupkg.sha512",
         "antdui.nuspec",
         "lib/net40/AntdUI.dll",
         "lib/net40/AntdUI.xml",
@@ -92,13 +92,15 @@
         "lib/net6.0-windows7.0/AntdUI.xml",
         "lib/net8.0-windows7.0/AntdUI.dll",
         "lib/net8.0-windows7.0/AntdUI.xml",
+        "lib/net9.0-windows7.0/AntdUI.dll",
+        "lib/net9.0-windows7.0/AntdUI.xml",
         "logo.png"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
-      "sha512": "cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.2": {
+      "sha512": "3iE7UF7MQkCv1cxzCahz+Y/guQbTqieyxyaWKhrRO91itI9cOKO76OHeQDahqG4MmW5umr3CcCvGmK92lWNlbg==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -122,15 +124,15 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
-        "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
-      "sha512": "arDBqTgFCyS0EvRV7O3MZturChstm50OJ0y9bDJvAcmEPJm0FFpFyjU/JLYyStNGGey081DvnQYlncNX5SJJGA==",
+    "Microsoft.Extensions.Logging.Abstractions/8.0.2": {
+      "sha512": "nroMDjS7hNBPtkZqVBbSiQaQjWRDxITI8Y7XnDs97rqG3EbzVTNLZQf7bIeUJcaHOV8bca47s1Uxq94+2oGdxA==",
       "type": "package",
-      "path": "microsoft.extensions.logging.abstractions/8.0.0",
+      "path": "microsoft.extensions.logging.abstractions/8.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -195,30 +197,24 @@
         "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
-        "microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+        "microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
         "microsoft.extensions.logging.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Npgsql/8.0.5": {
-      "sha512": "zRG5V8cyeZLpzJlKzFKjEwkRMYIYnHWJvEor2lWXeccS2E1G2nIWYYhnukB51iz5XsWSVEtqg3AxTWM0QJ6vfg==",
+    "Npgsql/9.0.2": {
+      "sha512": "hCbO8box7i/XXiTFqCJ3GoowyLqx3JXxyrbOJ6om7dr+eAknvBNhhUHeJVGAQo44sySZTfdVffp4BrtPeLZOAA==",
       "type": "package",
-      "path": "npgsql/8.0.5",
+      "path": "npgsql/9.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
         "lib/net6.0/Npgsql.dll",
         "lib/net6.0/Npgsql.xml",
-        "lib/net7.0/Npgsql.dll",
-        "lib/net7.0/Npgsql.xml",
         "lib/net8.0/Npgsql.dll",
         "lib/net8.0/Npgsql.xml",
-        "lib/netstandard2.0/Npgsql.dll",
-        "lib/netstandard2.0/Npgsql.xml",
-        "lib/netstandard2.1/Npgsql.dll",
-        "lib/netstandard2.1/Npgsql.xml",
-        "npgsql.8.0.5.nupkg.sha512",
+        "npgsql.9.0.2.nupkg.sha512",
         "npgsql.nuspec",
         "postgresql.png"
       ]
@@ -226,8 +222,8 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows7.0": [
-      "AntdUI >= 1.6.16",
-      "Npgsql >= 8.0.5"
+      "AntdUI >= 1.7.12",
+      "Npgsql >= 9.0.2"
     ]
   },
   "packageFolders": {
@@ -282,11 +278,11 @@
         "dependencies": {
           "AntdUI": {
             "target": "Package",
-            "version": "[1.6.16, )"
+            "version": "[1.7.12, )"
           },
           "Npgsql": {
             "target": "Package",
-            "version": "[8.0.5, )"
+            "version": "[9.0.2, )"
           }
         },
         "imports": [

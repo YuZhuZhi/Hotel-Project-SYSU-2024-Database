@@ -32,6 +32,7 @@ namespace HotelSQL.UI
                 case "首页":
                     if (Controls.ContainsKey("HotelTableControl")) Controls.RemoveByKey("HotelTableControl");
                     if (Controls.ContainsKey("RoomTableControl")) Controls.RemoveByKey("RoomTableControl");
+                    if (Controls.ContainsKey("ReservationTableControl")) Controls.RemoveByKey("ReservationTableControl");
 
                     if (Controls.ContainsKey("CarouselPanel")) break;
                     else Controls.Add(CarouselPanel);
@@ -40,6 +41,7 @@ namespace HotelSQL.UI
                 case "酒店管理":
                     if (Controls.ContainsKey("CarouselPanel")) Controls.RemoveByKey("CarouselPanel");
                     if (Controls.ContainsKey("RoomTableControl")) Controls.RemoveByKey("RoomTableControl");
+                    if (Controls.ContainsKey("ReservationTableControl")) Controls.RemoveByKey("ReservationTableControl");
 
                     if (hotelTableControl is null) {
                         hotelTableControl = new HotelTableControl(manager);
@@ -51,18 +53,32 @@ namespace HotelSQL.UI
                     break;
 
                 case "房间管理":
+                    HotelMenu.Items[1].Sub[0].Select = false;
+                    HotelMenu.Items[1].Sub[1].Select = true;
+                    HotelMenu.Items[1].Sub[2].Select = false;
+
+                    //HotelMenu.Select(HotelMenu.Items[1].Sub[1]);
+
                     if (Controls.ContainsKey("CarouselPanel")) Controls.RemoveByKey("CarouselPanel");
                     if (Controls.ContainsKey("HotelTableControl")) Controls.RemoveByKey("HotelTableControl");
+                    if (Controls.ContainsKey("ReservationTableControl")) Controls.RemoveByKey("ReservationTableControl");
+
                     roomTableControl = new RoomTableControl(manager, presentViewHotelNO);
                     Controls.Add(roomTableControl);
 
                     break;
 
                 case "订单管理":
+                    HotelMenu.Items[1].Sub[0].Select = false;
+                    HotelMenu.Items[1].Sub[1].Select = false;
+                    HotelMenu.Items[1].Sub[2].Select = true;
+
                     if (Controls.ContainsKey("CarouselPanel")) Controls.RemoveByKey("CarouselPanel");
                     if (Controls.ContainsKey("HotelTableControl")) Controls.RemoveByKey("HotelTableControl");
                     if (Controls.ContainsKey("RoomTableControl")) Controls.RemoveByKey("RoomTableControl");
 
+                    reservationTableControl = new ReservationTableControl(manager, presentViewHotelNO);
+                    Controls.Add(reservationTableControl);
 
                     break;
             }
@@ -70,10 +86,9 @@ namespace HotelSQL.UI
 
         private void HotelMenu_HotelTableControlButtonClicked(object sender, List<string> e)
         {
-            var args = new MenuSelectEventArgs(new MenuItem("房间管理"));
-            if (int.TryParse(e[1], out presentViewHotelNO));
+            var args = new MenuSelectEventArgs(new MenuItem(e[0]));
+            if (int.TryParse(e[1], out presentViewHotelNO)) HotelMenu_SelectChanged(sender, args);
             else Console.WriteLine("酒店地址转换错误");
-            HotelMenu_SelectChanged(sender, args);
         }
 
         /*----------------------------Public Member----------------------------------------*/
@@ -84,6 +99,7 @@ namespace HotelSQL.UI
 
         private HotelTableControl? hotelTableControl;
         private RoomTableControl? roomTableControl;
+        private ReservationTableControl? reservationTableControl;
         private Postgre postgre;
         private Manager manager;
 

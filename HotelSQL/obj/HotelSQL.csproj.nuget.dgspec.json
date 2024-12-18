@@ -52,11 +52,11 @@
           "dependencies": {
             "AntdUI": {
               "target": "Package",
-              "version": "[1.6.16, )"
+              "version": "[1.7.12, )"
             },
             "Npgsql": {
               "target": "Package",
-              "version": "[8.0.5, )"
+              "version": "[9.0.2, )"
             }
           },
           "imports": [

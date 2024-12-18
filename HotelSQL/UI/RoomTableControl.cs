@@ -17,6 +17,7 @@ namespace HotelSQL.UI
         /*----------------------------Private Member----------------------------------------*/
 
         private Manager manager;
+        private int page = 1;
         private int hotelNO;
 
         /*----------------------------Public Function----------------------------------------*/
@@ -26,6 +27,7 @@ namespace HotelSQL.UI
             InitializeComponent();
             this.manager = manager;
             this.hotelNO = hotelNO;
+
             TableOfRoom.Columns = new([
                 new Column("hotelno", "酒店地址", ColumnAlign.Center),
                 new Column("roomno", "房间号", ColumnAlign.Center) { SortOrder = true },
@@ -35,8 +37,15 @@ namespace HotelSQL.UI
                 new Column("operate", "操作", ColumnAlign.Center),
                 ]);
 
-            bindRoom.DataSource = GetPageData(1, 100);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
-            TableOfRoom.DataSource = bindRoom;
+            //bindRoom.DataSource = GetPageData(page, 20);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
+            //TableOfRoom.DataSource = GetPageData(page, 20);
+            TableOfRoom.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+
+            #region pagination
+
+            RoomTablePagination.Current = page;
+
+            #endregion
 
         }
 
@@ -44,10 +53,11 @@ namespace HotelSQL.UI
 
         private object GetPageData(int current, int pageSize)
         {
-            var list = new List<AntItem[]>(pageSize);
+            var list = new AntList<AntItem[]>(pageSize);
             var table = manager.GetHotelRooms(hotelNO);
             int start = Math.Abs(current - 1) * pageSize;
             int end = Math.Min(start + pageSize, table.Rows.Count);
+            RoomTablePagination.Total = table.Rows.Count;
 
             for (int i = start; i < end; i++) {
                 bool isReserved = (bool)table.Rows[i]["isReserved"];
@@ -64,7 +74,7 @@ namespace HotelSQL.UI
                     new AntItem("operate", new CellLink[] {
                         new CellButton($"EditRoom{i}", "编辑信息") { Type = TTypeMini.Primary, Ghost = true, BorderWidth = 2F },
                         new CellButton($"Reserve{i}", reserveBtnText) { Type = TTypeMini.Primary, Ghost = true, BorderWidth = 2F },
-                        new CellButton($"ViewReservation{i}", "查看订单") { Type = TTypeMini.Primary, Ghost = true, BorderWidth = 2F },
+                        new CellButton($"ViewReservation{i}", "查看订单") { Type = TTypeMini.Primary, Ghost = true, BorderWidth = 2F, Enabled = isReserved },
 
                     })
                 });
@@ -73,16 +83,20 @@ namespace HotelSQL.UI
             return list;
         }
 
-        private AntdUI.Table.CellStyleInfo TableOfRoom_SetRowStyle(object sender, TableSetRowStyleEventArgs e)
+        private AntdUI.Table.CellStyleInfo? TableOfRoom_SetRowStyle(object sender, TableSetRowStyleEventArgs e)
         {
             if (e.RowIndex % 2 == 0) {
-                return new Table.CellStyleInfo
-                {
+                return new Table.CellStyleInfo {
                     BackColor = Style.Db.ErrorBg,
-                    //ForeColor = Style.Db.Error
                 };
             }
             return null;
+        }
+
+        private void RoomTablePagination_ValueChanged(object sender, PagePageEventArgs e)
+        {
+            page = e.Current;
+            TableOfRoom.Binding((AntList<AntItem[]>)GetPageData(page, 20));
         }
     }
 }

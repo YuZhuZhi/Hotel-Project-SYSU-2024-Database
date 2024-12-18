@@ -38,6 +38,16 @@ namespace HotelSQL.HotelManage
             return dataTable;
         }
 
+        public DataTable GetHotelReservations(int hotelNO)
+        {
+            DataTable dataTable = new DataTable();
+            var result = SQL.Query($"SELECT Reservation.orderNO, Room.hotelno, Room.roomNO, Reserver.ID, Reserver.date, Reserver.duration\n" +
+                $"FROM Reservation NATURAL JOIN Reserver NATURAL JOIN Room\n" +
+                $"WHERE (hotelNO = {hotelNO})");
+            dataTable.Load(result);
+            return dataTable;
+        }
+
         public void DropAllTable()
         {
             try {

@@ -66,7 +66,7 @@
             HotelCarousel.Location = new Point(3, 3);
             HotelCarousel.Name = "HotelCarousel";
             HotelCarousel.Radius = 3;
-            HotelCarousel.SelectIndex = 3;
+            HotelCarousel.SelectIndex = 1;
             HotelCarousel.Size = new Size(958, 634);
             HotelCarousel.TabIndex = 0;
             HotelCarousel.Text = "carousel1";
@@ -75,10 +75,11 @@
             // HotelMenu
             // 
             HotelMenu.AutoCollapse = true;
-            HotelMenu.BackColor = Color.FromArgb(28, 28, 28);
+            HotelMenu.BackColor = Color.White;
             HotelMenu.Dock = DockStyle.Left;
+            HotelMenu.ForeColor = Color.Gray;
             HotelMenu.Indent = true;
-            menuItem1.Font = new Font("汉仪文黑-85W", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            menuItem1.Font = new Font("汉仪文黑-85W", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             menuItem1.Icon = Properties.Resources.HomeLogo1;
             menuItem1.PARENTITEM = null;
             menuItem1.Select = true;
@@ -111,7 +112,7 @@
             HotelMenu.Size = new Size(175, 681);
             HotelMenu.TabIndex = 1;
             HotelMenu.Text = "ManageMenu";
-            HotelMenu.Theme = AntdUI.TAMode.Dark;
+            HotelMenu.Theme = AntdUI.TAMode.Light;
             HotelMenu.Unique = true;
             HotelMenu.UseWaitCursor = true;
             HotelMenu.SelectChanged += HotelMenu_SelectChanged;
