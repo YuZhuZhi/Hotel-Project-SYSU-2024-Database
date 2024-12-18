@@ -27,19 +27,6 @@ namespace HotelSQL.UI
             InitializeComponent();
             this.manager = manager;
             this.hotelNO = hotelNO;
-            TableOfReservation.Columns = new([
-                new Column("orderno", "订单编号", ColumnAlign.Center) { SortOrder = true },
-                new Column("hotelno", "酒店地址", ColumnAlign.Center),
-                new Column("roomno", "房间号", ColumnAlign.Center),
-                new Column("id", "预订人", ColumnAlign.Center),
-                new Column("date", "预订时间", ColumnAlign.Center),
-                new Column("duration", "入住时长", ColumnAlign.Center),
-                ]);
-
-            //bindReservation.DataSource = GetPageData(page, 20);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
-            //TableOfReservation.DataSource = bindReservation;
-            TableOfReservation.Binding((AntList<AntItem[]>)GetPageData(page, 20));
-            ReservationTablePagination.Current = page;
         }
 
         /*----------------------------Private Function----------------------------------------*/
@@ -75,7 +62,7 @@ namespace HotelSQL.UI
         {
             if (e.RowIndex % 2 == 0) {
                 return new Table.CellStyleInfo {
-                    BackColor = Style.Db.ErrorBg,
+                    BackColor = ColorTranslator.FromHtml("#edf6f9"),
                 };
             }
             return null;
@@ -85,6 +72,24 @@ namespace HotelSQL.UI
         {
             page = e.Current;
             TableOfReservation.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+        }
+
+        private void ReservationTableControl_Load(object sender, EventArgs e)
+        {
+            TableOfReservation.Columns = new([
+                new Column("orderno", "订单编号", ColumnAlign.Center) { SortOrder = true },
+                new Column("hotelno", "酒店地址", ColumnAlign.Center),
+                new Column("roomno", "房间号", ColumnAlign.Center),
+                new Column("id", "预订人", ColumnAlign.Center),
+                new Column("date", "预订时间", ColumnAlign.Center),
+                new Column("duration", "入住时长", ColumnAlign.Center),
+                ]);
+
+            //bindReservation.DataSource = GetPageData(page, 20);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
+            //TableOfReservation.DataSource = bindReservation;
+            TableOfReservation.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+            ReservationTablePagination.Current = page;
+
         }
     }
 }

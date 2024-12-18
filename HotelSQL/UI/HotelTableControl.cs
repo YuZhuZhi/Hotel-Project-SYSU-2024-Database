@@ -11,6 +11,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static AntdUI.FloatButton;
 
 namespace HotelSQL.UI
 {
@@ -32,18 +33,6 @@ namespace HotelSQL.UI
         {
             InitializeComponent();
             this.manager = manager;
-            TableOfHotel.Columns = new([
-                new Column("hotelno", "酒店地址", ColumnAlign.Center) { SortOrder = true },
-                new Column("name", "酒店名字", ColumnAlign.Center),
-                new Column("star", "酒店星级", ColumnAlign.Center),
-                new Column("operate", "操作", ColumnAlign.Center),
-                ]);
-
-            //bindHotel.DataSource = GetPageData(page, 10);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
-            //TableOfHotel.DataSource = bindHotel;
-            TableOfHotel.Binding((AntList<AntItem[]>)GetPageData(page, 20));
-
-            HotelTablePagination.Current = page;
         }
 
         /*----------------------------Private Function----------------------------------------*/
@@ -73,11 +62,28 @@ namespace HotelSQL.UI
             return list;
         }
 
+        private void SetFloatButton()
+        {
+            ConfigBtn[] btns = new ConfigBtn[] {
+                new ConfigBtn("Button1", "按钮 1") {  },
+                new ConfigBtn("Button2", "按钮 2")
+            };
+
+            // 定义按钮点击后的回调
+            Action<ConfigBtn> buttonClickCallback = (btn) => {
+                MessageBox.Show($"按钮 {btn.Name} 被点击!");
+            };
+
+            // 配置并打开悬浮按钮
+            var config = FloatButton.config(this.FindForm(), btns, buttonClickCallback);
+            FloatButton.open(config);
+        }
+
         private Table.CellStyleInfo? TableOfHotel_SetRowStyle(object sender, TableSetRowStyleEventArgs e)
         {
             if (e.RowIndex % 2 == 0) {
                 return new Table.CellStyleInfo {
-                    BackColor = Style.Db.ErrorBg,
+                    BackColor = ColorTranslator.FromHtml("#edf6f9"),
                 };
             }
             return null;
@@ -107,6 +113,42 @@ namespace HotelSQL.UI
         {
             page = e.Current;
             TableOfHotel.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+        }
+
+        private void HotelTableControl_Load(object sender, EventArgs e)
+        {
+            //SetFloatButton();
+            TableOfHotel.Columns = new([
+                new Column("hotelno", "酒店地址", ColumnAlign.Center) { SortOrder = true },
+                new Column("name", "酒店名字", ColumnAlign.Center),
+                new Column("star", "酒店星级", ColumnAlign.Center),
+                new Column("operate", "操作", ColumnAlign.Center),
+                ]);
+
+            //bindHotel.DataSource = GetPageData(page, 10);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
+            //TableOfHotel.DataSource = bindHotel;
+            TableOfHotel.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+
+            HotelTablePagination.Current = page;
+
+        }
+
+        private void HotelTableDropdown_SelectedValueChanged(object sender, ObjectNEventArgs e)
+        {
+            switch (e.Value) {
+                case "刷新":
+                    TableOfHotel.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+                    break;
+
+                case "增加酒店":
+                    Modal.open(this.FindForm(), "增加酒店", new AddHotelControl());
+                    break;
+
+                default:
+                    Console.WriteLine(e.Value);
+                    break;
+            }
+                
         }
     }
 }

@@ -26,3 +26,4 @@ F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windo
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.HotelTableControl.resources
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.RoomTableControl.resources
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.ReservationTableControl.resources
+F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.AddHotelControl.resources

@@ -67,9 +67,10 @@
             BackColor = Color.WhiteSmoke;
             Controls.Add(ReservationTablePagination);
             Controls.Add(TableOfReservation);
-            Location = new Point(225, 25);
+            Location = new Point(225, 14);
             Name = "ReservationTableControl";
             Size = new Size(1000, 652);
+            Load += ReservationTableControl_Load;
             ((System.ComponentModel.ISupportInitialize)bindReservation).EndInit();
             ResumeLayout(false);
         }

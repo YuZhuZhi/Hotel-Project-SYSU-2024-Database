@@ -27,26 +27,6 @@ namespace HotelSQL.UI
             InitializeComponent();
             this.manager = manager;
             this.hotelNO = hotelNO;
-
-            TableOfRoom.Columns = new([
-                new Column("hotelno", "酒店地址", ColumnAlign.Center),
-                new Column("roomno", "房间号", ColumnAlign.Center) { SortOrder = true },
-                new Column("type", "房间等级", ColumnAlign.Center),
-                new Column("price", "单晚价格", ColumnAlign.Center),
-                new Column("isreserved", "预订状态", ColumnAlign.Center),
-                new Column("operate", "操作", ColumnAlign.Center),
-                ]);
-
-            //bindRoom.DataSource = GetPageData(page, 20);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
-            //TableOfRoom.DataSource = GetPageData(page, 20);
-            TableOfRoom.Binding((AntList<AntItem[]>)GetPageData(page, 20));
-
-            #region pagination
-
-            RoomTablePagination.Current = page;
-
-            #endregion
-
         }
 
         /*----------------------------Private Function----------------------------------------*/
@@ -87,7 +67,7 @@ namespace HotelSQL.UI
         {
             if (e.RowIndex % 2 == 0) {
                 return new Table.CellStyleInfo {
-                    BackColor = Style.Db.ErrorBg,
+                    BackColor = ColorTranslator.FromHtml("#edf6f9"),
                 };
             }
             return null;
@@ -97,6 +77,29 @@ namespace HotelSQL.UI
         {
             page = e.Current;
             TableOfRoom.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+        }
+
+        private void RoomTableControl_Load(object sender, EventArgs e)
+        {
+            TableOfRoom.Columns = new([
+                new Column("hotelno", "酒店地址", ColumnAlign.Center),
+                new Column("roomno", "房间号", ColumnAlign.Center) { SortOrder = true },
+                new Column("type", "房间等级", ColumnAlign.Center),
+                new Column("price", "单晚价格", ColumnAlign.Center),
+                new Column("isreserved", "预订状态", ColumnAlign.Center),
+                new Column("operate", "操作", ColumnAlign.Center),
+                ]);
+
+            //bindRoom.DataSource = GetPageData(page, 20);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
+            //TableOfRoom.DataSource = GetPageData(page, 20);
+            TableOfRoom.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+
+            #region pagination
+
+            RoomTablePagination.Current = page;
+
+            #endregion
+
         }
     }
 }

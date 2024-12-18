@@ -33,6 +33,7 @@
             TableOfHotel = new AntdUI.Table();
             bindHotel = new BindingSource(components);
             HotelTablePagination = new AntdUI.Pagination();
+            HotelTableDropdown = new AntdUI.Dropdown();
             ((System.ComponentModel.ISupportInitialize)bindHotel).BeginInit();
             SuspendLayout();
             // 
@@ -65,16 +66,37 @@
             HotelTablePagination.Total = 100;
             HotelTablePagination.ValueChanged += HotelTablePagination_ValueChanged;
             // 
+            // HotelTableDropdown
+            // 
+            HotelTableDropdown.BorderWidth = 1F;
+            HotelTableDropdown.DropDownPadding = new Size(12, 12);
+            HotelTableDropdown.Font = new Font("汉仪文黑-85W", 10.4999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            HotelTableDropdown.Ghost = true;
+            HotelTableDropdown.Items.AddRange(new object[] { "增加酒店", "删除酒店", "刷新" });
+            HotelTableDropdown.Location = new Point(854, 600);
+            HotelTableDropdown.Name = "HotelTableDropdown";
+            HotelTableDropdown.Placement = AntdUI.TAlignFrom.Top;
+            HotelTableDropdown.Shape = AntdUI.TShape.Round;
+            HotelTableDropdown.ShowArrow = true;
+            HotelTableDropdown.Size = new Size(111, 48);
+            HotelTableDropdown.TabIndex = 6;
+            HotelTableDropdown.Text = "更多操作\r\n";
+            HotelTableDropdown.Trigger = AntdUI.Trigger.Hover;
+            HotelTableDropdown.Type = AntdUI.TTypeMini.Info;
+            HotelTableDropdown.SelectedValueChanged += HotelTableDropdown_SelectedValueChanged;
+            // 
             // HotelTableControl
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
+            Controls.Add(HotelTableDropdown);
             Controls.Add(HotelTablePagination);
             Controls.Add(TableOfHotel);
-            Location = new Point(225, 25);
+            Location = new Point(225, 14);
             Name = "HotelTableControl";
             Size = new Size(1000, 652);
+            Load += HotelTableControl_Load;
             ((System.ComponentModel.ISupportInitialize)bindHotel).EndInit();
             ResumeLayout(false);
         }
@@ -82,5 +104,6 @@
         #endregion
 
         private AntdUI.Pagination HotelTablePagination;
+        private AntdUI.Dropdown HotelTableDropdown;
     }
 }

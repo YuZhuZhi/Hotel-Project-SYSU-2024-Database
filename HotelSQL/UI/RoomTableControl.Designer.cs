@@ -31,6 +31,7 @@
             TableOfRoom = new AntdUI.Table();
             bindRoom = new BindingSource(components);
             RoomTablePagination = new AntdUI.Pagination();
+            RoomTableDropdown1 = new AntdUI.Dropdown();
             ((System.ComponentModel.ISupportInitialize)bindRoom).BeginInit();
             SuspendLayout();
             // 
@@ -61,16 +62,36 @@
             RoomTablePagination.Total = 100;
             RoomTablePagination.ValueChanged += RoomTablePagination_ValueChanged;
             // 
+            // RoomTableDropdown1
+            // 
+            RoomTableDropdown1.BorderWidth = 1F;
+            RoomTableDropdown1.DropDownPadding = new Size(12, 12);
+            RoomTableDropdown1.Font = new Font("汉仪文黑-85W", 10.4999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            RoomTableDropdown1.Ghost = true;
+            RoomTableDropdown1.Items.AddRange(new object[] { "增加房间", "删除房间", "刷新" });
+            RoomTableDropdown1.Location = new Point(854, 600);
+            RoomTableDropdown1.Name = "RoomTableDropdown1";
+            RoomTableDropdown1.Placement = AntdUI.TAlignFrom.Top;
+            RoomTableDropdown1.Shape = AntdUI.TShape.Round;
+            RoomTableDropdown1.ShowArrow = true;
+            RoomTableDropdown1.Size = new Size(111, 48);
+            RoomTableDropdown1.TabIndex = 5;
+            RoomTableDropdown1.Text = "更多操作\r\n";
+            RoomTableDropdown1.Trigger = AntdUI.Trigger.Hover;
+            RoomTableDropdown1.Type = AntdUI.TTypeMini.Info;
+            // 
             // RoomTableControl
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
+            Controls.Add(RoomTableDropdown1);
             Controls.Add(RoomTablePagination);
             Controls.Add(TableOfRoom);
-            Location = new Point(225, 25);
+            Location = new Point(225, 14);
             Name = "RoomTableControl";
             Size = new Size(1000, 652);
+            Load += RoomTableControl_Load;
             ((System.ComponentModel.ISupportInitialize)bindRoom).EndInit();
             ResumeLayout(false);
         }
@@ -80,5 +101,6 @@
         private AntdUI.Table TableOfRoom;
         private BindingSource bindRoom;
         private AntdUI.Pagination RoomTablePagination;
+        private AntdUI.Dropdown RoomTableDropdown1;
     }
 }
