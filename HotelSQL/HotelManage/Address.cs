@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HotelSQL.HotelManage
 {
-    internal class Address : TableBase
+    public class Address : TableBase
     {
         /*---------------------------Public Enum--------------------------*/
 

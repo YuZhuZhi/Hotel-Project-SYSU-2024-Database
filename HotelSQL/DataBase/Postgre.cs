@@ -9,7 +9,7 @@ using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
 
 namespace HotelSQL.DataBase
 {
-    class Postgre
+    public class Postgre
     {
         /*---------------------------Public Functions--------------------------*/
 

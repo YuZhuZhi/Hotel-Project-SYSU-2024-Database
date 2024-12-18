@@ -9,7 +9,7 @@ using System.Data;
 
 namespace HotelSQL.HotelManage
 {
-    internal class TableBase
+    public class TableBase
     {
         /*---------------------------Public Function--------------------------*/
 

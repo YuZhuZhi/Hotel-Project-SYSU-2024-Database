@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HotelSQL.HotelManage
 {
-    internal class Reserver : TableBase
+    public class Reserver : TableBase
     {
         /*---------------------------Public Enum--------------------------*/
 

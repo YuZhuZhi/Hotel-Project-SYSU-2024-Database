@@ -63,10 +63,10 @@
             HotelCarousel.Image.Add(carouselItem5);
             HotelCarousel.Image.Add(carouselItem6);
             HotelCarousel.ImageFit = AntdUI.TFit.Contain;
-            HotelCarousel.Location = new Point(32, 0);
+            HotelCarousel.Location = new Point(3, 3);
             HotelCarousel.Name = "HotelCarousel";
             HotelCarousel.Radius = 3;
-            HotelCarousel.SelectIndex = 4;
+            HotelCarousel.SelectIndex = 3;
             HotelCarousel.Size = new Size(958, 634);
             HotelCarousel.TabIndex = 0;
             HotelCarousel.Text = "carousel1";
@@ -108,13 +108,13 @@
             HotelMenu.Name = "HotelMenu";
             HotelMenu.Round = true;
             HotelMenu.ShowSubBack = true;
-            HotelMenu.Size = new Size(176, 681);
+            HotelMenu.Size = new Size(175, 681);
             HotelMenu.TabIndex = 1;
-            HotelMenu.Text = "menu1";
+            HotelMenu.Text = "ManageMenu";
             HotelMenu.Theme = AntdUI.TAMode.Dark;
             HotelMenu.Unique = true;
             HotelMenu.UseWaitCursor = true;
-            HotelMenu.SelectChanged += menu1_SelectChanged;
+            HotelMenu.SelectChanged += HotelMenu_SelectChanged;
             // 
             // CarouselPanel
             // 
@@ -137,6 +137,7 @@
             ClientSize = new Size(1264, 681);
             Controls.Add(CarouselPanel);
             Controls.Add(HotelMenu);
+            DoubleBuffered = true;
             Name = "ManageForm";
             Text = "酒店管理系统";
             Load += ManageForm_Load;

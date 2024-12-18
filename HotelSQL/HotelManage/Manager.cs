@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HotelSQL.HotelManage
 {
-    internal class Manager
+    public class Manager
     {
         /*---------------------------Public Function--------------------------*/
         
@@ -26,6 +26,16 @@ namespace HotelSQL.HotelManage
                 CreateAllTables(postgre);
                 SetTables();
             }
+        }
+
+        public DataTable GetHotelRooms(int hotelNO)
+        {
+            DataTable dataTable = new DataTable();
+            var result = SQL.Query($"SELECT Room.hotelNO, roomNO, type, price, isReserved\n" +
+                $"FROM hotel NATURAL JOIN room NATURAL JOIN roomtype NATURAL JOIN address\n" +
+                $"WHERE (Room.hotelNO = {hotelNO})");
+            dataTable.Load(result);
+            return dataTable;
         }
 
         public void DropAllTable()

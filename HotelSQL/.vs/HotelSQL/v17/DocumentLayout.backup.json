@@ -3,32 +3,44 @@
   "WorkspaceRootPath": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\roomtablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\roomtablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\roomtablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\roomtablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\loginform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\hoteltablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\hoteltablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\hotelmanage\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:hotelmanage\\manager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\ui\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\usercontrol1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\hoteltablecontrol.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\hoteltablecontrol.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\hoteltablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\hoteltablecontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\roomtablecontrol.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\roomtablecontrol.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\manageform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,14 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\main4ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:main4ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\database\\postgre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:database\\postgre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,8 +58,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 14,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
@@ -70,111 +78,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LoginForm.Designer.cs",
-              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.Designer.cs",
-              "RelativeDocumentMoniker": "UI\\LoginForm.Designer.cs",
-              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.Designer.cs",
-              "RelativeToolTip": "UI\\LoginForm.Designer.cs",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAqwFEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T06:53:42.237Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LoginForm.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.cs",
-              "RelativeDocumentMoniker": "UI\\LoginForm.cs",
-              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "UI\\LoginForm.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-16T06:02:18.434Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ManageForm.Designer.cs",
-              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\ManageForm.Designer.cs",
-              "RelativeDocumentMoniker": "UI\\ManageForm.Designer.cs",
-              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\ManageForm.Designer.cs",
-              "RelativeToolTip": "UI\\ManageForm.Designer.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAqwBUAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-15T04:13:30.143Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LoginForm.cs",
-              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.cs",
-              "RelativeDocumentMoniker": "UI\\LoginForm.cs",
-              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.cs",
-              "RelativeToolTip": "UI\\LoginForm.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAA0wCYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-15T04:06:09.589Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 9,
               "Title": "Main.cs",
               "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\Main.cs",
               "RelativeDocumentMoniker": "Main.cs",
               "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\Main.cs",
               "RelativeToolTip": "Main.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T15:43:39.058Z"
+              "WhenOpened": "2024-11-07T15:43:39.058Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "Main4UI.cs",
               "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\Main4UI.cs",
               "RelativeDocumentMoniker": "Main4UI.cs",
               "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\Main4UI.cs",
               "RelativeToolTip": "Main4UI.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAABYAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAA6wBIAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T07:22:13.546Z"
+              "WhenOpened": "2024-11-14T07:22:13.546Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Postgre.cs",
-              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\DataBase\\Postgre.cs",
-              "RelativeDocumentMoniker": "DataBase\\Postgre.cs",
-              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\DataBase\\Postgre.cs",
-              "RelativeToolTip": "DataBase\\Postgre.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAKBBwCsAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T15:41:23.307Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Manager.cs",
-              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\HotelManage\\Manager.cs",
-              "RelativeDocumentMoniker": "HotelManage\\Manager.cs",
-              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\HotelManage\\Manager.cs",
-              "RelativeToolTip": "HotelManage\\Manager.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAMA1wKsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T15:00:53.019Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "ManageForm.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\ManageForm.cs",
               "RelativeDocumentMoniker": "UI\\ManageForm.cs",
               "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\ManageForm.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "UI\\ManageForm.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T15:11:42.012Z"
+              "WhenOpened": "2024-11-14T15:11:42.012Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ManageForm.Designer.cs",
+              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\ManageForm.Designer.cs",
+              "RelativeDocumentMoniker": "UI\\ManageForm.Designer.cs",
+              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\ManageForm.Designer.cs",
+              "RelativeToolTip": "UI\\ManageForm.Designer.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAswJYAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-15T04:13:30.143Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -184,20 +135,99 @@
               "RelativeDocumentMoniker": "UI\\ManageForm.cs",
               "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\ManageForm.cs",
               "RelativeToolTip": "UI\\ManageForm.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAgwCEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAAAdwEAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-14T16:13:24.039Z"
+              "WhenOpened": "2024-11-14T16:13:24.039Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "UserControl1.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\UserControl1.cs",
-              "RelativeDocumentMoniker": "UI\\UserControl1.cs",
-              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\UserControl1.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "UI\\UserControl1.cs [\u8BBE\u8BA1]",
+              "Title": "HotelTableControl.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\HotelTableControl.cs",
+              "RelativeDocumentMoniker": "UI\\HotelTableControl.cs",
+              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\HotelTableControl.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "UI\\HotelTableControl.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-15T10:36:22.241Z"
+              "WhenOpened": "2024-12-17T15:39:07.442Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HotelTableControl.Designer.cs",
+              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\HotelTableControl.Designer.cs",
+              "RelativeDocumentMoniker": "UI\\HotelTableControl.Designer.cs",
+              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\HotelTableControl.Designer.cs",
+              "RelativeToolTip": "UI\\HotelTableControl.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T16:07:29.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HotelTableControl.cs",
+              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\HotelTableControl.cs",
+              "RelativeDocumentMoniker": "UI\\HotelTableControl.cs",
+              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\HotelTableControl.cs",
+              "RelativeToolTip": "UI\\HotelTableControl.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAZwEsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-17T08:35:46.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RoomTableControl.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\RoomTableControl.cs",
+              "RelativeDocumentMoniker": "UI\\RoomTableControl.cs",
+              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\RoomTableControl.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "UI\\RoomTableControl.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T08:35:33.398Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RoomTableControl.Designer.cs",
+              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\RoomTableControl.Designer.cs",
+              "RelativeDocumentMoniker": "UI\\RoomTableControl.Designer.cs",
+              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\RoomTableControl.Designer.cs",
+              "RelativeToolTip": "UI\\RoomTableControl.Designer.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAjwC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T08:34:58.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RoomTableControl.cs",
+              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\RoomTableControl.cs",
+              "RelativeDocumentMoniker": "UI\\RoomTableControl.cs",
+              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\RoomTableControl.cs",
+              "RelativeToolTip": "UI\\RoomTableControl.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAOwB4AAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T08:34:42.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Manager.cs",
+              "DocumentMoniker": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\HotelManage\\Manager.cs",
+              "RelativeDocumentMoniker": "HotelManage\\Manager.cs",
+              "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\HotelManage\\Manager.cs",
+              "RelativeToolTip": "HotelManage\\Manager.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAZwCMAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T09:16:04.466Z",
+              "EditorCaption": ""
             }
           ]
         }

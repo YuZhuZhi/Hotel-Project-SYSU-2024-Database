@@ -10,7 +10,7 @@ using Npgsql;
 
 namespace HotelSQL.HotelManage
 {
-    internal class Hotel : TableBase
+    public class Hotel : TableBase
     {
         /*---------------------------Public Enum--------------------------*/
 
