@@ -17,6 +17,9 @@
     <Compile Update="UI\ReservationTableControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\ReserveControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\RoomTableControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

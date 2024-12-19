@@ -57,26 +57,42 @@ namespace HotelSQL.HotelManage
             Table.Rows.Find(hotelNO)?.Delete();
         }
 
-        public void SetAddress(int hotelNO, int newHotelNO)
+        public bool SetAddress(int hotelNO, int newHotelNO)
         {
-            if (Table.Rows.Find(newHotelNO) is not null) return;
+            if (newHotelNO == hotelNO) return true;
+            if (Table.Rows.Find(newHotelNO) is not null) return false;
             var hotelInfo = Table.Rows.Find(hotelNO);
-            if (hotelInfo is null) return;
-            hotelInfo["hotelNO"] = newHotelNO;
+            if (hotelInfo is null) return false;
+            try {
+                hotelInfo["hotelNO"] = newHotelNO;
+            } catch (Exception) { 
+                return false;
+            }
+            return true;
         }
 
-        public void Rename(int hotelNO, string hotelName)
+        public bool Rename(int hotelNO, string hotelName)
         {
             var hotelInfo = Table.Rows.Find(hotelNO);
-            if (hotelInfo is null) return;
-            hotelInfo["name"] = hotelName;
+            if (hotelInfo is null) return false;
+            try {
+                hotelInfo["name"] = hotelName;
+            } catch (Exception) {
+                return false;
+            }
+            return true;
         }
 
-        public void SetStar(int hotelNO, int star)
+        public bool SetStar(int hotelNO, int star)
         {
             var hotelInfo = Table.Rows.Find(hotelNO);
-            if (hotelInfo is null) return;
-            hotelInfo["star"] = star;
+            if (hotelInfo is null) return false;
+            try {
+                hotelInfo["star"] = star;
+            } catch (Exception) {
+                return false;
+            }
+            return true;
         }
 
         /*---------------------------Private Function--------------------------*/

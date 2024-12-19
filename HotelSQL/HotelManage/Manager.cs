@@ -106,22 +106,25 @@ namespace HotelSQL.HotelManage
             return Hotel.Update();
         }
 
-        public int SetHotelRename(int hotelNO, string hotelName)
+        public bool SetHotelName(int hotelNO, string newHotelName)
         {
-            Hotel.Rename(hotelNO, hotelName);
-            return Hotel.Update();
+            bool success = Hotel.Rename(hotelNO, newHotelName);
+            if (success) Hotel.Update();
+            return success;
         }
 
-        public int SetHotelAddress(int hotelNO, int newHotelNO)
+        public bool SetHotelAddress(int hotelNO, int newHotelNO)
         {
-            Hotel.SetAddress(hotelNO, newHotelNO);
-            return Hotel.Update();
+            bool success = Hotel.SetAddress(hotelNO, newHotelNO);
+            if (success) Hotel.Update();
+            return success;
         }
 
-        public int SetHotelStar(int hotelNO, int star)
+        public bool SetHotelStar(int hotelNO, int newStar)
         {
-            Hotel.SetStar(hotelNO, star);
-            return Hotel.Update();
+            bool success = Hotel.SetStar(hotelNO, newStar);
+            if (success) Hotel.Update();
+            return success;
         }
 
         public int AddRoomType(int hotelNO, string type, int price, int amount, int initialRoomNO)

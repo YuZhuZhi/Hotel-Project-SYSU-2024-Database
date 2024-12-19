@@ -46,6 +46,7 @@ namespace HotelSQL.UI
                 string reserveBtnText = isReserved ? "取消预订" : "预订";
 
                 list.Add(new AntItem[] {
+                    new AntItem("check", false),
                     new AntItem("hotelno", table.Rows[i]["hotelNO"]),
                     new AntItem("roomno", table.Rows[i]["roomNO"]),
                     new AntItem("type", table.Rows[i]["type"]),
@@ -63,6 +64,11 @@ namespace HotelSQL.UI
             return list;
         }
 
+        private void TableRefresh()
+        {
+            TableOfRoom.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+        }
+
         private AntdUI.Table.CellStyleInfo? TableOfRoom_SetRowStyle(object sender, TableSetRowStyleEventArgs e)
         {
             if (e.RowIndex % 2 == 0) {
@@ -76,12 +82,13 @@ namespace HotelSQL.UI
         private void RoomTablePagination_ValueChanged(object sender, PagePageEventArgs e)
         {
             page = e.Current;
-            TableOfRoom.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+            TableRefresh();
         }
 
         private void RoomTableControl_Load(object sender, EventArgs e)
         {
             TableOfRoom.Columns = new([
+                new ColumnCheck("check"),
                 new Column("hotelno", "酒店地址", ColumnAlign.Center),
                 new Column("roomno", "房间号", ColumnAlign.Center) { SortOrder = true },
                 new Column("type", "房间等级", ColumnAlign.Center),
@@ -90,8 +97,6 @@ namespace HotelSQL.UI
                 new Column("operate", "操作", ColumnAlign.Center),
                 ]);
 
-            //bindRoom.DataSource = GetPageData(page, 20);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
-            //TableOfRoom.DataSource = GetPageData(page, 20);
             TableOfRoom.Binding((AntList<AntItem[]>)GetPageData(page, 20));
 
             #region pagination
@@ -100,6 +105,19 @@ namespace HotelSQL.UI
 
             #endregion
 
+        }
+
+        private void TableOfRoom_CellButtonClick(object sender, TableButtonEventArgs e)
+        {
+            if (e.Btn.Id.Contains("Reserve")) {  // Reserve the room.
+
+            }
+            else if (e.Btn.Id.Contains("Edit")) {  // Edit the room's info.
+
+            }
+            else if (e.Btn.Id.Contains("View")) {  // View the room's Reservation.
+
+            }
         }
     }
 }

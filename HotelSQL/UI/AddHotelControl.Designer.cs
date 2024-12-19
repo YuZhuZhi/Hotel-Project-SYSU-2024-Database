@@ -27,64 +27,117 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new AntdUI.Panel();
-            input1 = new AntdUI.Input();
-            input2 = new AntdUI.Input();
-            input3 = new AntdUI.Input();
-            panel1.SuspendLayout();
+            AddHotelPanel = new AntdUI.Panel();
+            HotelStarLabel = new AntdUI.Label();
+            HotelNameLabel = new AntdUI.Label();
+            HotelStarInputNumber = new AntdUI.InputNumber();
+            HotelNameInput = new AntdUI.Input();
+            HotelNOLabel = new AntdUI.Label();
+            HotelNOInput = new AntdUI.Input();
+            AddHotelPanel.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // AddHotelPanel
             // 
-            panel1.Controls.Add(input3);
-            panel1.Controls.Add(input2);
-            panel1.Controls.Add(input1);
-            panel1.Location = new Point(38, 19);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(480, 224);
-            panel1.TabIndex = 0;
-            panel1.Text = "panel1";
+            AddHotelPanel.Controls.Add(HotelStarLabel);
+            AddHotelPanel.Controls.Add(HotelNameLabel);
+            AddHotelPanel.Controls.Add(HotelStarInputNumber);
+            AddHotelPanel.Controls.Add(HotelNameInput);
+            AddHotelPanel.Controls.Add(HotelNOLabel);
+            AddHotelPanel.Controls.Add(HotelNOInput);
+            AddHotelPanel.Location = new Point(0, 0);
+            AddHotelPanel.Name = "AddHotelPanel";
+            AddHotelPanel.Size = new Size(480, 200);
+            AddHotelPanel.TabIndex = 0;
+            AddHotelPanel.Text = "panel1";
             // 
-            // input1
+            // HotelStarLabel
             // 
-            input1.Location = new Point(96, 24);
-            input1.Name = "input1";
-            input1.Size = new Size(279, 49);
-            input1.TabIndex = 0;
-            input1.Text = "input1";
+            HotelStarLabel.BackColor = Color.Transparent;
+            HotelStarLabel.Font = new Font("汉仪文黑-85W", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            HotelStarLabel.Location = new Point(45, 133);
+            HotelStarLabel.Name = "HotelStarLabel";
+            HotelStarLabel.Size = new Size(83, 50);
+            HotelStarLabel.TabIndex = 8;
+            HotelStarLabel.Text = "酒店星级：";
+            HotelStarLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // input2
+            // HotelNameLabel
             // 
-            input2.Location = new Point(96, 89);
-            input2.Name = "input2";
-            input2.Size = new Size(279, 51);
-            input2.TabIndex = 1;
-            input2.Text = "input2";
+            HotelNameLabel.BackColor = Color.Transparent;
+            HotelNameLabel.Font = new Font("汉仪文黑-85W", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            HotelNameLabel.Location = new Point(45, 77);
+            HotelNameLabel.Name = "HotelNameLabel";
+            HotelNameLabel.Size = new Size(83, 50);
+            HotelNameLabel.TabIndex = 7;
+            HotelNameLabel.Text = "酒店名字：";
+            HotelNameLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
-            // input3
+            // HotelStarInputNumber
             // 
-            input3.Location = new Point(96, 156);
-            input3.Name = "input3";
-            input3.Size = new Size(279, 50);
-            input3.TabIndex = 2;
-            input3.Text = "input3";
+            HotelStarInputNumber.Font = new Font("汉仪文黑-85W", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            HotelStarInputNumber.Location = new Point(134, 133);
+            HotelStarInputNumber.Maximum = new decimal(new int[] { 5, 0, 0, 0 });
+            HotelStarInputNumber.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            HotelStarInputNumber.Name = "HotelStarInputNumber";
+            HotelStarInputNumber.Size = new Size(300, 50);
+            HotelStarInputNumber.TabIndex = 6;
+            HotelStarInputNumber.Text = "3";
+            HotelStarInputNumber.Value = new decimal(new int[] { 3, 0, 0, 0 });
+            // 
+            // HotelNameInput
+            // 
+            HotelNameInput.Font = new Font("汉仪文黑-85W", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            HotelNameInput.ForeColor = SystemColors.ButtonShadow;
+            HotelNameInput.Location = new Point(134, 77);
+            HotelNameInput.Name = "HotelNameInput";
+            HotelNameInput.Size = new Size(300, 50);
+            HotelNameInput.TabIndex = 4;
+            HotelNameInput.Text = "请输入拼音";
+            HotelNameInput.Click += HotelNameInput_Click;
+            // 
+            // HotelNOLabel
+            // 
+            HotelNOLabel.BackColor = Color.Transparent;
+            HotelNOLabel.Font = new Font("汉仪文黑-85W", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            HotelNOLabel.Location = new Point(45, 21);
+            HotelNOLabel.Name = "HotelNOLabel";
+            HotelNOLabel.Size = new Size(83, 50);
+            HotelNOLabel.TabIndex = 3;
+            HotelNOLabel.Text = "酒店地址：";
+            HotelNOLabel.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // HotelNOInput
+            // 
+            HotelNOInput.Font = new Font("汉仪文黑-85W", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            HotelNOInput.ForeColor = SystemColors.ButtonShadow;
+            HotelNOInput.Location = new Point(134, 21);
+            HotelNOInput.Name = "HotelNOInput";
+            HotelNOInput.Size = new Size(300, 50);
+            HotelNOInput.TabIndex = 0;
+            HotelNOInput.Text = "请输入五位数字";
+            HotelNOInput.Click += HotelNOInput_Click;
             // 
             // AddHotelControl
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(panel1);
+            Controls.Add(AddHotelPanel);
             Name = "AddHotelControl";
-            Size = new Size(561, 265);
-            panel1.ResumeLayout(false);
+            Size = new Size(480, 200);
+            AddHotelPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private AntdUI.Panel panel1;
-        private AntdUI.Input input3;
+        private AntdUI.Panel AddHotelPanel;
         private AntdUI.Input input2;
-        private AntdUI.Input input1;
+        private AntdUI.Input HotelNOInput;
+        private AntdUI.Label HotelNOLabel;
+        private AntdUI.Input HotelNameInput;
+        private AntdUI.InputNumber HotelStarInputNumber;
+        private AntdUI.Label HotelStarLabel;
+        private AntdUI.Label HotelNameLabel;
     }
 }

@@ -27,12 +27,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             TableOfRoom = new AntdUI.Table();
-            bindRoom = new BindingSource(components);
             RoomTablePagination = new AntdUI.Pagination();
             RoomTableDropdown1 = new AntdUI.Dropdown();
-            ((System.ComponentModel.ISupportInitialize)bindRoom).BeginInit();
             SuspendLayout();
             // 
             // TableOfRoom
@@ -46,6 +43,7 @@
             TableOfRoom.Size = new Size(935, 575);
             TableOfRoom.TabIndex = 1;
             TableOfRoom.Text = "房间列表";
+            TableOfRoom.CellButtonClick += TableOfRoom_CellButtonClick;
             TableOfRoom.SetRowStyle += TableOfRoom_SetRowStyle;
             // 
             // RoomTablePagination
@@ -68,7 +66,7 @@
             RoomTableDropdown1.DropDownPadding = new Size(12, 12);
             RoomTableDropdown1.Font = new Font("汉仪文黑-85W", 10.4999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
             RoomTableDropdown1.Ghost = true;
-            RoomTableDropdown1.Items.AddRange(new object[] { "增加房间", "删除房间", "刷新" });
+            RoomTableDropdown1.Items.AddRange(new object[] { "新增房间", "移除房间", "刷新" });
             RoomTableDropdown1.Location = new Point(854, 600);
             RoomTableDropdown1.Name = "RoomTableDropdown1";
             RoomTableDropdown1.Placement = AntdUI.TAlignFrom.Top;
@@ -92,14 +90,12 @@
             Name = "RoomTableControl";
             Size = new Size(1000, 652);
             Load += RoomTableControl_Load;
-            ((System.ComponentModel.ISupportInitialize)bindRoom).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private AntdUI.Table TableOfRoom;
-        private BindingSource bindRoom;
         private AntdUI.Pagination RoomTablePagination;
         private AntdUI.Dropdown RoomTableDropdown1;
     }

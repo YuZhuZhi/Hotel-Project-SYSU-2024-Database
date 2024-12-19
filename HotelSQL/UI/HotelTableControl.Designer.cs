@@ -6,7 +6,6 @@
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private BindingSource bindHotel;
         private AntdUI.Table TableOfHotel;
 
         /// <summary> 
@@ -29,12 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             TableOfHotel = new AntdUI.Table();
-            bindHotel = new BindingSource(components);
             HotelTablePagination = new AntdUI.Pagination();
             HotelTableDropdown = new AntdUI.Dropdown();
-            ((System.ComponentModel.ISupportInitialize)bindHotel).BeginInit();
             SuspendLayout();
             // 
             // TableOfHotel
@@ -72,7 +68,7 @@
             HotelTableDropdown.DropDownPadding = new Size(12, 12);
             HotelTableDropdown.Font = new Font("汉仪文黑-85W", 10.4999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
             HotelTableDropdown.Ghost = true;
-            HotelTableDropdown.Items.AddRange(new object[] { "增加酒店", "删除酒店", "刷新" });
+            HotelTableDropdown.Items.AddRange(new object[] { "新增酒店", "移除酒店", "刷新" });
             HotelTableDropdown.Location = new Point(854, 600);
             HotelTableDropdown.Name = "HotelTableDropdown";
             HotelTableDropdown.Placement = AntdUI.TAlignFrom.Top;
@@ -97,7 +93,6 @@
             Name = "HotelTableControl";
             Size = new Size(1000, 652);
             Load += HotelTableControl_Load;
-            ((System.ComponentModel.ISupportInitialize)bindHotel).EndInit();
             ResumeLayout(false);
         }
 

@@ -47,6 +47,7 @@ namespace HotelSQL.UI
 
             for (int i = start; i < end; i++) {
                 list.Add(new AntItem[] {
+                    new AntItem("check", false),
                     new AntItem("hotelno", table.Rows[i]["hotelNO"]),
                     new AntItem("name", table.Rows[i]["name"]),
                     new AntItem("star", table.Rows[i]["star"]),
@@ -62,21 +63,9 @@ namespace HotelSQL.UI
             return list;
         }
 
-        private void SetFloatButton()
+        private void TableRefresh()
         {
-            ConfigBtn[] btns = new ConfigBtn[] {
-                new ConfigBtn("Button1", "按钮 1") {  },
-                new ConfigBtn("Button2", "按钮 2")
-            };
-
-            // 定义按钮点击后的回调
-            Action<ConfigBtn> buttonClickCallback = (btn) => {
-                MessageBox.Show($"按钮 {btn.Name} 被点击!");
-            };
-
-            // 配置并打开悬浮按钮
-            var config = FloatButton.config(this.FindForm(), btns, buttonClickCallback);
-            FloatButton.open(config);
+            TableOfHotel.Binding((AntList<AntItem[]>)GetPageData(page, 20));
         }
 
         private Table.CellStyleInfo? TableOfHotel_SetRowStyle(object sender, TableSetRowStyleEventArgs e)
@@ -104,7 +93,39 @@ namespace HotelSQL.UI
                 return;
             }
             else if (e.Btn.Id.Contains("Edit")) {
-
+                int presentHotelNO = (int)TableOfHotel[e.RowIndex - 1]?["hotelno"];
+                var control = new AddHotelControl(
+                    hotelNO: (int)TableOfHotel[e.RowIndex - 1]?["hotelno"],
+                    hotelName: TableOfHotel[e.RowIndex - 1]?["name"].ToString(),
+                    hotelStar: (int)TableOfHotel[e.RowIndex - 1]?["star"]
+                    );
+                var config = new Modal.Config(this.FindForm(), "修改酒店信息", control) {
+                    Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                    OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                    CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                    OnOk = (config) => {
+                        #region Define Notification
+                        var noteConfig = new Notification.Config(this.FindForm(), "Alert", "非法数据！", TType.Error, TAlignFrom.Top) {
+                            FontTitle = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                            Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                            AutoClose = 3,
+                            ShowInWindow = true,
+                        };
+                        #endregion
+                        if (control.IsValid()) {
+                            var (hotelNO, name, star) = control.GetValues();
+                            bool success = manager.SetHotelAddress(presentHotelNO, hotelNO);
+                            success &= manager.SetHotelName(presentHotelNO, name);
+                            success &= manager.SetHotelStar(presentHotelNO, star);
+                            if (!success) Notification.open(noteConfig);
+                            return success;
+                        }
+                        Notification.open(noteConfig);
+                        return false;
+                    }
+                };
+                Modal.open(config);
+                TableRefresh();
             }
 
         }
@@ -112,21 +133,19 @@ namespace HotelSQL.UI
         private void HotelTablePagination_ValueChanged(object sender, PagePageEventArgs e)
         {
             page = e.Current;
-            TableOfHotel.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+            TableRefresh();
         }
 
         private void HotelTableControl_Load(object sender, EventArgs e)
         {
-            //SetFloatButton();
             TableOfHotel.Columns = new([
+                new ColumnCheck("check"),
                 new Column("hotelno", "酒店地址", ColumnAlign.Center) { SortOrder = true },
                 new Column("name", "酒店名字", ColumnAlign.Center),
                 new Column("star", "酒店星级", ColumnAlign.Center),
                 new Column("operate", "操作", ColumnAlign.Center),
                 ]);
 
-            //bindHotel.DataSource = GetPageData(page, 10);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
-            //TableOfHotel.DataSource = bindHotel;
             TableOfHotel.Binding((AntList<AntItem[]>)GetPageData(page, 20));
 
             HotelTablePagination.Current = page;
@@ -137,11 +156,43 @@ namespace HotelSQL.UI
         {
             switch (e.Value) {
                 case "刷新":
-                    TableOfHotel.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+                    TableRefresh();
                     break;
 
-                case "增加酒店":
-                    Modal.open(this.FindForm(), "增加酒店", new AddHotelControl());
+                case "新增酒店":
+                    var control = new AddHotelControl();
+                    var config = new Modal.Config(this.FindForm(), "新增酒店", control) {
+                        Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OnOk = (config) => {
+                            if (control.IsValid()) {
+                                var (hotelNO, name, star) = control.GetValues();
+                                int addNum = manager.AddHotel(hotelNO, name, star);
+                                if (addNum > 0) return true;
+                            }
+                            #region Show Notification
+                            var noteConfig = new Notification.Config(this.FindForm(), "Alert", "非法数据！", TType.Error, TAlignFrom.Top) {
+                                FontTitle = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                                Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                                AutoClose = 3,
+                                ShowInWindow = true,
+                            };
+                            Notification.open(noteConfig);
+                            #endregion
+                            return false;
+                        }
+                    };
+                    Modal.open(config);
+                    TableRefresh();
+                    break;
+
+                case "移除酒店":
+                    var table = (AntList<AntItem[]>)TableOfHotel.DataSource;
+                    for (int i = 0; i < table?.Count; i++) {
+                        if ((bool)table[i][0].value) manager.RemoveHotel((int)table[i][1].value);
+                    }
+                    TableRefresh();
                     break;
 
                 default:
