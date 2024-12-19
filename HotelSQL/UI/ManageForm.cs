@@ -57,8 +57,6 @@ namespace HotelSQL.UI
                     HotelMenu.Items[1].Sub[1].Select = true;
                     HotelMenu.Items[1].Sub[2].Select = false;
 
-                    //HotelMenu.Select(HotelMenu.Items[1].Sub[1]);
-
                     if (Controls.ContainsKey("CarouselPanel")) Controls.RemoveByKey("CarouselPanel");
                     if (Controls.ContainsKey("HotelTableControl")) Controls.RemoveByKey("HotelTableControl");
                     if (Controls.ContainsKey("ReservationTableControl")) Controls.RemoveByKey("ReservationTableControl");

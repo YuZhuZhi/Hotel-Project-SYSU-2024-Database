@@ -41,12 +41,13 @@ namespace HotelSQL.UI
 
             for (int i = start; i < end; i++) {
                 list.Add(new AntItem[] {
+                    new AntItem("check", false),
                     new AntItem("orderno", table.Rows[i]["orderNO"]),
                     new AntItem("hotelno", table.Rows[i]["hotelNO"]),
                     new AntItem("roomno", table.Rows[i]["roomNO"]),
                     new AntItem("id", table.Rows[i]["ID"]),
-                    new AntItem("date", table.Rows[i]["date"]),
-                    new AntItem("duration", table.Rows[i]["duration"]),
+                    new AntItem("date", ((DateTime)table.Rows[i]["date"]).ToString("yyyy-MM-dd")),
+                    new AntItem("duration", ((TimeSpan)table.Rows[i]["duration"]).Days + "天"),
                     new AntItem("operate", new CellLink[] {
                         new CellButton($"EditReservation{i}", "编辑信息") { Type = TTypeMini.Primary, Ghost = true, BorderWidth = 2F },
                         new CellButton($"Cancel{i}", "取消订单") { Type = TTypeMini.Primary, Ghost = true, BorderWidth = 2F },
@@ -77,6 +78,7 @@ namespace HotelSQL.UI
         private void ReservationTableControl_Load(object sender, EventArgs e)
         {
             TableOfReservation.Columns = new([
+                new ColumnCheck("check"),
                 new Column("orderno", "订单编号", ColumnAlign.Center) { SortOrder = true },
                 new Column("hotelno", "酒店地址", ColumnAlign.Center),
                 new Column("roomno", "房间号", ColumnAlign.Center),

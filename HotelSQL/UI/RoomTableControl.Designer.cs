@@ -66,7 +66,7 @@
             RoomTableDropdown1.DropDownPadding = new Size(12, 12);
             RoomTableDropdown1.Font = new Font("汉仪文黑-85W", 10.4999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
             RoomTableDropdown1.Ghost = true;
-            RoomTableDropdown1.Items.AddRange(new object[] { "新增房间", "移除房间", "刷新" });
+            RoomTableDropdown1.Items.AddRange(new object[] { "新增房间", "移除房间", "查看房间类型信息", "刷新" });
             RoomTableDropdown1.Location = new Point(854, 600);
             RoomTableDropdown1.Name = "RoomTableDropdown1";
             RoomTableDropdown1.Placement = AntdUI.TAlignFrom.Top;
@@ -77,6 +77,7 @@
             RoomTableDropdown1.Text = "更多操作\r\n";
             RoomTableDropdown1.Trigger = AntdUI.Trigger.Hover;
             RoomTableDropdown1.Type = AntdUI.TTypeMini.Info;
+            RoomTableDropdown1.SelectedValueChanged += RoomTableDropdown1_SelectedValueChanged;
             // 
             // RoomTableControl
             // 

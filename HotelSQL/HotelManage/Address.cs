@@ -50,6 +50,14 @@ namespace HotelSQL.HotelManage
             return Table.Rows.Find([hotelNO, roomNO]);
         }
 
+        public bool SetType(int hotelNO, int roomNO, string type)
+        {
+            DataRow? row = GetRow(hotelNO, roomNO);
+            if (row is null) return false;
+            row["type"] = type;
+            return true;
+        }
+
         public bool Add(int hotelNO, int roomNO, string type)
             //Should be called After Room.Add().
         {

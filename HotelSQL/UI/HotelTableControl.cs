@@ -100,6 +100,7 @@ namespace HotelSQL.UI
                     hotelStar: (int)TableOfHotel[e.RowIndex - 1]?["star"]
                     );
                 var config = new Modal.Config(this.FindForm(), "修改酒店信息", control) {
+                    Icon = TType.Info,
                     Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
@@ -162,6 +163,7 @@ namespace HotelSQL.UI
                 case "新增酒店":
                     var control = new AddHotelControl();
                     var config = new Modal.Config(this.FindForm(), "新增酒店", control) {
+                        Icon = TType.Info,
                         Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
                         OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
                         CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
@@ -189,9 +191,19 @@ namespace HotelSQL.UI
 
                 case "移除酒店":
                     var table = (AntList<AntItem[]>)TableOfHotel.DataSource;
-                    for (int i = 0; i < table?.Count; i++) {
-                        if ((bool)table[i][0].value) manager.RemoveHotel((int)table[i][1].value);
-                    }
+                    config = new Modal.Config(this.FindForm(), "再次确认", "确定要移除这些酒店吗？") {
+                        Icon = TType.Warn,
+                        Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OnOk = (config) => {
+                            for (int i = 0; i < table?.Count; i++) {
+                                if ((bool)table[i][0].value) manager.RemoveHotel((int)table[i][1].value);
+                            }
+                            return true;
+                        }
+                    };
+                    Modal.open(config);
                     TableRefresh();
                     break;
 

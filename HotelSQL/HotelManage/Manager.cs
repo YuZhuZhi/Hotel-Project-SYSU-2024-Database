@@ -33,7 +33,8 @@ namespace HotelSQL.HotelManage
             DataTable dataTable = new DataTable();
             var result = SQL.Query($"SELECT Room.hotelNO, roomNO, type, price, isReserved\n" +
                 $"FROM hotel NATURAL JOIN room NATURAL JOIN roomtype NATURAL JOIN address\n" +
-                $"WHERE (Room.hotelNO = {hotelNO})");
+                $"WHERE (Room.hotelNO = {hotelNO})\n" +
+                $"ORDER BY roomNO ASC, price ASC;");
             dataTable.Load(result);
             return dataTable;
         }
@@ -129,6 +130,7 @@ namespace HotelSQL.HotelManage
 
         public int AddRoomType(int hotelNO, string type, int price, int amount, int initialRoomNO)
         {
+            type = type.Trim();
             RoomType.Add(hotelNO, type, price, amount);
             for (int i = initialRoomNO; i < initialRoomNO + amount; i++) {
                 Room.Add(hotelNO, i);
@@ -139,28 +141,33 @@ namespace HotelSQL.HotelManage
 
         public int RemoveRoomType(int hotelNO, string type)
         {
+            type = type.Trim();
             RoomType.Delete(hotelNO, type);
             return RoomType.Update();
         }
 
         public int SetRoomTypePrice(int hotelNO, string type, int price)
         {
+            type = type.Trim();
             RoomType.SetPrice(hotelNO, type, price);
             return RoomType.Update();
         }
 
         public int SetRoomTypeName(int hotelNO, string type, string newType)
         {
+            type = type.Trim();
+            newType = newType.Trim();
             RoomType.SetType(hotelNO, type, newType);
             return RoomType.Update();
         }
 
         public int AddRoom(int hotelNO, int roomNO, string type)
         {
+            type = type.Trim();
+            if (!Room.Add(hotelNO, roomNO)) return 0;
+            if (!Address.Add(hotelNO, roomNO, type)) return 0;
             RoomType.IncreaseAmount(hotelNO, type, 1);
-            Room.Add(hotelNO, roomNO);
-            Address.Add(hotelNO, roomNO, type);
-            return Address.Update() + Room.Update() + RoomType.Update();
+            return Room.Update() + Address.Update() + RoomType.Update();
         }
 
         public int RemoveRoom(int hotelNO, int roomNO)
@@ -182,11 +189,25 @@ namespace HotelSQL.HotelManage
                     select room).Count();
         }
 
+        public int SetRoomType(int hotelNO, int roomNO, string type)
+        {
+            type = type.Trim();
+            Address.SetType(hotelNO, roomNO, type);
+            return Address.Update();
+        }
+
         public string GetRoomType(int hotelNO, int roomNO)
         {
             var row = Address.GetRow(hotelNO, roomNO);
             if (row is null) return string.Empty;
             return row["type"].ToString();
+        }
+
+        public List<string> GetRoomType(int hotelNO)
+        {
+            return (from row in RoomType.Table.AsEnumerable()
+                    where row.Field<int>("hotelNO") == hotelNO
+                    select row.Field<string>("type")).ToList();
         }
 
         /*---------------------------Private Function--------------------------*/

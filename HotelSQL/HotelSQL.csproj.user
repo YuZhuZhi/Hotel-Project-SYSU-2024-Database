@@ -5,6 +5,9 @@
     <Compile Update="UI\AddHotelControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\AddRoomControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
