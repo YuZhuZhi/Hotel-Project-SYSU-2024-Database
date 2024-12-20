@@ -47,7 +47,7 @@
             AddHotelPanel.Controls.Add(HotelNOInput);
             AddHotelPanel.Location = new Point(0, 0);
             AddHotelPanel.Name = "AddHotelPanel";
-            AddHotelPanel.Size = new Size(480, 200);
+            AddHotelPanel.Size = new Size(560, 200);
             AddHotelPanel.TabIndex = 0;
             AddHotelPanel.Text = "panel1";
             // 
@@ -124,7 +124,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(AddHotelPanel);
             Name = "AddHotelControl";
-            Size = new Size(480, 200);
+            Size = new Size(560, 200);
             AddHotelPanel.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -132,7 +132,6 @@
         #endregion
 
         private AntdUI.Panel AddHotelPanel;
-        private AntdUI.Input input2;
         private AntdUI.Input HotelNOInput;
         private AntdUI.Label HotelNOLabel;
         private AntdUI.Input HotelNameInput;

@@ -27,12 +27,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             TableOfReservation = new AntdUI.Table();
-            bindReservation = new BindingSource(components);
             ReservationTablePagination = new AntdUI.Pagination();
-            ReservationTableDropdown1 = new AntdUI.Dropdown();
-            ((System.ComponentModel.ISupportInitialize)bindReservation).BeginInit();
+            ReservationTableDropdown = new AntdUI.Dropdown();
             SuspendLayout();
             // 
             // TableOfReservation
@@ -61,45 +58,44 @@
             ReservationTablePagination.Total = 100;
             ReservationTablePagination.ValueChanged += ReservationTablePagination_ValueChanged;
             // 
-            // ReservationTableDropdown1
+            // ReservationTableDropdown
             // 
-            ReservationTableDropdown1.BorderWidth = 1F;
-            ReservationTableDropdown1.DropDownPadding = new Size(12, 12);
-            ReservationTableDropdown1.Font = new Font("汉仪文黑-85W", 10.4999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ReservationTableDropdown1.Ghost = true;
-            ReservationTableDropdown1.Items.AddRange(new object[] { "增加房间", "删除房间", "刷新" });
-            ReservationTableDropdown1.Location = new Point(854, 600);
-            ReservationTableDropdown1.Name = "ReservationTableDropdown1";
-            ReservationTableDropdown1.Placement = AntdUI.TAlignFrom.Top;
-            ReservationTableDropdown1.Shape = AntdUI.TShape.Round;
-            ReservationTableDropdown1.ShowArrow = true;
-            ReservationTableDropdown1.Size = new Size(111, 48);
-            ReservationTableDropdown1.TabIndex = 6;
-            ReservationTableDropdown1.Text = "更多操作\r\n";
-            ReservationTableDropdown1.Trigger = AntdUI.Trigger.Hover;
-            ReservationTableDropdown1.Type = AntdUI.TTypeMini.Info;
+            ReservationTableDropdown.BorderWidth = 1F;
+            ReservationTableDropdown.DropDownPadding = new Size(12, 12);
+            ReservationTableDropdown.Font = new Font("汉仪文黑-85W", 10.4999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ReservationTableDropdown.Ghost = true;
+            ReservationTableDropdown.Items.AddRange(new object[] { "撤销订单", "刷新" });
+            ReservationTableDropdown.Location = new Point(854, 600);
+            ReservationTableDropdown.Name = "ReservationTableDropdown";
+            ReservationTableDropdown.Placement = AntdUI.TAlignFrom.Top;
+            ReservationTableDropdown.Shape = AntdUI.TShape.Round;
+            ReservationTableDropdown.ShowArrow = true;
+            ReservationTableDropdown.Size = new Size(111, 48);
+            ReservationTableDropdown.TabIndex = 6;
+            ReservationTableDropdown.Text = "更多操作\r\n";
+            ReservationTableDropdown.Trigger = AntdUI.Trigger.Hover;
+            ReservationTableDropdown.Type = AntdUI.TTypeMini.Info;
+            ReservationTableDropdown.SelectedValueChanged += ReservationTableDropdown_SelectedValueChanged;
             // 
             // ReservationTableControl
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            Controls.Add(ReservationTableDropdown1);
+            Controls.Add(ReservationTableDropdown);
             Controls.Add(ReservationTablePagination);
             Controls.Add(TableOfReservation);
             Location = new Point(225, 14);
             Name = "ReservationTableControl";
             Size = new Size(1000, 652);
             Load += ReservationTableControl_Load;
-            ((System.ComponentModel.ISupportInitialize)bindReservation).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private AntdUI.Table TableOfReservation;
-        private BindingSource bindReservation;
         private AntdUI.Pagination ReservationTablePagination;
-        private AntdUI.Dropdown ReservationTableDropdown1;
+        private AntdUI.Dropdown ReservationTableDropdown;
     }
 }

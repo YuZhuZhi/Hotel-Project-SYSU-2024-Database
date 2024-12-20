@@ -49,6 +49,17 @@ namespace HotelSQL.HotelManage
             return dataTable;
         }
 
+        public DataTable GetHotelRoomTypes(int hotelNO)
+        {
+            DataTable dataTable = new DataTable();
+            var result = SQL.Query($"SELECT hotelNO, type, price, amount\n" +
+                $"FROM RoomType\n" +
+                $"WHERE (hotelNO = {hotelNO})\n" +
+                $"ORDER BY price ASC;");
+            dataTable.Load(result);
+            return dataTable;
+        }
+
         public void DropAllTable()
         {
             try {
@@ -142,8 +153,15 @@ namespace HotelSQL.HotelManage
         public int RemoveRoomType(int hotelNO, string type)
         {
             type = type.Trim();
+            var roomNOs = (from row in Room.Table.AsEnumerable()
+                           join address in Address.Table.AsEnumerable()
+                           on row.Field<int>("roomNO") equals address.Field<int>("roomNO")
+                           where (row.Field<int>("hotelNO") == hotelNO) && (address.Field<int>("hotelNO") == hotelNO)
+                                && (address.Field<string>("type")?.TrimEnd() == type)
+                           select row.Field<int>("roomNO")).ToList();
+            foreach (var roomNO in roomNOs) Room.Delete(hotelNO, roomNO);
             RoomType.Delete(hotelNO, type);
-            return RoomType.Update();
+            return Address.Update() + RoomType.Update() + Room.Update();
         }
 
         public int SetRoomTypePrice(int hotelNO, string type, int price)
@@ -179,7 +197,7 @@ namespace HotelSQL.HotelManage
             return Address.Update() + Room.Update() + RoomType.Update();
         }
 
-        public int RoomRemian(int hotelNO, string type)
+        public int RoomRemain(int hotelNO, string type)
         {
             return (from room in Room.Table.AsEnumerable()
                        join address in Address.Table.AsEnumerable()

@@ -55,7 +55,7 @@
             AddHotelPanel.Controls.Add(HotelNOInput);
             AddHotelPanel.Location = new Point(3, 3);
             AddHotelPanel.Name = "AddHotelPanel";
-            AddHotelPanel.Size = new Size(470, 300);
+            AddHotelPanel.Size = new Size(537, 300);
             AddHotelPanel.TabIndex = 1;
             AddHotelPanel.Text = "panel1";
             // 
@@ -178,7 +178,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(AddHotelPanel);
             Name = "ReserveControl";
-            Size = new Size(470, 300);
+            Size = new Size(540, 300);
             AddHotelPanel.ResumeLayout(false);
             ResumeLayout(false);
         }

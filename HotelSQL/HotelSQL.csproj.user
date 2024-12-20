@@ -8,6 +8,9 @@
     <Compile Update="UI\AddRoomControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\AddRoomTypeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -24,6 +27,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\RoomTableControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\RoomTypeTableControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

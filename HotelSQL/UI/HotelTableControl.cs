@@ -94,17 +94,17 @@ namespace HotelSQL.UI
             }
             else if (e.Btn.Id.Contains("Edit")) {
                 int presentHotelNO = (int)TableOfHotel[e.RowIndex - 1]?["hotelno"];
-                var control = new AddHotelControl(
+                var addHotelControl = new AddHotelControl(
                     hotelNO: (int)TableOfHotel[e.RowIndex - 1]?["hotelno"],
                     hotelName: TableOfHotel[e.RowIndex - 1]?["name"].ToString(),
                     hotelStar: (int)TableOfHotel[e.RowIndex - 1]?["star"]
                     );
-                var config = new Modal.Config(this.FindForm(), "修改酒店信息", control) {
+                var addHotelConfig = new Modal.Config(this.FindForm(), "修改酒店信息", addHotelControl) {
                     Icon = TType.Info,
                     Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                    OnOk = (config) => {
+                    OnOk = (addHotelConfig) => {
                         #region Define Notification
                         var noteConfig = new Notification.Config(this.FindForm(), "Alert", "非法数据！", TType.Error, TAlignFrom.Top) {
                             FontTitle = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
@@ -113,8 +113,8 @@ namespace HotelSQL.UI
                             ShowInWindow = true,
                         };
                         #endregion
-                        if (control.IsValid()) {
-                            var (hotelNO, name, star) = control.GetValues();
+                        if (addHotelControl.IsValid()) {
+                            var (hotelNO, name, star) = addHotelControl.GetValues();
                             bool success = manager.SetHotelAddress(presentHotelNO, hotelNO);
                             success &= manager.SetHotelName(presentHotelNO, name);
                             success &= manager.SetHotelStar(presentHotelNO, star);
@@ -125,7 +125,7 @@ namespace HotelSQL.UI
                         return false;
                     }
                 };
-                Modal.open(config);
+                Modal.open(addHotelConfig);
                 TableRefresh();
             }
 
@@ -161,15 +161,15 @@ namespace HotelSQL.UI
                     break;
 
                 case "新增酒店":
-                    var control = new AddHotelControl();
-                    var config = new Modal.Config(this.FindForm(), "新增酒店", control) {
+                    var addHotelControl = new AddHotelControl();
+                    var addHotelConfig = new Modal.Config(this.FindForm(), "新增酒店", addHotelControl) {
                         Icon = TType.Info,
                         Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
                         OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
                         CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                        OnOk = (config) => {
-                            if (control.IsValid()) {
-                                var (hotelNO, name, star) = control.GetValues();
+                        OnOk = (addHotelConfig) => {
+                            if (addHotelControl.IsValid()) {
+                                var (hotelNO, name, star) = addHotelControl.GetValues();
                                 int addNum = manager.AddHotel(hotelNO, name, star);
                                 if (addNum > 0) return true;
                             }
@@ -185,25 +185,25 @@ namespace HotelSQL.UI
                             return false;
                         }
                     };
-                    Modal.open(config);
+                    Modal.open(addHotelConfig);
                     TableRefresh();
                     break;
 
                 case "移除酒店":
                     var table = (AntList<AntItem[]>)TableOfHotel.DataSource;
-                    config = new Modal.Config(this.FindForm(), "再次确认", "确定要移除这些酒店吗？") {
+                    var removeHotelConfig = new Modal.Config(this.FindForm(), "再次确认", "确定要移除这些酒店吗？") {
                         Icon = TType.Warn,
                         Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
                         OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
                         CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                        OnOk = (config) => {
+                        OnOk = (removeHotelConfig) => {
                             for (int i = 0; i < table?.Count; i++) {
                                 if ((bool)table[i][0].value) manager.RemoveHotel((int)table[i][1].value);
                             }
                             return true;
                         }
                     };
-                    Modal.open(config);
+                    Modal.open(removeHotelConfig);
                     TableRefresh();
                     break;
 

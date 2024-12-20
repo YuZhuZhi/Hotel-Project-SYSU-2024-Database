@@ -113,13 +113,29 @@ namespace HotelSQL.UI
             if (e.Btn.Id.Contains("Reserve")) {  // Reserve the room.
                 int hotelNO = (int)TableOfRoom[e.RowIndex - 1]?["hotelno"];
                 int roomNO = (int)TableOfRoom[e.RowIndex - 1]?["roomno"];
-                var control = new ReserveControl(hotelNO, roomNO);
-                var config = new Modal.Config(this.FindForm(), "输入预订信息", control) {
+                if (e.Btn.Text == "取消预订") {
+                    int reserverID = (int)manager.Reservation.Table.Select($"hotelNO={hotelNO} AND roomNO={roomNO}")[0]["ID"];
+                    var cancelConfig = new Modal.Config(this.FindForm(), "再次确认", "确定要取消预订吗？") {
+                        Icon = TType.Warn,
+                        Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OnOk = (config) => { 
+                            manager.ReserveCancle(reserverID);
+                            return true;
+                        }
+                    };
+                    Modal.open(cancelConfig);
+                    TableRefresh();
+                    return;
+                }
+                var reserveControl = new ReserveControl(hotelNO, roomNO);
+                var reserveConfig = new Modal.Config(this.FindForm(), "输入预订信息", reserveControl) {
                     Icon = TType.Info,
                     Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                    OnOk = (config) => {
+                    OnOk = (reserveConfig) => {
                         #region Define Notification
                         var noteConfig = new Notification.Config(this.FindForm(), "Alert", "非法数据！", TType.Error, TAlignFrom.Top) {
                             FontTitle = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
@@ -128,8 +144,8 @@ namespace HotelSQL.UI
                             ShowInWindow = true,
                         };
                         #endregion
-                        if (control.IsValid()) {
-                            var (hotelNO, roomNO, ID, date, duration) = control.GetValues();
+                        if (reserveControl.IsValid()) {
+                            var (hotelNO, roomNO, ID, date, duration) = reserveControl.GetValues();
                             int addNum = manager.ReserveRoom(ID, hotelNO, roomNO, date, duration);
                             return (addNum > 0);
                         }
@@ -137,18 +153,18 @@ namespace HotelSQL.UI
                         return false;
                     }
                 };
-                Modal.open(config);
+                Modal.open(reserveConfig);
                 TableRefresh();
             }
             else if (e.Btn.Id.Contains("Edit")) {  // Edit the room's info.
-                var control = new AddRoomControl(hotelNO, manager.GetRoomType(hotelNO),
+                var addRoomControl = new AddRoomControl(hotelNO, manager.GetRoomType(hotelNO),
                     (int)TableOfRoom[e.RowIndex - 1]["roomno"], (string)TableOfRoom[e.RowIndex - 1]["type"]);
-                var config = new Modal.Config(this.FindForm(), "修改房间信息", control) {
+                var addRoomConfig = new Modal.Config(this.FindForm(), "修改房间信息", addRoomControl) {
                     Icon = TType.Info,
                     Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                    OnOk = (config) => {
+                    OnOk = (addRoomConfig) => {
                         #region Define Notification
                         var noteConfig = new Notification.Config(this.FindForm(), "Alert", "非法数据！", TType.Error, TAlignFrom.Top) {
                             FontTitle = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
@@ -157,8 +173,8 @@ namespace HotelSQL.UI
                             ShowInWindow = true,
                         };
                         #endregion
-                        if (control.IsValid()) {
-                            var (hotelNO, roomNO, type) = control.GetValues();
+                        if (addRoomControl.IsValid()) {
+                            var (hotelNO, roomNO, type) = addRoomControl.GetValues();
                             int change = manager.SetRoomType(hotelNO, roomNO, type);
                             if (change > 0) return true;
                         }
@@ -166,7 +182,7 @@ namespace HotelSQL.UI
                         return false;
                     }
                 };
-                Modal.open(config);
+                Modal.open(addRoomConfig);
                 TableRefresh();
             }
             else if (e.Btn.Id.Contains("View")) {  // View the room's Reservation.
@@ -177,18 +193,18 @@ namespace HotelSQL.UI
                 DateTime date = (DateTime)dataRow["date"];
                 int duration = ((TimeSpan)dataRow["duration"]).Days;
 
-                var control = new ReserveControl(hotelNO, roomNO, ID, date, duration);
-                var config = new Modal.Config(this.FindForm(), "预订信息", control) {
+                var reserveControl = new ReserveControl(hotelNO, roomNO, ID, date, duration);
+                var reserveConfig = new Modal.Config(this.FindForm(), "预订信息", reserveControl) {
                     Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
                     CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                    OnOk = (config) => { return true; }
+                    OnOk = (reserveConfig) => { return true; }
                 };
-                Modal.open(config);
+                Modal.open(reserveConfig);
             }
         }
 
-        private void RoomTableDropdown1_SelectedValueChanged(object sender, ObjectNEventArgs e)
+        private void RoomTableDropdown_SelectedValueChanged(object sender, ObjectNEventArgs e)
         {
             switch (e.Value) {
                 case "刷新":
@@ -196,13 +212,13 @@ namespace HotelSQL.UI
                     break;
 
                 case "新增房间":
-                    var control = new AddRoomControl(hotelNO, manager.GetRoomType(hotelNO));
-                    var config = new Modal.Config(this.FindForm(), "新增房间", control) {
+                    var addRoomControl = new AddRoomControl(hotelNO, manager.GetRoomType(hotelNO));
+                    var addRoomConfig = new Modal.Config(this.FindForm(), "新增房间", addRoomControl) {
                         Icon = TType.Info,
                         Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
                         OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
                         CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                        OnOk = (config) => {
+                        OnOk = (addRoomConfig) => {
                             #region Define Notification
                             var noteConfig = new Notification.Config(this.FindForm(), "Alert", "非法数据！", TType.Error, TAlignFrom.Top) {
                                 FontTitle = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
@@ -211,8 +227,8 @@ namespace HotelSQL.UI
                                 ShowInWindow = true,
                             };
                             #endregion
-                            if (control.IsValid()) {
-                                var (hotelNO, roomNO, type) = control.GetValues();
+                            if (addRoomControl.IsValid()) {
+                                var (hotelNO, roomNO, type) = addRoomControl.GetValues();
                                 int addNum = manager.AddRoom(hotelNO, roomNO, type);
                                 if (addNum > 0) return true;
                             }
@@ -220,31 +236,40 @@ namespace HotelSQL.UI
                             return false;
                         }
                     };
-                    Modal.open(config);
+                    Modal.open(addRoomConfig);
                     TableRefresh();
                     break;
 
                 case "移除房间":
                     var table = (AntList<AntItem[]>)TableOfRoom.DataSource;
-                    config = new Modal.Config(this.FindForm(), "再次确认", "确定要移除这些房间吗？") {
+                    var removeRoomConfig = new Modal.Config(this.FindForm(), "再次确认", "确定要移除这些房间吗？") {
                         Icon = TType.Warn,
                         Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
                         OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
                         CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
-                        OnOk = (config) => {
+                        OnOk = (removeRoomConfig) => {
                             for (int i = 0; i < table?.Count; i++) {
                                 if ((bool)table[i][0].value) manager.RemoveRoom(hotelNO, (int)table[i][2].value);
                             }
                             return true;
                         }
                     };
-                    Modal.open(config);
+                    Modal.open(removeRoomConfig);
 
                     TableRefresh();
                     break;
 
                 case "查看房间类型信息":
-
+                    var roomTypeControl = new RoomTypeTableControl(manager, hotelNO);
+                    var roomTypeConfig = new Modal.Config(this.FindForm(), "房间类型信息", roomTypeControl) {
+                        Icon = TType.Info,
+                        Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OnOk = (roomTypeConfig) => { return true; }
+                    };
+                    Modal.open(roomTypeConfig);
+                    TableRefresh();
                     break;
 
             }

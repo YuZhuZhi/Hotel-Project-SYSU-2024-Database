@@ -186,6 +186,7 @@
             Name = "LoginForm";
             Text = "酒店管理系统——登录页";
             Load += LoginForm_Load;
+            Shown += LoginForm_Shown;
             KeyDown += LoginForm_KeyDown;
             LogInPanel.ResumeLayout(false);
             ResumeLayout(false);

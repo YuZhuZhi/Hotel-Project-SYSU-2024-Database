@@ -9,6 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\DatabaseSetting.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DatabaseSetting.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AntdUI" Version="1.7.12" />
     <PackageReference Include="Npgsql" Version="9.0.2" />
   </ItemGroup>

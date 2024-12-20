@@ -27,3 +27,7 @@ F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Release\net8.0-win
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Release\net8.0-windows\HotelSQL.pdb
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Release\net8.0-windows\HotelSQL.genruntimeconfig.cache
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Release\net8.0-windows\ref\HotelSQL.dll
+F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Release\net8.0-windows\HotelSQL.UI.AddRoomControl.resources
+F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Release\net8.0-windows\HotelSQL.UI.AddRoomTypeControl.resources
+F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Release\net8.0-windows\HotelSQL.UI.ReserveControl.resources
+F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Release\net8.0-windows\HotelSQL.UI.RoomTypeTableControl.resources

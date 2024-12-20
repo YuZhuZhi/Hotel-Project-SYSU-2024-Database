@@ -29,6 +29,11 @@ namespace HotelSQL.UI
             this.hotelNO = hotelNO;
         }
 
+        public void TableRefresh()
+        {
+            TableOfReservation.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+        }
+
         /*----------------------------Private Function----------------------------------------*/
 
         private object GetPageData(int current, int pageSize)
@@ -72,7 +77,7 @@ namespace HotelSQL.UI
         private void ReservationTablePagination_ValueChanged(object sender, PagePageEventArgs e)
         {
             page = e.Current;
-            TableOfReservation.Binding((AntList<AntItem[]>)GetPageData(page, 20));
+            TableRefresh();
         }
 
         private void ReservationTableControl_Load(object sender, EventArgs e)
@@ -87,11 +92,36 @@ namespace HotelSQL.UI
                 new Column("duration", "入住时长", ColumnAlign.Center),
                 ]);
 
-            //bindReservation.DataSource = GetPageData(page, 20);  // Bind hotel.Table to bindHotel (To allow changes show immediately).
-            //TableOfReservation.DataSource = bindReservation;
             TableOfReservation.Binding((AntList<AntItem[]>)GetPageData(page, 20));
             ReservationTablePagination.Current = page;
 
+        }
+
+        private void ReservationTableDropdown_SelectedValueChanged(object sender, ObjectNEventArgs e)
+        {
+            switch (e.Value) {
+                case "刷新":
+                    TableRefresh();
+                    break;
+
+                case "撤销订单":
+                    var table = (AntList<AntItem[]>)TableOfReservation.DataSource;
+                    var removeConfig = new Modal.Config(this.FindForm(), "再次确认", "确定要移除这些订单吗？") {
+                        Icon = TType.Warn,
+                        Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OnOk = (removeRoomConfig) => {
+                            for (int i = 0; i < table?.Count; i++) {
+                                if ((bool)table[i][0].value) manager.ReserveCancle((int)table[i][4].value);
+                            }
+                            return true;
+                        }
+                    };
+                    Modal.open(removeConfig);
+                    TableRefresh();
+                    break;
+            }
         }
     }
 }

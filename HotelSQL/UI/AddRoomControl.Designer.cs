@@ -47,7 +47,7 @@
             AddHotelPanel.Controls.Add(HotelNOInput);
             AddHotelPanel.Location = new Point(0, 0);
             AddHotelPanel.Name = "AddHotelPanel";
-            AddHotelPanel.Size = new Size(475, 200);
+            AddHotelPanel.Size = new Size(560, 200);
             AddHotelPanel.TabIndex = 1;
             AddHotelPanel.Text = "panel1";
             // 
@@ -61,7 +61,6 @@
             RoomTypeSelect.TabIndex = 9;
             RoomTypeSelect.Text = "请选择房间等级";
             RoomTypeSelect.TextChanged += RoomTypeSelect_TextChanged;
-            //RoomTypeSelect.Click += RoomTypeSelect_Click;
             // 
             // RoomTypeLabel
             // 
@@ -124,7 +123,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(AddHotelPanel);
             Name = "AddRoomControl";
-            Size = new Size(475, 200);
+            Size = new Size(560, 200);
             AddHotelPanel.ResumeLayout(false);
             ResumeLayout(false);
         }

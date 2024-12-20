@@ -1,4 +1,5 @@
-﻿using HotelSQL.UI;
+﻿using AntdUI;
+using HotelSQL.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -113,6 +114,30 @@ namespace HotelSQL
         {
             if (PasswordInput.Text == "password") PasswordInput.Status = AntdUI.TType.Success;
             else PasswordInput.Status = AntdUI.TType.None;
+        }
+
+        private void LoginForm_Shown(object sender, EventArgs e)
+        {
+            var buttons = new FloatButton.ConfigBtn[] {
+                new FloatButton.ConfigBtn("DatabaseParams") {
+                    Tooltip = "数据库参数",
+                    Type = TTypeMini.Default,
+                    Icon = (Bitmap)Image.FromFile(@"..\..\..\Resources\DatabaseSetting.png"),
+                    //Icon = Properties.Resources.DatabaseSetting.png
+                }
+            };
+
+            var callback = (FloatButton.ConfigBtn btn) => {
+                switch (btn.Name) {
+                    case "DatabaseParams":
+
+                        break;
+                }
+            };
+
+            var floatButtonConfig = new FloatButton.Config(this, buttons, callback);
+            FloatButton.open(floatButtonConfig);
+
         }
     }
 }

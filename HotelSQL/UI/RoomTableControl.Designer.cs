@@ -29,7 +29,7 @@
         {
             TableOfRoom = new AntdUI.Table();
             RoomTablePagination = new AntdUI.Pagination();
-            RoomTableDropdown1 = new AntdUI.Dropdown();
+            RoomTableDropdown = new AntdUI.Dropdown();
             SuspendLayout();
             // 
             // TableOfRoom
@@ -60,31 +60,31 @@
             RoomTablePagination.Total = 100;
             RoomTablePagination.ValueChanged += RoomTablePagination_ValueChanged;
             // 
-            // RoomTableDropdown1
+            // RoomTableDropdown
             // 
-            RoomTableDropdown1.BorderWidth = 1F;
-            RoomTableDropdown1.DropDownPadding = new Size(12, 12);
-            RoomTableDropdown1.Font = new Font("汉仪文黑-85W", 10.4999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            RoomTableDropdown1.Ghost = true;
-            RoomTableDropdown1.Items.AddRange(new object[] { "新增房间", "移除房间", "查看房间类型信息", "刷新" });
-            RoomTableDropdown1.Location = new Point(854, 600);
-            RoomTableDropdown1.Name = "RoomTableDropdown1";
-            RoomTableDropdown1.Placement = AntdUI.TAlignFrom.Top;
-            RoomTableDropdown1.Shape = AntdUI.TShape.Round;
-            RoomTableDropdown1.ShowArrow = true;
-            RoomTableDropdown1.Size = new Size(111, 48);
-            RoomTableDropdown1.TabIndex = 5;
-            RoomTableDropdown1.Text = "更多操作\r\n";
-            RoomTableDropdown1.Trigger = AntdUI.Trigger.Hover;
-            RoomTableDropdown1.Type = AntdUI.TTypeMini.Info;
-            RoomTableDropdown1.SelectedValueChanged += RoomTableDropdown1_SelectedValueChanged;
+            RoomTableDropdown.BorderWidth = 1F;
+            RoomTableDropdown.DropDownPadding = new Size(12, 12);
+            RoomTableDropdown.Font = new Font("汉仪文黑-85W", 10.4999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            RoomTableDropdown.Ghost = true;
+            RoomTableDropdown.Items.AddRange(new object[] { "新增房间", "移除房间", "查看房间类型信息", "刷新" });
+            RoomTableDropdown.Location = new Point(854, 600);
+            RoomTableDropdown.Name = "RoomTableDropdown";
+            RoomTableDropdown.Placement = AntdUI.TAlignFrom.Top;
+            RoomTableDropdown.Shape = AntdUI.TShape.Round;
+            RoomTableDropdown.ShowArrow = true;
+            RoomTableDropdown.Size = new Size(111, 48);
+            RoomTableDropdown.TabIndex = 5;
+            RoomTableDropdown.Text = "更多操作\r\n";
+            RoomTableDropdown.Trigger = AntdUI.Trigger.Hover;
+            RoomTableDropdown.Type = AntdUI.TTypeMini.Info;
+            RoomTableDropdown.SelectedValueChanged += RoomTableDropdown_SelectedValueChanged;
             // 
             // RoomTableControl
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            Controls.Add(RoomTableDropdown1);
+            Controls.Add(RoomTableDropdown);
             Controls.Add(RoomTablePagination);
             Controls.Add(TableOfRoom);
             Location = new Point(225, 14);
@@ -98,6 +98,6 @@
 
         private AntdUI.Table TableOfRoom;
         private AntdUI.Pagination RoomTablePagination;
-        private AntdUI.Dropdown RoomTableDropdown1;
+        private AntdUI.Dropdown RoomTableDropdown;
     }
 }
