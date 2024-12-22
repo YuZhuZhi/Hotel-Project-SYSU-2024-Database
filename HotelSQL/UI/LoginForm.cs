@@ -155,8 +155,8 @@ namespace HotelSQL
                 new FloatButton.ConfigBtn("DatabaseParams") {
                     Tooltip = "设置数据库连接参数",
                     Type = TTypeMini.Default,
-                    Icon = (Bitmap)Image.FromFile(@"..\..\..\Resources\DatabaseSetting.png"),
-                    //Icon = Properties.Resources.DatabaseSetting.png
+                    //Icon = (Bitmap)Image.FromFile(@"..\..\..\Resources\DatabaseSetting.png"),
+                    Icon = Properties.Resources.DatabaseSetting
                 }
             };
 

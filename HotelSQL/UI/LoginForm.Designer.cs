@@ -180,11 +180,15 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             BackgroundImage = Properties.Resources.BackGround;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1264, 681);
             Controls.Add(LogInPanel);
+            DoubleBuffered = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             KeyPreview = true;
+            MaximizeBox = false;
             Name = "LoginForm";
             Text = "酒店管理系统——登录页";
             Load += LoginForm_Load;
