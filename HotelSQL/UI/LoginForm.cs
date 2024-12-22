@@ -1,4 +1,5 @@
 ﻿using AntdUI;
+using HotelSQL.HotelManage;
 using HotelSQL.UI;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,16 @@ namespace HotelSQL
 {
     public partial class LoginForm : Form
     {
+        /*---------------------------Private Member--------------------------------*/
+
+        private FormFloatButton floatButton;
+
+        private int port = 5432;
+        private string userName = "postgres";
+        private string password = "password";
+
+        /*----------------------------Public Functions-----------------------------*/
+
         public LoginForm()
         {
             InitializeComponent();
@@ -59,11 +70,26 @@ namespace HotelSQL
         {
             if (((AccountInput.Text == "") && (PasswordInput.Text == "")) ||
                 ((AccountInput.Text == "DataBase") && (PasswordInput.Text == "password"))) {
-                AntdUI.Message.success(this, "登录成功！", autoClose: 2);
+                floatButton.Close();
                 this.Hide();
 
-                Form manageForm = new ManageForm();
-                manageForm.ShowDialog();
+                try {
+                    Form manageForm = new ManageForm(port, userName, password);
+                    manageForm.ShowDialog();
+                } catch (Exception) {
+                    this.Show();
+                    var databaseConfig = new Modal.Config(this, "数据库连接失败", "请点击右下角检查数据库连接参数") {
+                        Icon = TType.Warn,
+                        Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                        OnOk = (config) => {
+                            return true;
+                        }
+                    };
+                    AntdUI.Modal.open(databaseConfig);
+                    return;
+                }
                 this.Close();
             }
             else {
@@ -118,9 +144,16 @@ namespace HotelSQL
 
         private void LoginForm_Shown(object sender, EventArgs e)
         {
+            SetFloatButton();
+            SetFloatButton();
+            floatButton.Show();
+        }
+
+        private void SetFloatButton()
+        {
             var buttons = new FloatButton.ConfigBtn[] {
                 new FloatButton.ConfigBtn("DatabaseParams") {
-                    Tooltip = "数据库参数",
+                    Tooltip = "设置数据库连接参数",
                     Type = TTypeMini.Default,
                     Icon = (Bitmap)Image.FromFile(@"..\..\..\Resources\DatabaseSetting.png"),
                     //Icon = Properties.Resources.DatabaseSetting.png
@@ -130,14 +163,38 @@ namespace HotelSQL
             var callback = (FloatButton.ConfigBtn btn) => {
                 switch (btn.Name) {
                     case "DatabaseParams":
-
+                        var loginControl = new LoginControl();
+                        var setConfig = new Modal.Config(this, "设置数据库连接参数", loginControl) {
+                            Icon = TType.Info,
+                            Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                            OkFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                            CancelFont = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                            OnOk = (setConfig) => {
+                                #region Define Notification
+                                var noteConfig = new Notification.Config(this.FindForm(), "Alert", "非法数据！", TType.Error, TAlignFrom.Top) {
+                                    FontTitle = new Font("汉仪文黑-85W", 10F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                                    Font = new Font("汉仪文黑-85W", 15F, FontStyle.Regular, GraphicsUnit.Point, 0),
+                                    AutoClose = 3,
+                                    ShowInWindow = true,
+                                };
+                                #endregion
+                                if (loginControl.IsValid()) {
+                                    (port, userName, password) = loginControl.GetValues();
+                                    AntdUI.Message.success(this, "数据库连接参数设置成功！", autoClose: 2);
+                                    return true;
+                                }
+                                Notification.open(noteConfig);
+                                return false;
+                            }
+                        };
+                        AntdUI.Modal.open(setConfig);
                         break;
                 }
             };
 
             var floatButtonConfig = new FloatButton.Config(this, buttons, callback);
-            FloatButton.open(floatButtonConfig);
-
+            floatButton = floatButtonConfig.open();
+            //floatButton = FloatButton.open(floatButtonConfig);
         }
     }
 }

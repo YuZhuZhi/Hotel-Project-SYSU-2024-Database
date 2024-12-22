@@ -28,7 +28,8 @@ namespace HotelSQL.DataBase
             ConnectionNum++;
             ConnectString = $"Host=localhost;Port={port};Username={userName};Password={passWord};";
             Connection = new NpgsqlConnection(ConnectString);
-            Connection.Open();
+            try { Connection.Open(); }
+            catch (Exception) { throw; }
         }
 
         ~Postgre()

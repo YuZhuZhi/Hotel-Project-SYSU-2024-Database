@@ -78,6 +78,7 @@
             // 
             // AccountInput
             // 
+            AccountInput.AllowClear = true;
             AccountInput.Font = new Font("汉仪文黑-85W", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
             AccountInput.ForeColor = SystemColors.ButtonShadow;
             AccountInput.Location = new Point(532, 165);
@@ -91,6 +92,7 @@
             // 
             // PasswordInput
             // 
+            PasswordInput.AllowClear = true;
             PasswordInput.Font = new Font("汉仪文黑-85W", 8.999999F, FontStyle.Regular, GraphicsUnit.Point, 0);
             PasswordInput.ForeColor = SystemColors.ButtonShadow;
             PasswordInput.Location = new Point(532, 248);

@@ -11,6 +11,9 @@
     <Compile Update="UI\AddRoomTypeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UI\LoginControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UI\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

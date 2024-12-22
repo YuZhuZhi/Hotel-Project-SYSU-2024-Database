@@ -31,3 +31,4 @@ F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windo
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.AddRoomControl.resources
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.RoomTypeTableControl.resources
 F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.AddRoomTypeControl.resources
+F:\资料及作业\作业\数据库\HotelProject\HotelSQL\obj\Debug\net8.0-windows\HotelSQL.UI.LoginControl.resources

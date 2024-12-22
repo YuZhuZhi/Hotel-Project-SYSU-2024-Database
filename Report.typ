@@ -194,7 +194,7 @@
 == 功能模块设计 <FunctionModuleDesign>
 
 #let Level() = {
-  set text(font: "SDK_SC_Unity")
+  set text(font: "SDK_SC_Unity", size: 0.9em)
   pseudocode-list(line-numbering: none, booktabs: true, hooks: 1em, indentation: 1.5em)[
   + Main
   + DataBase 
@@ -216,28 +216,30 @@
   ]
 }
 
-在这个项目中，我们设计的功能模块层级结构如@LevelSturcture 所示。由于C\#语言的语言特性，图中列出的层级结构不一定代表真实文件结构，仅具有逻辑含义。同时，所列项目也不一定是文件名或类名，具体含义请看左边的具体释义。
+#grid(
+  columns: 2,
+  gutter: 2em,
+  [在这个项目中，我们设计的功能模块层级结构如右图所示。由于C\#语言的语言特性，图中列出的层级结构不一定代表真实文件结构，仅具有逻辑含义。同时，所列项目也不一定是文件名或类名，具体含义请看左边的具体释义。
 
-#place(top+right)[
-  #figure(
+  - Main是整个项目的入口，即主函数
+  - DataBase命名空间，用于较底层与数据库沟通的功能
+    - Postgre类，即对Npgsql中基础功能的封装
+    - GenerateCommand类，用于较为系统地生成SQL语句
+  - HotelManage命名空间用于管理酒店数据库相关表格
+    - TableBase类，是六张表格的基类
+      - Hotel, RoomType...等六张内存中的表格
+    - Manager类，管理上述六张表格
+  - UI命名空间，实现项目的前端界面],
+  
+  figure(
   diagram(node-stroke: black, {
     node((0, 0), Level(), shape: rect)
   }),
   
   caption: [功能模块设计层级结构],
   placement: bottom
-  )  <LevelSturcture>
-]
-
-- Main是整个项目的入口，即主函数
-- DataBase命名空间，用于较底层与数据库沟通的功能
-  - Postgre类，即对Npgsql中基础功能的封装
-  - GenerateCommand类，用于较为系统地生成SQL语句
-- HotelManage命名空间用于管理酒店数据库相关表格
-  - TableBase类，是六张表格的基类
-    - Hotel, RoomType...等六张内存中的表格
-  - Manager类，管理上述六张表格
-- UI命名空间，实现项目的前端界面
+  ), 
+)
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

@@ -18,12 +18,31 @@ namespace HotelSQL.UI
         public ManageForm()
         {
             InitializeComponent();
+            SetDatabase();
+        }
+
+        public ManageForm(int port, string userName, string passWord)
+        {
+            InitializeComponent();
+            this.port = port;
+            this.userName = userName;
+            this.passWord = passWord;
+            SetDatabase();
+        }
+
+        private void SetDatabase()
+        {
+            try {
+                postgre = new(port: port, userName: userName, passWord: passWord);
+                manager = new(postgre, true);
+            } catch (Exception) {
+                throw new Exception("数据库连接错误");
+            }
         }
 
         private void ManageForm_Load(object sender, EventArgs e)
         {
-            postgre = new(passWord: "wjy20040416");
-            manager = new(postgre, true);
+            AntdUI.Message.success(this, "登录成功！", autoClose: 2);
         }
 
         private void HotelMenu_SelectChanged(object sender, AntdUI.MenuSelectEventArgs e)
@@ -102,5 +121,9 @@ namespace HotelSQL.UI
         private Manager manager;
 
         private int presentViewHotelNO = 10001;
+
+        private int port = 5432;
+        private string userName = "postgres";
+        private string passWord = "wjy20040416";
     }
 }
