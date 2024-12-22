@@ -193,8 +193,8 @@
 
 == 功能模块设计 <FunctionModuleDesign>
 
-#let Level() = {
-  set text(font: "SDK_SC_Unity", size: 0.9em)
+#let BackendLevel() = {
+  set text(font: "SDK_SC_Unity", size: 0.92em)
   pseudocode-list(line-numbering: none, booktabs: true, hooks: 1em, indentation: 1.5em)[
   + Main
   + DataBase 
@@ -209,37 +209,82 @@
       + Address
       + Reservation
     + Manager
-  + UI
-    + MainForm
-    + ManageForm
-      + TODO
   ]
 }
 
-#grid(
-  columns: 2,
-  gutter: 2em,
-  [在这个项目中，我们设计的功能模块层级结构如右图所示。由于C\#语言的语言特性，图中列出的层级结构不一定代表真实文件结构，仅具有逻辑含义。同时，所列项目也不一定是文件名或类名，具体含义请看左边的具体释义。
+#let FrontendLevel() = {
+  set text(font: "SDK_SC_Unity", size: 0.8em)
+  pseudocode-list(line-numbering: none, booktabs: true, hooks: 1em, indentation: 1.5em)[
+    + UI
+      + Form
+        + LoginForm
+        + ManageForm
+      + TableControl
+        + HotelTableControl
+        + RoomTableControl
+        + RoomTypeTableControl
+        + ReservationTableControl
+      + Control
+        + LoginControl
+        + AddHotelControl
+        + AddRoomControl
+        + AddRoomTypeControl
+        + ReserveControl
+  ]
+}
 
-  - Main是整个项目的入口，即主函数
-  - DataBase命名空间，用于较底层与数据库沟通的功能
-    - Postgre类，即对Npgsql中基础功能的封装
-    - GenerateCommand类，用于较为系统地生成SQL语句
-  - HotelManage命名空间用于管理酒店数据库相关表格
-    - TableBase类，是六张表格的基类
-      - Hotel, RoomType...等六张内存中的表格
-    - Manager类，管理上述六张表格
-  - UI命名空间，实现项目的前端界面],
-  
-  figure(
-  diagram(node-stroke: black, {
-    node((0, 0), Level(), shape: rect)
-  }),
-  
-  caption: [功能模块设计层级结构],
-  placement: bottom
-  ), 
-)
+#align(
+  center,
+  grid(
+    columns: 2,
+    gutter: 2em,
+    
+    figure(
+      diagram(node-stroke: black, {
+        node((0, 0), BackendLevel(), shape: rect)
+      }),
+      caption: [功能模块设计层级结构(后端)],
+    ), 
+    
+    figure(
+      diagram(node-stroke: black, {
+        node((0, 0), FrontendLevel(), shape: rect)
+      }),
+      caption: [功能模块设计层级结构(前端)],
+    ), 
+  )
+) 
+
+在这个项目中，我们设计的功能模块层级结构如上图所示。由于C\#语言的语言特性，图中列出的层级结构不一定代表真实文件结构，仅具有逻辑含义。同时，所列项目也不一定是文件名或类名，具体含义请看下面的具体释义。
+
+首先是后端部分：
+
+- `Main`是整个项目的入口，即主函数
+- `DataBase`命名空间，用于较底层与数据库沟通的功能
+  - `Postgre`类，即对`Npgsql`中基础功能的封装
+  - `GenerateCommand`类，用于较为系统地生成SQL语句
+- `HotelManage`命名空间用于管理酒店数据库相关表格
+  - `TableBase`类，是六张表格的基类
+    - `Hotel`, `RoomType`...等六张内存中的表格
+  - `Manager`类，管理上述六张表格
+
+接下来是前端部分。第二层的是逻辑结构，在实际代码中没有这样的区分。带有`Control`的是控件，与`Form`窗口具有一定区别——控件是窗口中的某个部分：
+
+- `UI`命名空间，实现项目的前端界面
+  - `Form`是窗口界面，本项目中存在两个窗口：
+    - `LoginForm`，登录界面的窗口，同时用于设置数据库连接参数
+    - `ManageForm`，登录成功后进入的管理界面窗口，在这里实现对酒店各项的管理
+  - `TableControl`，用于显示表格的控件
+    - `HotelTableControl`，显示酒店的表格
+    - `RoomTableControl`，显示特定酒店的房间的表格
+    - `RoomTypeTableControl`，显示特定酒店的房间类型的表格
+    - `ReservationTableControl`，显示特定酒店的订单的表格
+  - `Control`，用于显示提示用户输入的控件
+    - `LoginControl`，用户设置数据库连接参数
+    - `AddHotelControl`，用户查看或添加酒店
+    - `AddRoomControl`，用户查看或添加房间
+    - `AddRoomTypeControl`，用户查看或添加房间类型
+    - `ReserveControl`，用户查看或添加订单
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
