@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|f:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\hotelproject\\hotelsql\\ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{EE955FD6-5999-45B8-9C18-0135CE71E671}|HotelSQL.csproj|solutionrelative:ui\\manageform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -85,8 +85,7 @@
               "ToolTip": "F:\\\u8D44\u6599\u53CA\u4F5C\u4E1A\\\u4F5C\u4E1A\\\u6570\u636E\u5E93\\HotelProject\\HotelSQL\\UI\\LoginForm.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "UI\\LoginForm.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T16:52:23.739Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2024-12-20T16:52:23.739Z"
             },
             {
               "$type": "Document",
@@ -98,8 +97,7 @@
               "RelativeToolTip": "UI\\LoginForm.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAswJ4AAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T16:31:47.76Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-20T16:31:47.76Z"
             },
             {
               "$type": "Document",
@@ -123,8 +121,7 @@
               "RelativeToolTip": "UI\\ManageForm.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAA8wCwAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T17:23:06.438Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-20T17:23:06.438Z"
             }
           ]
         }

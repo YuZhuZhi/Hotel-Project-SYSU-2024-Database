@@ -23,14 +23,24 @@
   codly(
     languages: (
       CSharp: (
-        name: "CSharp",
+        name: "C#",
+        icon: text(font: "tabler-icons", "\u{fa53}"),
+        color: rgb("#CE412B")
+      ),
+      cs: (
+        name: "C#",
         icon: text(font: "tabler-icons", "\u{fa53}"),
         color: rgb("#CE412B")
       ),
       SQL: (
         name: "SQL",
         icon: text(font: "tabler-icons", "\u{fa63}"),
-        color: rgb("#6ace2b")
+        color: rgb("#46ce2b")
+      ),
+      sql: (
+        name: "SQL",
+        icon: text(font: "tabler-icons", "\u{fa63}"),
+        color: rgb("#46ce2b")
       ),
     )
   )
@@ -39,7 +49,7 @@
   set document(author: name, title: title, date: auto)
   set text(font: "STSong", lang: "zh", region: "cn")
   show heading: set block(above: 2em, below: 1em)
-  set heading(numbering: "I.1.A")
+  set heading(numbering: "I.1.A.a")
   show heading: it => block[
     #set text(font: "STZhongsong")
     #counter(heading).display()
@@ -66,6 +76,7 @@
     )
   ]
 
+  show outline: set text(fill: rgb("#006d12"))
   outline(indent: 2.5em)
   pagebreak()
 

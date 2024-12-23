@@ -22,7 +22,7 @@
 
 你将扮演一位坐拥几座酒店的管理者，在电脑桌前邂逅性格各异、能力独特的旅客们，和他们一起创造财富——同时，逐步发掘数据库的真相！
 
-你的账户是DataBase，密码是password。当你正确输入上述信息时，输入框会变为绿色。
+你的账户是#text(fill: purple)[DataBase]，密码是#text(fill: purple)[password]。当你正确输入上述信息时，输入框会变为绿色。
 
 == 设计目的
 
@@ -50,7 +50,6 @@
   - 使用WinForm作为开发前端的平台，而不是更加复杂的WPF。
   - 出于美观考量，使用开源的AntdUI作为界面库。
   - #link("https://gitee.com/antdui/AntdUI")[#text(blue, "AntdUI Gitee发布页")] @AntdUIdocument
-  - 同时，AntdUI并没有提供表格相关组件，因此我们还使用了???。
 
 == 人员分工
 
@@ -78,7 +77,7 @@
 
 结合上述的具体信息，我们显然可以发现系统中具有实体集：酒店(Hotel)、房间(Room)、预订人(Reserver)。事实上，我们还应当从中分离出一个“房间类型(RoomType)”的实体集出来。
 
-其中的联系集是：(Hotel, RoomType)，酒店持有其独特的房间类型；(Room, RoomType)，房间自然是具有房间类型的；(Reserver, Room)，预订人会预订特定的房间；(Reserver, Hotel)，由于房间归属于酒店，因此还需要附加酒店信息。整理后我们可以绘制E-R图如@E-R 所示。
+其中的联系集是：(Hotel, RoomType)，酒店持有其独特的房间类型；(Room, RoomType)，房间自然是具有房间类型的；(Reserver, Room)，预订人会预订特定的房间；(Reserver, Hotel)，由于房间归属于酒店，因此还需要附加酒店信息。整理后我们可以绘制E-R图如 @E-R 所示。
 
 #let HotelTable() = {
   set text(font: "SDK_SC_Unity", lang: "en")
@@ -185,11 +184,11 @@
 
 方便起见，在之后的设计中，我们以酒店编号(hotelNO)来代替地址(Address)。在数据库中，相关属性会以hotelNO的名字出现；在用户界面中，尽管列名会显示为“酒店地址”，但其中的内容依然会以不同的数字形式出现。
 
-== 系统结构设计
+== 系统结构设计 <SystemDesign>
 
 我们设计的系统中，通用的流程是：在未创建表的情况下，首先创建表格并初始化。同时，在本地内存与数据库中都持有表格。之后的一切操作，先在本地通过算法初步判断是否是合法的更新；如果合法，那么就更新本地表格；之后，再更新数据库中的数据。如果数据库更新成功，后端才返回更新成功的指示。
 
-从结构上来说，我们自底向上设计。我们首先实现C\# 语言对Postgre数据库的相关操作；之后在此基础上，实现对酒店预订信息的管理；最后基于上述实现，设计美观优雅易操作的用户界面。这将会在下一节 @FunctionModuleDesign < 功能模块设计 >中体现。
+从结构上来说，我们自底向上设计。我们首先实现C\# 语言对Postgre数据库的相关操作；之后在此基础上，实现对酒店预订信息的管理；最后基于上述实现，设计美观优雅易操作的用户界面。这将会在下一节 @FunctionModuleDesign 中体现。
 
 == 功能模块设计 <FunctionModuleDesign>
 
@@ -268,7 +267,7 @@
     - `Hotel`, `RoomType`...等六张内存中的表格
   - `Manager`类，管理上述六张表格
 
-接下来是前端部分。第二层的是逻辑结构，在实际代码中没有这样的区分。带有`Control`的是控件，与`Form`窗口具有一定区别——控件是窗口中的某个部分：
+接下来是前端部分。下述层级关系中的第二层是逻辑结构，在实际代码中没有这样的区分。带有`Control`的是控件，与`Form`窗口具有一定区别——控件是窗口中的某个部分：
 
 - `UI`命名空间，实现项目的前端界面
   - `Form`是窗口界面，本项目中存在两个窗口：
@@ -290,7 +289,7 @@
 
 = 详细设计
 
-== 系统数据库设计
+== 系统数据库设计 <DatabaseDesign>
 
 根据E-R图，六张表对应的创建表格指令分别是：
 
@@ -346,7 +345,7 @@ CREATE TABLE Address (
   FOREIGN KEY (hotelNO, type) REFERENCES RoomType(hotelNO, type) ON DELETE CASCADE);
 ```
 
-1. 预订表：
+6. 预订表：
 
 ```SQL
 CREATE TABLE Reservation (
@@ -359,11 +358,243 @@ CREATE TABLE Reservation (
 
 在每一张表中，所有属性都完全依赖于主键或主键元组，因此这些表至少是符合2-NF范式的；同时，也不存在传递依赖，因此系统数据库是符合3-NF范式的。
 
+这里规定了所有属性均不能为`NULL`，从根源上避免了数据的不完整性。同时，几乎所有与`hotelNO`和`roomNO`有关的属性都设置为`ON DELETE CASCADE`，这样在删除酒店或房间时，相关的信息也都会被删除，避免了因为被引用而无法被删除、也使得删除操作更加简便，减少了后续的心智负担。
+
+唯一的例外是`RoomType`中的属性`type`。按道理来说，当某类房间被删除时，对应的所有房间也应删除。假设删除了一种房间类型，此时`Address`表中的房间对应关系也都被删除，但是`Room`表中依然存在相关房间——它们只是不再出现在`Address`表中。而`Room`是整个数据库关系中最重要的两个属性之一，不能在其中设置`roomNO`为其他表的外键(也避免循环依赖)。所以要求在删除某个房间类型时，必须再手动删除所有相关房间。
+
 == 主要功能模块
 
+本项目中，核心操作都在后端，由后端提供已经封装好的接口，前端只需要调用这些接口即可，也只需要处理前端自己的逻辑。
 
+=== 后端
 
-== 各模块算法
+==== `Postgre`类
+
+这个类是对`Npgsql`的封装，提供了一些基础的数据库操作，例如连接数据库、执行SQL语句等。只需要提供数据库的连接参数，这个类就会自动连接数据库。
+
+类中提供两个通用的操作函数，```cs public NpgsqlDataReader? Query(string query)```和```cs public int NotQuery(string sentence)```，参数即是`SQL`语句。前者用于查询(即`SELECT`语句)，后者用于更新(即`CREATE`，`DROP`，`INSERT`，`UPDATE`，`DELETE`等语句)。当然，也提供了更具体的函数，例如```cs public int Insert(string sentence)```，但其实际上就是调用了```cs NotQuery(...)```函数。
+
+```cs
+public NpgsqlDataReader? Query(string query)
+{
+    if (string.IsNullOrEmpty(query)) return null;
+    using var command = new NpgsqlCommand(query, Connection);
+    return command.ExecuteReader();
+}
+
+public int NotQuery(string sentence)
+{
+    if (string.IsNullOrEmpty(sentence)) return 0;
+    using var command = new NpgsqlCommand(sentence, Connection);
+    return command.ExecuteNonQuery();
+}
+```
+
+类中提供返回`Adapter`的函数，用于将`DataTable`与数据库中的表格进行同步。这个函数会返回`NpgsqlDataAdapter`，可以将`DataTable`中的数据更新到数据库中，也能使数据库中的表格写入到`DataTable`中。正如我们即将要提到的 @TableBaseClass 中所述，每个表格都需要持有一个对应的`Adapter`，才能使之与数据库同步。
+
+```cs
+public NpgsqlDataAdapter? Adapter(string tableName)
+{
+    if (Connection is null) return null;
+    var adapter =  new NpgsqlDataAdapter($"SELECT * FROM {tableName};", Connection);
+    _ = new NpgsqlCommandBuilder(adapter);
+    return adapter;
+}
+```
+
+==== `TableBase`类 <TableBaseClass>
+
+这个类是六张表格管理的基类。在这个类中，已经定义好一个表格类应当具有的属性，例如表格名`Name`、存储于内存中的表格副本`Table`，以及最重要的、能够实现与数据库同步的`Adapter`。
+
+在这个类中，已经定义好`Table`同步到数据库中的函数```cs public virtual int Update()```，返回值是更新的行数。需要注意：由于各种原因，同步可能失败，因此需要捕获异常；并在发生异常时，拒绝本地已执行的更新，恢复到上一次同步的状态。拒绝使用的函数是```cs public void Reject()```。
+
+```cs
+public virtual int Update()
+{
+    try {
+        int changes = Adapter.Update(Table);
+        Table.AcceptChanges();
+        return changes;
+    } catch (Exception) {
+        Table.RejectChanges();
+        return 0;
+    }
+}
+
+public void Reject() { Table.RejectChanges(); }
+```
+
+==== 例：`Hotel`类
+
+正如 @TableBaseClass 所说，所有表格管理类都继承自`TableBase`。在此基础上，每一个表格管理类实现基于自己属性的相关管理逻辑。现在以`Hotel`类为例说明。
+
+在我的实现中，各类会持有一个专属的`Attribute`枚举类型，用以描述表中的属性名。例如本例中：
+
+```cs
+public class Hotel : TableBase
+{
+    /*---------------------------Public Enum--------------------------*/
+
+    public enum Attribute
+    {
+        hotelNO, name, star
+    }
+}
+```
+
+同时，应当都具有```cs public bool Add(...)```和```cs public void Delete(...)```方法。由于各表格属性不同，所以参数不同，因此并没有作为`TableBase`中规定的接口。
+
+```cs
+public bool Add(int hotelNO, string hotelName, int hotelStar)
+{
+    if (Table.Rows.Find(hotelNO) is not null) return false;
+    Table.Rows.Add([hotelNO, hotelName, hotelStar]);
+    return true;
+}
+
+public void Delete(int hotelNO)
+{
+    Table.Rows.Find(hotelNO)?.Delete();
+}
+```
+
+以上实现了增删，还需要针对每个属性实现改操作。应当注意：虽然各表中都实现了改主键的函数，但实际上由于主键和外键约束的存在，并不推荐调用这些改主键的函数。例如在本例中，可以修改酒店名字：
+
+```cs
+public bool Rename(int hotelNO, string hotelName)
+{
+    var hotelInfo = Table.Rows.Find(hotelNO);
+    if (hotelInfo is null) return false;
+    try {
+        hotelInfo["name"] = hotelName;
+    } catch (Exception) {
+        return false;
+    }
+    return true;
+}
+```
+
+==== `Manager`类
+
+`Manager`类是后端的重头大戏。一些操作，例如有客户预订房间，这必然会造成多张表的变动，这些逻辑如果不封装起来，那么前端不仅要持有这六张表，还要协调这些表之间的联动关系，这无疑增加了代码的耦合性。因此，由`Manager`类持有六张表并实现操作逻辑，前端只需要持有一个这个类的实例，调用它的接口即可。
+
+回到刚才的例子，例如在前端界面中点击了某个房间的预订按钮，那么只需要调用```cs public int ReserveRoom(int reserverID, int hotelNO, int roomNO, DateTime date, int duration)```即可：
+
+```cs
+public int ReserveRoom(int reserverID, int hotelNO, int roomNO, DateTime date, int duration)
+{
+    if (Room.Reserve(hotelNO, roomNO)) {
+        Reserver.Delete(reserverID);
+        Reserver.Add(reserverID, date, duration);
+
+        Reservation.Add(reserverID, hotelNO, roomNO);
+
+        return Room.Update() + Reserver.Update() + Reservation.Update();
+    }
+    else return 0;
+}
+```
+
+`Manager`类中操作相关的返回值，都是数据库中总共更新的行数。当然，也存在一些查询相关的函数，其返回值就由函数行为决定。例如，注意到表中并没有存储还剩多少房间已被预订，但这是可以由`amount`和`isReveived`属性计算出来的，查询剩余房间数的函数就如下所示：
+
+```cs
+public int RoomRemain(int hotelNO, string type)
+{
+    return (from room in Room.Table.AsEnumerable()
+                join address in Address.Table.AsEnumerable()
+                on room.Field<int>("roomNO") equals address.Field<int>("roomNO")
+                where (room.Field<int>("hotelNO") == hotelNO) && (address.Field<int>("hotelNO") == hotelNO)
+                    && (address.Field<string>("type")?.TrimEnd() == type) && (room.Field<bool>("isReserved") == false)
+            select room).Count();
+}
+```
+
+注意到这个函数使用了`C#`中的`Linq`表达式，与`SQL`语句非常像，这也是我们选择`C#`语言的原因之一。
+
+=== 前端
+
+==== `ManageForm`类
+
+`ManageForm`类是登录之后，用于管理的窗口。这个窗口能在侧边栏选择当前要管理的项目，如下所示：
+
+#figure(
+  image("image/manage-form.png"),
+  caption: [管理窗口界面]
+)
+
+选择 酒店 栏中任意一项，都会展现对应的表格。例如，选择 酒店-房间管理 ，界面如下所示：
+
+#figure(
+  image("image/room-table.png"),
+  caption: [酒店-房间管理界面]
+) <RoomTable>
+
+这些表格均由`...TableControl`控件实现。接下来就以 @RoomTable 中的表格为例，说明`...TableControl`的实现。
+
+==== 例：`RoomTableControl`类
+
+显示房间的表格类被命名为`RoomTableControl`。带有`Control`一词意味着它是一个控件，将要嵌入到窗口中、而不是独立为一个窗口。`TableControl`意味着控件的主要功能是显示表格。
+
+`...TableControl`具有以下共性。首先，它们都需要持有同一个`Manager`类的实例，这样才能实现前端操作与后台数据的同步。其次，它们都要持有一个`AntdUI.Table`控件用于显示表格，这自不必多说；重要的是，它们都应实现一个```cs private object GetPageData(int current, int pageSize)```函数，用于分页显示表格。这是因为表格中的数据可能非常多，如果一次性全部显示，一则导致界面卡顿，二则也会对使用者造成心智负担。
+
+例如，`RoomTableControl`类中的```cs GetPageData(...)```函数如下：
+
+```cs
+private object GetPageData(int current, int pageSize)
+{
+    var list = new AntList<AntItem[]>(pageSize);
+    var table = manager.GetHotelRooms(hotelNO);
+    int start = Math.Abs(current - 1) * pageSize;
+    int end = Math.Min(start + pageSize, table.Rows.Count);
+    RoomTablePagination.Total = table.Rows.Count;
+
+    for (int i = start; i < end; i++) {
+        bool isReserved = (bool)table.Rows[i]["isReserved"];
+        var state = isReserved ? TState.Error : TState.Success;
+        string strState = isReserved ? "已预订" : "未预订";
+        string reserveBtnText = isReserved ? "取消预订" : "预订";
+
+        list.Add(new AntItem[] {
+            new AntItem("check", false),
+            new AntItem("hotelno", table.Rows[i]["hotelNO"]),
+            new AntItem("roomno", table.Rows[i]["roomNO"]),
+            new AntItem("type", table.Rows[i]["type"]),
+            new AntItem("price", table.Rows[i]["price"]),
+            new AntItem("isreserved", new CellBadge(state, strState)),
+            new AntItem("operate", new CellLink[] {
+                new CellButton($"EditRoom{i}", "编辑信息") { Type = TTypeMini.Primary, Ghost = true, BorderWidth = 2F },
+                new CellButton($"Reserve{i}", reserveBtnText) { Type = TTypeMini.Primary, Ghost = true, BorderWidth = 2F },
+                new CellButton($"ViewReservation{i}", "查看订单") { Type = TTypeMini.Primary, Ghost = true, BorderWidth = 2F, Enabled = isReserved },
+
+            })
+        });
+    }
+
+    return list;
+}
+```
+
+注意到我们在列的最后添加了三个按钮，分别是编辑信息、预订、查看订单。因为这三种操作是针对单个房间的，所以每个房间都有这些按钮是一种合理的设计。
+
+同时注意到 @RoomTable 的右下角有一个 更多功能 选择栏，可以在其中实现新增单个房间、批量删除房间、以及刷新表格的功能。其中，刷新表格是一个安慰剂设计，虽然它确实能够刷新界面，但由于在我们的设计中、只要有数据更改就会自动刷新，所以视觉上并不会发生什么变化。
+
+如果点击“查看房间类型信息”，那么会出现以下界面：
+
+#figure(
+  image("image/room-type-table.png"),
+  caption: [房间类型表格]
+)
+
+这张表也是通过`RoomTypeTableControl`类实现的。具体细节不再赘述。
+
+==== 例：`ReserveControl`类
+
+如果在 @RoomTable 中点击任意一个“预订”按钮，那么会出现以下界面：
+
+#figure(
+  image("image/reserve-control.png"),
+  caption: [预订界面]
+)
 
 
 
@@ -371,9 +602,38 @@ CREATE TABLE Reservation (
 
 = 调试与问题
 
-== 问题
+== 问题 <Problems>
+
+在项目中，我们遇到过以下问题：
+
++ 在修改内存中的表格时，有时会与数据库中的数据产生某些出入，导致本地表格`Update`到数据库失败——进而导致整个项目崩溃。
+
++ 由于项目使用WinForm构建前端界面，它会自动生成一些代码，而这些代码是编程者不可控的。当后端抛出异常时，即便在自定义函数中存在异常处理，但由于中间存在WinForm自动生成的代码，异常不会继续向上抛出，从而导致项目崩溃。
+
++ 如在 @DatabaseDesign 中所述，删除房间类型时，需要手动删除所有相关房间。这在实际操作前是没有考虑到的。
+
++ 有些操作，例如删除某个房间类型时，会导致多个表发生变动——在这个例子中，发生变动的有`RoomType`，`Room`，`Address`三张表。正如 @SystemDesign 开头已经阐明的那样，算法首先作用到本地内存中，之后才同步到数据库中。如果首先删除`RoomType`中的`type`，而由第三个问题`Room`中的房间依然存在；但是`Address`表中既存在引用`roomNO`的外键，也存在引用`type`的外键，这就导致了继续删除`Address`表时会发生冲突并崩溃。
 
 == 解决方案
+
+在 @Problems 中提到的问题，我们分别采取了以下解决方案：
+
++ 问题的根源是：`C#`中的`DataTable`数据结构不会自动生成约束关系。虽然数据库的数据初始化是直接初始化到数据库中的，但是从数据库中读取数据到`DataTable`中时，并不会也将数据库中的约束关系读取到`DataTable`中。因此，在创建内存`DataTable`时，还需要手动设置于数据库中相同的约束关系。例如，`Address`表中有两个外键约束，那么使用下述代码来模拟这些约束：```cs
+Address.Table.Constraints.Add(new ForeignKeyConstraint(
+    [RoomType.Table.Columns["hotelNO"], RoomType.Table.Columns["type"]],
+    [Address.Table.Columns["hotelNO"], Address.Table.Columns["type"]])
+    { DeleteRule = Rule.Cascade });
+Address.Table.Constraints.Add(new ForeignKeyConstraint(
+    [Room.Table.Columns["hotelNO"], Room.Table.Columns["roomNO"]],
+    [Address.Table.Columns["hotelNO"], Address.Table.Columns["roomNO"]])
+    { DeleteRule = Rule.Cascade });
+```
+
++ 问题的根源是：`WinForm`自动生成的代码中没有异常处理。所以，在注意处理异常逻辑时，将这些逻辑尽量放置在自定义函数中。
+
++ 正如问题所说，虽然在设计之初没有考虑到`type`相关的级联删除，但回过头来看，在以`hotelNO`和`roomNO`为数据库主要属性的情况下，也确实不可能做到级联删除。因此，在实现删除`type`的相关逻辑时，我们会手动删除所有相关房间。
+
++ 要解决问题很简单：只需要注意操作的顺序即可。例如，在删除`type`之前，先删除所有相关房间，再删除`type`即可。另外也需要注意：内存表格同步到数据库中时也需要遵循一定的顺序。
 
 == 解决效果
 
