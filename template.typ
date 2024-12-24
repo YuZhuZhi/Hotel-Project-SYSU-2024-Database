@@ -80,5 +80,38 @@
   outline(indent: 2.5em)
   pagebreak()
 
+  set ref(supplement: it => {
+    if (it.func() == heading) {
+      "章节"
+    }
+    else if (it.func() == figure) {
+      "图"
+    }
+    else {
+      "Thing"
+    }
+  })
+
+  show ref: it => {
+    if (it.element == none) {
+      it
+    }
+    else if (it.element.func() == heading) {
+      it
+      let l = it.target // label
+      let h = it.element // heading
+      link(l, [ [ #h.body ]])
+    }
+    else if (it.element.func() == figure) {
+      it
+      let l = it.target // label
+      let h = it.element // heading
+      link(l, [ [ #h.caption.body ]])
+    }
+    else {
+      it
+    }
+  }
+
   doc
 }

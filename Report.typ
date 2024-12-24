@@ -5,7 +5,7 @@
 #import "template.typ": template
 
 #show: doc => template(
-  [数据库期末项目],
+  [数据库期末项目——酒店管理系统],
   doc
 )
 
@@ -58,6 +58,8 @@
 - 王炳睿：组员。负责前后端的逻辑连接。
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#pagebreak()
 
 = 设计概要
 
@@ -287,7 +289,9 @@
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-= 详细设计
+#pagebreak()
+
+= 详细设计 <DetailDesign>
 
 == 系统数据库设计 <DatabaseDesign>
 
@@ -596,9 +600,39 @@ private object GetPageData(int current, int pageSize)
   caption: [预订界面]
 )
 
+像这样提示用户输入的子窗口控件，都被命名为`...Control`，例如用于预订信息输入的就叫`ReserveControl`。在这些窗口中，需要对用户输入内容进行一定的限制，如果输入不合法，就应当拒绝此次输入。例如，如果“预订入住天数”中填入了小于等于0的数字；输入了不存在的酒店或房间；没有任何输入，等等。这些判断逻辑汇聚在一个函数中——不如说，`...Control`类都应当实现一个```cs public bool IsValid()```接口，外界调用者使用此函数测试其中的输入内容是否有效之后，才从中(通过```cs public (...) GetValues()```函数)获取其中的输入值。例如，在本例`ReserveControl`类中，以上两个函数的实现如下：
+
+```cs
+public bool IsValid()
+{
+    if (HotelNOInput.Text.Length != 5) return false;
+    if (!int.TryParse(HotelNOInput.Text, out int _)) return false;
+    if (RoomNOInput.Text == "请输入房间号") return false;
+    if (!int.TryParse(RoomNOInput.Text, out int _)) return false;
+    if (IDInput.Text == "请输入身份证号") return false;
+    if (!int.TryParse(IDInput.Text, out int _)) return false;
+    if (DatePicker.Value is null) return false;
+    return true;
+}
+
+public (int hotelNO, int roomNO, int ID,
+    DateTime date, int duration) GetValues()
+{
+    int hotelNO = 0, roomNO = 0, ID = 0;
+    int.TryParse(HotelNOInput.Text, out hotelNO);
+    int.TryParse(RoomNOInput.Text, out roomNO);
+    int.TryParse(IDInput.Text, out ID);
+    return (hotelNO, roomNO, ID, (DateTime)DatePicker.Value, (int)DurationInputNumber.Value);
+}
+```
+
+在这里，我们使用了`C#`中的一种语法糖，即```cs GetValues()```函数的返回值是一个匿名元组。只需要将所需的数据类型简单地填入小括号中，而无需为它专门设计一个结构体或者类。
+
 
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+#pagebreak()
 
 = 调试与问题
 
@@ -635,11 +669,66 @@ Address.Table.Constraints.Add(new ForeignKeyConstraint(
 
 + 要解决问题很简单：只需要注意操作的顺序即可。例如，在删除`type`之前，先删除所有相关房间，再删除`type`即可。另外也需要注意：内存表格同步到数据库中时也需要遵循一定的顺序。
 
-== 解决效果
+== 解决效果 <Result>
+
+解决以上较为严重的问题之后，并完善一些操作逻辑之后，我们的成品效果如下：
+
+#figure(
+  image("image/login-form.png"),
+  caption: [登录界面 \ 在右下角悬浮按钮处设置数据库连接参数]
+)
+
+#figure(
+  image("image/manage-form.png"),
+  caption: [管理窗口首页]
+)
+
+#figure(
+  image("image/room-table.png"),
+  caption: [房间管理页]
+)
+
+#figure(
+  image("image/error.png"),
+  caption: [输入非法数据时出现提示]
+)
+
+#figure(
+  image("image/one-room-reservation.png"),
+  caption: [查看单个房间的订单信息]
+)
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+#pagebreak()
+
 = 总结
+
+在这个数据库期末项目中，我们权衡了各语言的利弊，最终选定了能够一站式解决前端后端的C\#语言，并从零开始学习了这门语言。
+
+结合现实中酒店管理具有的要素，确定了管理系统所需要的基本属性，并通过绘制如 @E-R 的E-R图，使数据库设计符合3-NF范式。
+
+我们采取前端与后端分离的设计方法，按 @FunctionModuleDesign 所示构建了项目的结构。并按照 @DetailDesign 中示例的项目代码规范，逐步使用C\#语言从零开始完成整个项目。
+
+最终，我们的成品如 @Result 所展现的那样，是一个界面美观大气，空间布局合理，使用体验舒适的桌面应用。同时，具有健壮的异常处理系统，不会因为误操作而崩溃。由于所有更新操作算法都首先修改内存中的副本，成功之后才写回到数据库中( @SystemDesign )，因此本项目也对数据库安全具有一定的保障。
+
+当然，项目依然有值得改进的地方。比如：
+
++ 一个酒店具有大量房间，作为管理者有时希望能够直达某一房间的管理界面，因此应当设计一个关于房间号的搜索框。订单管理也是如此。
+
++ 管理者可能并不喜欢被规定的账户#text(fill: purple)[DataBase]和密码#text(fill: purple)[password]，更希望能够自己注册一个账号和密码。为此，可以在登录界面追加一个注册按钮，并在本地创建一个密文加密的文件用以记录新注册的账户密码。
+
++ 每次登录时都需要配置数据库连接参数。这对于管理者稍显麻烦，可以追加一个记忆功能，记忆管理者上次填写的参数。
+
++ 为了测试的方便，一些属性的语义与数据类型并不搭配。例如，酒店地址应是一条字符串，但在数据库中具有名字`hotelNO`，数据类型为`int`；预订人身份证号使用`int`作为数据类型(这导致在预订界面，过长的身份证号会提示非法数据)。此问题的订正是简单的。
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+= 附录与指引
+
+该项目的源代码已上传至#link("https://github.com/YuZhuZhi/Hotel-Project-SYSU-2024-Database")[#text(blue, "GitHub仓库")] (点击蓝字以访问)。同时，应用安装包可以在右侧Release栏中下载。
+
+- 为了界面的美观，建议在安装应用之后，将安装目录中的`/Resource/zh-cn.ttf`字体文件一并手动安装。这个字体文件亦可在仓库的`HotelSQL/Resources/`文件夹中寻得。
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -648,5 +737,4 @@ Address.Table.Constraints.Add(new ForeignKeyConstraint(
 #show bibliography: set heading(numbering: "I")
 
 #bibliography("reference.bib", style: "ieee", title: "参考文献")
-
 
