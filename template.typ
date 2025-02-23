@@ -1,9 +1,6 @@
 #import "@preview/codly:1.0.0": *
 #import "@preview/tablex:0.0.9": tablex, rowspanx, colspanx
 
-#let name = "王俊亚"
-#let stuNum = "22307049"
-
 #let template(title, doc) = {
   show ref: it => {
     set text(fill: orange)
@@ -46,7 +43,7 @@
   )
 
   set par(justify: true)
-  set document(author: name, title: title, date: auto)
+  set document(author: "XXX", title: title, date: auto)
   set text(font: "STSong", lang: "zh", region: "cn")
   show heading: set block(above: 2em, below: 1em)
   set heading(numbering: "I.1.A.a")
@@ -71,8 +68,8 @@
       header-rows: 2,
 
       [姓名], [], [学号],
-      [王俊亚], [], [22307049],
-      [王炳睿], [], [22354124]
+      [XXX], [], [22xxxxxx],
+      [YYY], [], [22yyyyyy]
     )
   ]
 
